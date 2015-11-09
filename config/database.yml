@@ -1,0 +1,16 @@
+# Ansible managed: /ansible/roles/postgresql/templates/database.yml.j2 modified on 2015-10-12 17:29:44 by vagrant on localhost
+
+default: &default
+  adapter: postgresql
+  pool: 5
+
+development:
+  <<: *default
+  database: councils
+
+  username: vagrant
+  password: None
+
+test:
+  <<: *default
+  database: councils_test

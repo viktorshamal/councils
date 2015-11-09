@@ -1,0 +1,2 @@
+---
+- include: ../../delayed_job/handlers/main.yml
