@@ -1,2 +1,0 @@
-councils = angular.module('councils',[
-])

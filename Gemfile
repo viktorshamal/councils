@@ -23,6 +23,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'bower-rails'
 gem 'angular-rails-templates'
+gem 'sprockets', '2.12.3'
+
+gem 'active_model_serializers'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0'
