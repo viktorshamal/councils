@@ -2,3 +2,4 @@ asset 'angular'
 asset 'angular-route'
 asset 'bootstrap-sass-official'
 asset 'angular-qrcode'
+asset "angular-resource" 

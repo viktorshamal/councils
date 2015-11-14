@@ -4,6 +4,7 @@
     "angular": "latest",
     "angular-route": "latest",
     "bootstrap-sass-official": "latest",
-    "angular-qrcode": "latest"
+    "angular-qrcode": "latest",
+    "angular-resource": "latest"
   }
 }

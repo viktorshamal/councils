@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require angular/angular
+//= require angular-resource/angular-resource.min
 //= require angular-route/angular-route
 //= require angular-rails-templates
 //= require angular-qrcode/angular-qrcode
