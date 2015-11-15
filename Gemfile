@@ -25,7 +25,7 @@ gem 'bower-rails'
 gem 'angular-rails-templates'
 gem 'sprockets', '2.12.3'
 
-gem 'active_model_serializers'
+gem 'active_model_serializers', :git => 'https://github.com/rails-api/active_model_serializers.git'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0'

@@ -5,7 +5,7 @@ class MeetingsController < ApplicationController
   # GET /meetings.json
   def index
     @meetings = Meeting.all
-    render json: @meeting
+    render json: @meeting, each_serializer: MeetingSerializer
   end
 
   # GET /meetings/1

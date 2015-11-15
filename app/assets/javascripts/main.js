@@ -4,24 +4,22 @@ var receta = angular.module('receta',[
   'controllers',
   'ngResource',
   'monospaced.qrcode'
-]).factory('meetings', ['$resource', function($resource) {
-  return $resource('/meeting/:meetingId', {meetingId:'@id'});
+]).factory('Meeting', ['$resource', function($resource) {
+  return $resource('/meetings/:id/', {id:'@id'});
 }]);
 
 receta.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
-      when('/', {
+      when('/meetings/:id', {
         templateUrl: 'index.html',
         controller: 'MeetingController'
       })
   }
 ]);
 
-
-
 controllers = angular.module('controllers',[]);
-receta.controller('MeetingController', ['$scope','meetings', function($scope) {
+receta.controller('MeetingController', ['$scope','Meeting','$routeParams', function($scope,Meeting,$routeParams) {
   //var Meeting = $resource('/meeting/:meetingId', {meetingId:'@id'});
-  $scope.meeting = meetings.get({id:1})
+  $scope.meeting = Meeting.get({id:$routeParams.id})
 }]);
