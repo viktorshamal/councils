@@ -1,0 +1,17 @@
+.container
+  .row
+    .col-md-3{"ng-repeat" => "meeting in meetings"}
+      .card
+        .card-block.card-warning.text-center
+          %p.card-text Elevrådsmøde
+        %ul.list-group.list-group-flush
+          %li.list-group-item Cras justo odio
+          %li.list-group-item Dapibus ac facilisis in
+          %li.list-group-item Deltagere: 67
+        .card-block
+          %a.card-link{:href => "#"} Referat
+          %a.card-link{:href => "#"} Dagsorden
+          %a.card-link{'ng-href' => "/#/meetings/{{meeting.id}}"} Se
+
+    %button{"ng-click" => "createProject()"} Create Project
+%hr/

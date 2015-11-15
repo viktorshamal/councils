@@ -18,5 +18,5 @@
 //= require angular-rails-templates
 //= require angular-qrcode/angular-qrcode
 //= require qrcode-engine
-//= require_tree ./templates
 //= require_tree .
+//= require_tree ./templates

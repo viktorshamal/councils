@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
-  resources :meetings
   root 'home#index'
+  namespace :v1 do
+    defaults format: 'json' do
+      resources :meetings
+    end
+  end
 end

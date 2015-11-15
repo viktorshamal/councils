@@ -3,7 +3,7 @@
   "dependencies": {
     "angular": "latest",
     "angular-route": "latest",
-    "bootstrap-sass-official": "latest",
+    "bootstrap": "v4.0.0-alpha",
     "angular-qrcode": "latest",
     "angular-resource": "latest"
   }
