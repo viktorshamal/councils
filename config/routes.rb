@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
-  mount_devise_token_auth_for 'User', at: 'api/auth'
+  mount_devise_token_auth_for 'User', at: 'v1/auth'
   root 'home#index'
   namespace :v1 do
     defaults format: 'json' do
-      resources :meetings
+      resources :meetings do
+        resources :users, shallow: true
+      end
+      resources :attendances
     end
   end
 end

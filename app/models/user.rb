@@ -4,4 +4,7 @@ class User < ActiveRecord::Base
           :recoverable, :rememberable, :validatable,
           :confirmable, :omniauthable
   include DeviseTokenAuth::Concerns::User
+
+  has_many :attendances
+  has_many :meetings, through: :attendances
 end

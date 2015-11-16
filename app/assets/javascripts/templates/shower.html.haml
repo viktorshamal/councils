@@ -1,0 +1,16 @@
+%section.row
+  %a{"ng-href" => "/#/meetings/"} Back
+  .text-center.col-md-12
+    %qrcode{:data => "{{meeting.secret}}", :size => "200"}
+    %h3 Attendees
+%hr
+.container
+  .row
+    %div.col-md-2.col-xs-4{'ng-repeat' => 'user in users'}
+      .card.text-center
+        %img.card-img-top{"src" => '{{ user.image }}?width=500'}
+        %ul.list-group.list-group-flush
+          %li.list-group-item
+            %p {{ user.name }}
+        .card-block.hidden-md-down
+          %a.card-link{'ng-href' => "/#/users/{{user.id}}"} Se

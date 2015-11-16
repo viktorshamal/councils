@@ -22,7 +22,7 @@ module Councils
 
     config.assets.paths << Rails.root.join("vendor","assets","bower_components")
     config.assets.paths << Rails.root.join("vendor","assets","bower_components","bootstrap","assets","fonts")
-
+    config.filter_parameters += [:password, :password_confirmation, :tokens]
     config.assets.precompile << %r(.*.(?:eot|svg|ttf|woff|woff2)$)
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
