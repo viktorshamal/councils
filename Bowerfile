@@ -2,4 +2,6 @@ asset 'angular'
 asset 'angular-route'
 asset 'bootstrap', 'v4.0.0-alpha'
 asset 'angular-qrcode'
-asset "angular-resource"
+asset 'angular-resource'
+asset 'angular-cookie'
+asset 'ng-token-auth'

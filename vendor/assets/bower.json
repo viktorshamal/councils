@@ -5,6 +5,8 @@
     "angular-route": "latest",
     "bootstrap": "v4.0.0-alpha",
     "angular-qrcode": "latest",
-    "angular-resource": "latest"
+    "angular-resource": "latest",
+    "angular-cookie": "latest",
+    "ng-token-auth": "latest"
   }
 }
