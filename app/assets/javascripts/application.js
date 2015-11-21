@@ -21,6 +21,7 @@
 //= require angular-route/angular-route
 //= require angular-rails-templates
 //= require angular-qrcode/angular-qrcode
+//= require angular-sanitize/angular-sanitize.min.js
 //= require qrcode-engine
 //= require_tree .
 //= require_tree ./templates

@@ -4,7 +4,8 @@ var councils = angular.module('councils',[
   'controllers',
   'restmod',
   'monospaced.qrcode',
-  'ng-token-auth'
+  'ng-token-auth',
+  'ngSanitize'
 ])
 
 .config(function(restmodProvider) {
@@ -70,24 +71,33 @@ var councils = angular.module('councils',[
             apiUrl: '/v1',
             storage:'localStorage'
         });
-    });
+    })
 
-controllers = angular.module('controllers',[]);
 
-councils.controller('HomeController', ['$scope','$auth', function($scope,$auth) {
 
-}]);
+.controller('HomeController', ['$scope','$auth', function($scope,$auth) {
 
-councils.controller('MeetingController', ['$scope','Meeting','$routeParams','$auth', function($scope,Meeting,$routeParams,$auth) {
+}])
+
+.controller('MeetingController', ['$scope','Meeting','$routeParams','$auth', function($scope,Meeting,$routeParams,$auth) {
   $scope.meeting = Meeting.$find($routeParams.id);
   $scope.users = $scope.meeting.users.$fetch();
-}]);
+}])
 
-councils.controller('MeetingIndexController', ['$scope','Meeting','$routeParams', function($scope,Meeting,$routeParams) {
+.controller('MeetingIndexController', ['$scope','Meeting','$routeParams', function($scope,Meeting,$routeParams) {
   $scope.meetings = Meeting.$search();
 
   $scope.createProject = function(){
     Meeting.save();
     $scope.meetings = Meeting.query();
   }
-}]);
+}])
+.controller('MeetingController', ['$scope','Meeting','$routeParams','$auth', function($scope,Meeting,$routeParams,$auth) {
+  $scope.meeting = Meeting.$find($routeParams.id);
+  $scope.users = $scope.meeting.users.$fetch();
+}])
+.controller('menuController', ['$scope','$auth', function($scope,$auth) {
+
+}])
+
+controllers = angular.module('controllers',[]);

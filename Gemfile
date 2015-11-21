@@ -29,6 +29,8 @@ gem 'devise_token_auth'
 gem 'haml'
 gem 'figaro'
 
+gem 'rack-cors'
+
 gem 'bower-rails'
 gem 'angular-rails-templates'
 gem 'sprockets', '2.12.3'
