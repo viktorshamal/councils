@@ -6,12 +6,12 @@
           %p.card-text Elevrådsmøde
         %ul.list-group.list-group-flush
           %li.list-group-item Cras justo odio
-          %li.list-group-item Dapibus ac facilisis in
+          %li.list-group-item
+            %button{'ng-click' => "destroyMeeting(meeting.$pk)"} Delete
           %li.list-group-item Deltagere: 67
         .card-block
-          %a.card-link{:href => "#"} Referat
           %a.card-link{'ng-href' => "/#/attend/{{meeting.secret}}"} Attend
           %a.card-link{'ng-href' => "/#/meetings/{{meeting.id}}"} Se
 
-    %button{"ng-click" => "createProject()"} Create Project
+    %button{"ng-click" => "createMeeting()"} Create Project
 %hr/

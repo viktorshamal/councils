@@ -14,28 +14,15 @@ class V1::MeetingsController < ApplicationController
     render json: @meeting
   end
 
-  # GET /meetings/new
-  def new
-    @meeting = Meeting.new
-  end
-
-  # GET /meetings/1/edit
-  def edit
-  end
-
   # POST /meetings
   # POST /meetings.json
   def create
-    @meeting = Meeting.new(meeting_params)
+    @meeting = Meeting.new()
 
-    respond_to do |format|
-      if @meeting.save
-        format.html { redirect_to @meeting, notice: 'Meeting was successfully created.' }
-        format.json { render :show, status: :created, location: @meeting }
-      else
-        format.html { render :new }
-        format.json { render json: @meeting.errors, status: :unprocessable_entity }
-      end
+    if @meeting.save
+      render json: @meeting, status: :created
+    else
+      render json: @meeting.errors, status: :unprocessable_entity
     end
   end
 

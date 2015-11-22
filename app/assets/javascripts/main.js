@@ -8,21 +8,21 @@ var councils = angular.module('councils',[
   'ngSanitize'
 ])
 
-.config(function(restmodProvider) {
+.config(['restmodProvider',function(restmodProvider) {
     restmodProvider.rebase('AMSApi');
-})
+}])
 
-.factory('Meeting', function(restmod) {
+.factory('Meeting', ['restmod',function(restmod) {
     return restmod.model('v1/meetings').mix({
       users: { hasMany: 'User'}
     });
-})
+}])
 
-.factory('User', function(restmod) {
+.factory('User',['restmod', function(restmod) {
     return restmod.model('v1/users').mix({
       meetings: { hasMany: 'Meeting'}
     });
-})
+}])
 
 .config(['$routeProvider',
   function($routeProvider) {
@@ -49,7 +49,7 @@ var councils = angular.module('councils',[
   }
 ])
 
-.factory('attendService', function ($location,$route,$http) {
+.factory('attendService', ['$location','$route','$http',function ($location,$route,$http) {
     return function () {
       $http.post('/v1/attendances',{ secret: $route.current.params.secret })
         .then(function successCallback(response) {
@@ -64,14 +64,14 @@ var councils = angular.module('councils',[
           $location.path('/meetings/');
         });
       }
-})
+}])
 
 .config(function($authProvider) {
-        $authProvider.configure({
-            apiUrl: '/v1',
-            storage:'localStorage'
-        });
-    })
+    $authProvider.configure({
+        apiUrl: '/v1',
+        storage:'localStorage'
+    });
+})
 
 
 
@@ -87,11 +87,15 @@ var councils = angular.module('councils',[
 .controller('MeetingIndexController', ['$scope','Meeting','$routeParams', function($scope,Meeting,$routeParams) {
   $scope.meetings = Meeting.$search();
 
-  $scope.createProject = function(){
-    Meeting.save();
-    $scope.meetings = Meeting.query();
+  $scope.createMeeting = function(){
+    $scope.meetings.$create();
+  }
+
+  $scope.destroyMeeting = function(pk){
+    $scope.meetings.$find(pk).$destroy();
   }
 }])
+
 .controller('MeetingController', ['$scope','Meeting','$routeParams','$auth', function($scope,Meeting,$routeParams,$auth) {
   $scope.meeting = Meeting.$find($routeParams.id);
   $scope.users = $scope.meeting.users.$fetch();
