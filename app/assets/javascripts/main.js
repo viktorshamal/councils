@@ -66,14 +66,12 @@ var councils = angular.module('councils',[
       }
 }])
 
-.config(function($authProvider) {
+.config(['$authProvider',function($authProvider) {
     $authProvider.configure({
         apiUrl: '/v1',
         storage:'localStorage'
     });
-})
-
-
+}])
 
 .controller('HomeController', ['$scope','$auth', function($scope,$auth) {
 
