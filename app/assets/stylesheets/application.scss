@@ -1,3 +1,6 @@
-@import "bootstrap/dist/css/bootstrap.min";
+$brand-primary: #43B5AD;
+$brand-warning: #3CA39C;
+
+@import "bootstrap/scss/bootstrap";
 @import "meetings";
-@import "navbar"
+@import "navbar";

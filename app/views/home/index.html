@@ -1,22 +1,22 @@
-<nav class="navbar navbar-dark bg-inverse">
+<nav class="navbar navbar-light">
 <!-- Brand -->
-  <a class="navbar-brand" ng-href="#">Councils</a>
+  <a class="navbar-brand" ng-href="/#/">Councils</a>
 
 <!-- Links -->
-  <ul class="nav navbar-nav">
-    <li class="nav-item">
-      <a class="nav-link" ng-href="/#/meetings">Meetings</a>
-    </li>
-  </ul>
+    <ul class="nav navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" ng-href="/#/meetings">Meetings</a>
+        </li>
+    </ul>
 
-  <form class="form-inline navbar-form pull-right">
-    <button class="btn btn-primary-outline" ng-click="authenticate('facebook')" type="submit">Log in</button>
-  </form>
-  <ul class="nav navbar-nav pull-right">
-    <li class="nav-item">
-      <a class="nav-link" ng-show='user.name' ng-href="/#/meetings">{{ user.name }}</a>
-    </li>
-  </ul>
+    <ul class="nav navbar-nav pull-right">
+        <li class="nav-item">
+            <a class="nav-link" ng-show='user.name' ng-href="/#/meetings">{{ user.name }}</a>
+        </li>
+        <li class="nav-item">
+            <a class="btn btn-primary-outline" ng-click="authenticate('facebook')" type="submit">Log in</a>
+        </li>
+    </ul>
 </nav>
 <div class="view-container">
   <div ng-view class="view-frame animate-view"></div>

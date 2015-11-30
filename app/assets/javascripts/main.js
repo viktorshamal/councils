@@ -36,15 +36,15 @@ var councils = angular.module('councils',[
         controller: 'MeetingIndexController'
       })
       .when('/', {
-        templateUrl: 'home.html',
-        controller: 'HomeController'
+        templateUrl: 'index.html',
+        controller: 'MeetingIndexController'
       })
       .when('/attend/:secret', {
             resolve: {
                 attend: ['attendService', function (attendService) {
                     attendService();
                 }]
-            },
+            }
         })
   }
 ])
@@ -53,13 +53,8 @@ var councils = angular.module('councils',[
     return function () {
       $http.post('/v1/attendances',{ secret: $route.current.params.secret })
         .then(function successCallback(response) {
-          // this callback will be called asynchronously
-          // when the response is available
-          console.log(response);
           $location.path('/meetings/' + response.data.meeting_id);
         }, function errorCallback(response) {
-          // called asynchronously if an error occurs
-          // or server returns response with an error status.
           alert(response.data.errors[0]);
           $location.path('/meetings/');
         });
@@ -82,9 +77,8 @@ var councils = angular.module('councils',[
         $scope.meeting = Meeting.$find($routeParams.id);
         $scope.users = $scope.meeting.users.$fetch();
 
-        $interval(function(){
-            $scope.users.$refresh();
-        },2000);
+        var intervalPromise = $interval(function(){$scope.users.$refresh(); },10000);
+        $scope.$on('$destroy', function () { $interval.cancel(intervalPromise); });
     }
 ])
 
