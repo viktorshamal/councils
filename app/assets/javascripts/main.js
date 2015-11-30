@@ -77,29 +77,30 @@ var councils = angular.module('councils',[
 
 }])
 
-.controller('MeetingController', ['$scope','Meeting','$routeParams','$auth', function($scope,Meeting,$routeParams,$auth) {
-  $scope.meeting = Meeting.$find($routeParams.id);
-  $scope.users = $scope.meeting.users.$fetch();
-}])
+.controller('MeetingController', ['$scope','Meeting','$routeParams','$interval',
+    function($scope,Meeting,$routeParams,$interval) {
+        $scope.meeting = Meeting.$find($routeParams.id);
+        $scope.users = $scope.meeting.users.$fetch();
+
+        $interval(function(){
+            $scope.users.$refresh();
+        },2000);
+    }
+])
 
 .controller('MeetingIndexController', ['$scope','Meeting','$routeParams', function($scope,Meeting,$routeParams) {
   $scope.meetings = Meeting.$search();
 
   $scope.createMeeting = function(){
     $scope.meetings.$create();
-  }
+  };
 
   $scope.destroyMeeting = function(pk){
     $scope.meetings.$find(pk).$destroy();
-  }
-}])
-
-.controller('MeetingController', ['$scope','Meeting','$routeParams','$auth', function($scope,Meeting,$routeParams,$auth) {
-  $scope.meeting = Meeting.$find($routeParams.id);
-  $scope.users = $scope.meeting.users.$fetch();
+  };
 }])
 .controller('menuController', ['$scope','$auth', function($scope,$auth) {
 
-}])
+}]);
 
 controllers = angular.module('controllers',[]);

@@ -23,5 +23,6 @@
 //= require angular-qrcode/angular-qrcode
 //= require angular-sanitize/angular-sanitize.min.js
 //= require qrcode-engine
+//= require websocket_rails/main
 //= require_tree .
 //= require_tree ./templates
