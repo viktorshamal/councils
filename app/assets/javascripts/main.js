@@ -77,7 +77,7 @@ var councils = angular.module('councils',[
         $scope.meeting = Meeting.$find($routeParams.id);
         $scope.users = $scope.meeting.users.$fetch();
 
-        var intervalPromise = $interval(function(){$scope.users.$refresh(); },10000);
+        var intervalPromise = $interval(function(){$scope.users.$refresh(); },2000);
         $scope.$on('$destroy', function () { $interval.cancel(intervalPromise); });
     }
 ])
