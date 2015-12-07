@@ -10,7 +10,7 @@ var councils = angular.module('councils',[
 ])
 
 .run(['editableOptions', function(editableOptions) {
-    editableOptions.theme = 'default'
+    editableOptions.theme = 'bs3'
 }])
 
 .config(['restmodProvider', function(restmodProvider) {
