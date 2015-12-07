@@ -1,0 +1,9 @@
+.container
+  .row
+    .col-md-3{"ng-repeat" => "document in documents"}
+      .card.meeting-card
+        .card-block.card-primary.text-center
+          %p.card-text Meeting
+        .card-block.card-warning
+          %a.card-link{'ng-href' => "/#/documents/{{document.id}}"} Se
+%hr/

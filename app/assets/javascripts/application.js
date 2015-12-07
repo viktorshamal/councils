@@ -22,6 +22,7 @@
 //= require angular-rails-templates
 //= require angular-qrcode/angular-qrcode
 //= require angular-sanitize/angular-sanitize.min.js
+//= require angular-xeditable/dist/js/xeditable
 //= require qrcode-engine
+//= require main
 //= require_tree .
-//= require_tree ./templates

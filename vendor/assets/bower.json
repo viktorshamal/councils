@@ -9,6 +9,7 @@
     "angular-cookie": "latest",
     "ng-token-auth": "latest",
     "angular-restmod": "latest",
-    "angular-sanitize": "latest"
+    "angular-sanitize": "latest",
+    "angular-xeditable": "latest"
   }
 }

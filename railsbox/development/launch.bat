@@ -1,4 +1,4 @@
-cd C:\Users\Lenovo\Documents\Rails projects\councils\railsbox\development
+cd C:\Users\Lenovo\Environments\councils\railsbox\development
 vagrant up
 vagrant ssh
 vagrant halt
