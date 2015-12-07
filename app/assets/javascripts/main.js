@@ -9,16 +9,15 @@ var councils = angular.module('councils',[
     'xeditable'
 ])
 
-.run(function(editableOptions) {
+.run(['editableOptions', function(editableOptions) {
     editableOptions.theme = 'default'
-})
+}])
 
-.config(['restmodProvider',function(restmodProvider) {
+.config(['restmodProvider', function(restmodProvider) {
     restmodProvider.rebase('AMSApi');
 }])
 
-.config(['$routeProvider',
-  function($routeProvider) {
+.config(['$routeProvider', function($routeProvider) {
     $routeProvider
         .when('/documents/:id', {
             templateUrl: 'documents/show.html',

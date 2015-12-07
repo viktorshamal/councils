@@ -1,4 +1,4 @@
-councils.controller('DocumentIndexController', ['$scope','Document','$routeParams',
+councils.controller('DocumentIndexController', ['$scope','Document',
     function($scope,Document) {
         $scope.documents = Document.$search();
     }
