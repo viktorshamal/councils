@@ -5,7 +5,7 @@ councils.config(['$authProvider',function($authProvider) {
     });
 }])
 .factory('User',['restmod', function(restmod) {
-    return restmod.model('v1/users').mix({
+    return restmod.model('users').mix({
         meetings: { hasMany: 'Meeting'}
     });
 }]);

@@ -1,8 +1,8 @@
 .container
   .row
-    .col-md-6.col-md-offset-3{"ng-repeat" => "paragraph in document.paragraphs"}
+    .col-md-6.col-md-offset-3{'ng-repeat': 'paragraph in paragraphs'}
       .card.meeting-card
         .card-block.card-primary.text-center
-          %p.card-text(editable-text = "paragraph.description")
+          %p.card-text(editable-text = "paragraph.description" onaftersave = 'updateParagraph(paragraph)')
             {{paragraph.id}}. {{ paragraph.description || "empty" }}
 %hr/

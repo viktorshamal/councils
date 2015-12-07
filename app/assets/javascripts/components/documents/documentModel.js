@@ -1,3 +1,8 @@
 councils.factory('Document', ['restmod',function(restmod) {
-    return restmod.model('v1/documents');
+    return restmod.model('documents').mix({
+        paragraphs: { hasMany: 'Paragraph' }
+    });
+}])
+.factory('Paragraph', ['restmod',function(restmod) {
+    return restmod.model('paragraphs');
 }]);

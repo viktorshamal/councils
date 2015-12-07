@@ -15,6 +15,11 @@ var councils = angular.module('councils',[
 
 .config(['restmodProvider', function(restmodProvider) {
     restmodProvider.rebase('AMSApi');
+    restmodProvider.rebase({
+        $config: {
+            urlPrefix: '/v1' // or use setProperty('urlPrefix', '/api/v1') in a definition function
+        }
+    });
 }])
 
 .config(['$routeProvider', function($routeProvider) {

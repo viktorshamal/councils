@@ -7,7 +7,9 @@ Rails.application.routes.draw do
         resources :users, shallow: true
       end
       resources :attendances
-      resources :documents
+      resources :documents do
+        resources :paragraphs, shallow: true
+      end
     end
   end
 end

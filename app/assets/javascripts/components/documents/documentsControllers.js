@@ -5,6 +5,11 @@ councils.controller('DocumentIndexController', ['$scope','Document',
 ])
 .controller('DocumentController', ['$scope','Document','$routeParams',
     function($scope,Document,$routeParams) {
-        $scope.document = Document.$find($routeParams.id);
+        $scope.document = Document.$new($routeParams.id);
+        $scope.paragraphs = $scope.document.paragraphs.$fetch();
+
+        $scope.updateParagraph = function(paragraph){
+            paragraph.$save(['description']);
+        }
     }
 ]);
