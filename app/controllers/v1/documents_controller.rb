@@ -1,19 +1,32 @@
 class V1::DocumentsController < ApplicationController
-  before_action :set_document, only: [:show]
+  before_action :set_document, only: [:show, :destroy]
 
-  # GET /meetings
-  # GET /meetings.json
   def index
     @document = Document.all
     render json: @document
   end
 
-  # GET /meetings/1
-  # GET /meetings/1.json
   def show
     render json: @document
   end
 
+  def create
+    @document = Document.new
+
+    if @document.save
+      render json: @document, status: :created
+    else
+      render json: @document.errors, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    if @document.destroy
+      render json: {}, status: 200
+    else
+      render json: {}, status: 500
+    end
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_document

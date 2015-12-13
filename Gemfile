@@ -7,6 +7,7 @@ gem 'pg'
 gem 'thin'
 gem 'rack-cors'
 gem 'active_model_serializers', :git => 'https://github.com/rails-api/active_model_serializers.git'
+gem 'paper_trail', '~> 4.0.0'
 
 #front-end
 gem 'bower-rails'

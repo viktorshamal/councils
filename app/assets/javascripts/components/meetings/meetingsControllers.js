@@ -15,7 +15,7 @@ councils.controller('MeetingController', ['$scope','Meeting','$routeParams','$in
         $scope.meetings.$create();
     };
 
-    $scope.destroyMeeting = function(pk){
-        $scope.meetings.$find(pk).$destroy();
+    $scope.destroyMeeting = function(meeting){
+        meeting.$destroy();
     };
 }]);

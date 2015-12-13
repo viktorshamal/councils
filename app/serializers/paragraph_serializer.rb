@@ -1,3 +1,5 @@
 class ParagraphSerializer < ActiveModel::Serializer
-  attributes :id, :description
+  attributes :id, :description, :suggested_to
+
+  has_many :suggestions
 end

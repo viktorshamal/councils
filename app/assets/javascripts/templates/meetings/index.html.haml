@@ -3,10 +3,16 @@
     .col-md-3{"ng-repeat" => "meeting in meetings"}
       .card.meeting-card
         .card-block.card-primary.text-center
-          %p.card-text Elevrådsmøde
-        .card-block.card-warning
-          %a.card-link{'ng-href' => "/#/attend/{{meeting.secret}}"} Attend
-          %a.card-link{'ng-href' => "/#/meetings/{{meeting.id}}"} Se
-
-    %button{"ng-click" => "createMeeting()"} Create Project
+          %p.card-text
+            Elevrådsmøde
+        .card-block.card-warning.card-info
+          .col-xs-2.col-xs-offset-2.text-center
+            %a.card-link{'ng-href' => "/#/meetings/{{meeting.id}}"}
+              %i.fa.fa-users
+          .col-xs-2.col-xs-offset-4.text-center
+            %a{'ng-click': 'destroyMeeting(meeting)'}
+              %i.fa.fa-trash
+    .col-md-3.text-center
+      %a{"ng-click" => "createMeeting()"}
+        %i.fa.fa-plus.fa-2x
 %hr/

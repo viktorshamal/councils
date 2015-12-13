@@ -7,3 +7,13 @@
 .card-img-top{
   width: 100%;
 }
+
+.vertical-center{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-info{
+  padding-bottom:30px;
+}
