@@ -9,9 +9,9 @@
             %a.card-link{'ng-href' => "/#/documents/{{document.id}}"}
               %i.fa.fa-list
           .col-xs-2.col-xs-offset-4.text-center
-            %a{'ng-click': 'deleteDocument(document)'}
+            %a{'ng-click': 'deleteDocument(document)', 'ng-if': "user.role_names.includes('admin')"}
               %i.fa.fa-trash
     .col-md-3.text-center
-      %a{"ng-click" => "createDocument()"}
+      %a{'ng-click': 'createDocument()', 'ng-if': "user.role_names.includes('admin')"}
         %i.fa.fa-plus.fa-2x
 %hr/

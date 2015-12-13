@@ -1,4 +1,4 @@
-class V1::UsersController < ApplicationController
+class V1::UsersController < V1::BaseController
   def index
     @users = if(params[:meeting_id])
       Meeting.find(params[:meeting_id]).users

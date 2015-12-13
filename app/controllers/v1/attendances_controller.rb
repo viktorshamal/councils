@@ -1,4 +1,4 @@
-class V1::AttendancesController < ApplicationController
+class V1::AttendancesController < V1::BaseController
   before_action :authenticate_user!
 
   def create

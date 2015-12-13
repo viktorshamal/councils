@@ -12,12 +12,13 @@
         .card.meeting-card
           .card-block.card-primary.text-center
             {{ suggestion.description }}
-            %a{'ng-click': 'acceptSuggestion(suggestion)'}
-              %i.fa.fa-check
-            %a{'ng-click': 'deleteSuggestion(paragraph,suggestion)'}
-              %i.fa.fa-minus
+            %span{'ng-if': "user.role_names.includes('admin')"}
+              %a{'ng-click': 'acceptSuggestion(suggestion)'}
+                %i.fa.fa-check
+              %a{'ng-click': 'deleteSuggestion(paragraph,suggestion)'}
+                %i.fa.fa-minus
     .col-md-6.col-md-offset-3.text-center
-      %a{'ng-click': 'createParagraph()'}
+      %a{'ng-click': 'createParagraph()',  'ng-if': 'user.image'}
         %i.fa.fa-plus.fa-2x
 
 %hr/

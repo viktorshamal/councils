@@ -32,7 +32,8 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'devise_token_auth'
-
+gem 'pundit'
+gem 'rolify'
 gem 'foreman'
 
 group :production, :staging do

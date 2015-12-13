@@ -11,4 +11,8 @@ class Meeting < ActiveRecord::Base
   def generate_secret
     self.secret = SecureRandom.base64(10)
   end
+
+  def self.attend
+
+  end
 end

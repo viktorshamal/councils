@@ -1,23 +1,20 @@
-class V1::MeetingsController < ApplicationController
-  before_action :set_meeting, only: [:show, :edit, :update, :destroy]
+class V1::MeetingsController < V1::BaseController
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_meeting, only: [:show, :update, :destroy]
 
-  # GET /meetings
-  # GET /meetings.json
   def index
     @meetings = Meeting.all
     render json: @meetings
   end
 
-  # GET /meetings/1
-  # GET /meetings/1.json
   def show
     render json: @meeting
   end
 
-  # POST /meetings
-  # POST /meetings.json
   def create
-    @meeting = Meeting.new()
+    @meeting = Meeting.new
+
+    authorize @meeting
 
     if @meeting.save
       render json: @meeting, status: :created
@@ -26,28 +23,21 @@ class V1::MeetingsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /meetings/1
-  # PATCH/PUT /meetings/1.json
   def update
-    respond_to do |format|
-      if @meeting.update(meeting_params)
-        format.html { redirect_to @meeting, notice: 'Meeting was successfully updated.' }
-        format.json { render :show, status: :ok, location: @meeting }
-      else
-        format.html { render :edit }
-        format.json { render json: @meeting.errors, status: :unprocessable_entity }
-      end
+    authorize @meeting
+
+    if @meeting.update(meeting_params)
+      render json: @meeting, status: :ok
+    else
+      render json: @meeting.errors, status: :unprocessable_entity
     end
   end
 
-  # DELETE /meetings/1
-  # DELETE /meetings/1.json
   def destroy
+    authorize @meeting
+
     @meeting.destroy
-    respond_to do |format|
-      format.html { redirect_to meetings_url, notice: 'Meeting was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    render json: {}, status: :ok
   end
 
   private

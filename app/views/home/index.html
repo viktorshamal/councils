@@ -16,8 +16,11 @@
         <li class="nav-item">
             <a class="nav-link" ng-show='user.name' ng-href="/#/meetings">{{ user.name }}</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" ng-if="!user.name">
             <a class="btn btn-primary-outline" ng-click="authenticate('facebook')" type="submit">Log in</a>
+        </li>
+        <li class="nav-item" ng-if="user.name">
+            <a class="nav-link" ng-click="signOut()" type="submit">Log out</a>
         </li>
     </ul>
 </nav>

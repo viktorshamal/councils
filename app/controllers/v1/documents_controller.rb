@@ -1,5 +1,6 @@
-class V1::DocumentsController < ApplicationController
+class V1::DocumentsController < V1::BaseController
   before_action :set_document, only: [:show, :destroy]
+  before_action :authenticate_user!, except: [:index,:show]
 
   def index
     @document = Document.all
@@ -13,6 +14,8 @@ class V1::DocumentsController < ApplicationController
   def create
     @document = Document.new
 
+    authorize @document
+
     if @document.save
       render json: @document, status: :created
     else
@@ -21,6 +24,7 @@ class V1::DocumentsController < ApplicationController
   end
 
   def destroy
+    authorize @document
     if @document.destroy
       render json: {}, status: 200
     else

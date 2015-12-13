@@ -10,9 +10,9 @@
             %a.card-link{'ng-href' => "/#/meetings/{{meeting.id}}"}
               %i.fa.fa-users
           .col-xs-2.col-xs-offset-4.text-center
-            %a{'ng-click': 'destroyMeeting(meeting)'}
+            %a{'ng-click': 'destroyMeeting(meeting)', 'ng-if': "user.role_names.includes('admin')"}
               %i.fa.fa-trash
     .col-md-3.text-center
-      %a{"ng-click" => "createMeeting()"}
+      %a{'ng-click': 'createMeeting()', 'ng-if': "user.role_names.includes('admin')"}
         %i.fa.fa-plus.fa-2x
 %hr/
