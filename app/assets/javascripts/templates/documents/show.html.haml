@@ -5,9 +5,11 @@
         .card-block.card-primary.text-center
           %a.pull-left{'ng-click': 'previousVersion(paragraph)'}
             %i.fa.fa-arrow-left
+          %a.pull-right{'ng-click': 'deleteParagraph(paragraph)'}
+            %i.fa.fa-close
 
-          %p.card-text(editable-text = "paragraph.description" onaftersave = 'updateParagraph(paragraph)')
-            {{paragraph.id}}. {{ paragraph.description || "empty" }}
+          %p.card-text.paragraph-text(editable-text = "paragraph.description" onaftersave = 'updateParagraph(paragraph)')
+            &#167;{{ $index + 1 }} {{ paragraph.description || "empty" }}
       .col-md-12{'ng-repeat': "suggestion in paragraph.suggestions | orderBy: 'id' track by $index "}
         .card.meeting-card
           .card-block.card-primary.text-center
@@ -18,6 +20,8 @@
               %a{'ng-click': 'deleteSuggestion(paragraph,suggestion)'}
                 %i.fa.fa-minus
     .col-md-6.col-md-offset-3.text-center
+      %input{type:'text', 'ng-model':'paragraphText', placeholder:'enter paragraph text'}
+      %br
       %a{'ng-click': 'createParagraph()',  'ng-if': 'user.image'}
         %i.fa.fa-plus.fa-2x
 

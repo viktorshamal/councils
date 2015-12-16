@@ -17,6 +17,7 @@ class V1::ParagraphsController < V1::BaseController
 
   def create
     @paragraph = Paragraph.new paragraph_params
+    @paragraph.document_id = params[:document_id]
     if @paragraph.save
       render json: @paragraph
     else
@@ -54,6 +55,6 @@ class V1::ParagraphsController < V1::BaseController
     end
 
     def paragraph_params
-      params.require(:paragraph).permit(:description, :suggested_to, :document_id)
+      params.require(:paragraph).permit(:description, :suggested_to)
     end
 end

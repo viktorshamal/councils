@@ -15,6 +15,7 @@ councils.controller('DocumentIndexController', ['$scope','Document','$window',
     function($scope,$http,$routeParams,Paragraph,Document) {
         $scope.document = Document.$new($routeParams.id);
         $scope.paragraphs = $scope.document.paragraphs.$fetch();
+        $scope.paragraphText = '';
 
         $scope.updateParagraph = function(paragraph){
             suggestion = Paragraph.$create({
@@ -34,6 +35,13 @@ councils.controller('DocumentIndexController', ['$scope','Document','$window',
 
         };
 
+        $scope.deleteParagraph = function(paragraph){
+            paragraph.$destroy().then(function(){
+                var index = $scope.paragraphs.$indexOf(paragraph);
+                $scope.paragraphs.splice(index,1);
+            });
+        };
+
         $scope.acceptSuggestion = function(suggestion){
             $http.post('/v1/paragraphs/' + suggestion.id + '/accept/', {}).then(function () {
                 $scope.paragraphs.$refresh();
@@ -41,7 +49,8 @@ councils.controller('DocumentIndexController', ['$scope','Document','$window',
         };
 
         $scope.createParagraph = function(){
-            $scope.paragraphs.$create({description: 'A new description'});
+            $scope.paragraphs.$create({description: $scope.paragraphText});
+            $scope.paragraphText = '';
         };
 
         $scope.previousVersion = function(paragraph){
