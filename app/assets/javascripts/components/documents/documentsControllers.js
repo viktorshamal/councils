@@ -15,11 +15,10 @@ councils.controller('DocumentIndexController', ['$scope','Document','$window',
     function($scope,$http,$routeParams,Paragraph,Document) {
         $scope.document = Document.$new($routeParams.id);
         $scope.paragraphs = $scope.document.paragraphs.$fetch();
-        $scope.paragraphText = '';
 
-        $scope.updateParagraph = function(paragraph){
-            suggestion = Paragraph.$create({
-                description:  paragraph.description,
+        $scope.suggest = function(paragraph,description){
+            var suggestion = Paragraph.$create({
+                description:  description,
                 suggested_to: paragraph.id,
                 document_id:  $scope.document.id
             });

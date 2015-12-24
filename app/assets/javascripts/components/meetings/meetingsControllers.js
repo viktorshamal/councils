@@ -11,8 +11,15 @@ councils.controller('MeetingController', ['$scope','Meeting','$routeParams','$in
 .controller('MeetingIndexController', ['$scope','Meeting','$routeParams', function($scope,Meeting,$routeParams) {
     $scope.meetings = Meeting.$search();
 
+    $scope.meetingOptions = [
+        {name: 'Elevrådsmøde', color: 'black'},
+        {name: 'Bestyrelsesmøde', color:'red'}
+    ];
+
+    $scope.newMeeting = $scope.meetingOptions[0];
+
     $scope.createMeeting = function(){
-        $scope.meetings.$create();
+        $scope.meetings.$create({name: $scope.newMeeting.name});
     };
 
     $scope.destroyMeeting = function(meeting){

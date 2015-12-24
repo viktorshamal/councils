@@ -33,7 +33,7 @@ var councils = angular.module('councils',[
             controller: 'DocumentIndexController'
         })
         .when('/meetings/:id', {
-        templateUrl: 'meetings/shower.html',
+        templateUrl: 'meetings/show.html',
         controller: 'MeetingController'
         })
         .when('/meetings/', {

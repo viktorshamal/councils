@@ -12,7 +12,7 @@ class V1::MeetingsController < V1::BaseController
   end
 
   def create
-    @meeting = Meeting.new
+    @meeting = Meeting.new meeting_params
 
     authorize @meeting
 
@@ -48,6 +48,6 @@ class V1::MeetingsController < V1::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def meeting_params
-      params[:meeting]
+      params.require(:meeting).permit(:name)
     end
 end

@@ -14,4 +14,8 @@ class Paragraph < ActiveRecord::Base
       self.destroy!
     end
   end
+
+  def author
+    User.find(self.paper_trail_originator)
+  end
 end

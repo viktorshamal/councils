@@ -1,6 +1,6 @@
 class MeetingSerializer < ActiveModel::Serializer
   #serialization_scope :current_user
-  attributes :id, :secret
+  attributes :id, :secret, :name
 
   # def attributes(x)
   #   data = super

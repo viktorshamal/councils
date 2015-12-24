@@ -4,4 +4,13 @@ $brand-warning: #3CA39C;
 @import "bootstrap/scss/bootstrap";
 @import "meetings";
 @import "navbar";
+@import 'documents';
 //@import "angular-xeditable/dist/css/xeditable";
+
+.profile-miniature{
+  width: 25px;
+  float: right;
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+}
