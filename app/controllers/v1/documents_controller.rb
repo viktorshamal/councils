@@ -1,9 +1,9 @@
 class V1::DocumentsController < V1::BaseController
   before_action :set_document, only: [:show, :destroy]
-  before_action :authenticate_user!, except: [:index,:show]
+  before_action :authenticate_user!
 
   def index
-    @document = Document.all
+    @document = Document.where(council_id: current_user.council_id)
     render json: @document
   end
 
@@ -13,6 +13,7 @@ class V1::DocumentsController < V1::BaseController
 
   def create
     @document = Document.new
+    @document.council_id = current_user.council_id
 
     authorize @document
 

@@ -1,9 +1,9 @@
 class V1::MeetingsController < V1::BaseController
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!
   before_action :set_meeting, only: [:show, :update, :destroy]
 
   def index
-    @meetings = Meeting.all
+    @meetings = Meeting.where(council_id: current_user.council_id)
     render json: @meetings
   end
 
@@ -13,6 +13,7 @@ class V1::MeetingsController < V1::BaseController
 
   def create
     @meeting = Meeting.new meeting_params
+    @meeting.council_id = current_user.council_id
 
     authorize @meeting
 
