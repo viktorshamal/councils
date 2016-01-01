@@ -28,3 +28,16 @@ input[type="text"]:focus,
 input[type="text"].focus {
   border-bottom: solid 2px #969696;
 }
+
+.datetimepicker{
+  width: 100% !important;
+}
+
+.meeting-date{
+  font-size: 12px;
+  color: ghostwhite;
+}
+
+.card-text{
+  margin-bottom: 0;
+}

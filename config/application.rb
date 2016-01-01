@@ -29,6 +29,7 @@ module Councils
       end
     end
 
+    config.assets.paths << Rails.root.join("node_modules")
     config.assets.paths << Rails.root.join("vendor","assets","bower_components")
     config.assets.paths << Rails.root.join("vendor","assets","bower_components","bootstrap","assets","fonts")
     config.filter_parameters += [:password, :password_confirmation, :tokens]

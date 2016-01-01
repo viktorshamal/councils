@@ -5,6 +5,8 @@
         .card-block.card-primary.text-center{style:"background-color: {{ meeting.color }}"}
           %p.card-text
             {{ meeting.name }}
+          %span.meeting-date
+            {{ readableDate(meeting.date) }}
         .card-block.card-warning.card-info
           .col-xs-2.col-xs-offset-2.text-center
             %a.card-link{'ng-href' => "/#/meetings/{{meeting.id}}"}
@@ -13,8 +15,6 @@
             %a{'ng-click': 'destroyMeeting(meeting)', 'ng-if': "user.role_names.includes('admin')"}
               %i.fa.fa-trash
     .col-md-3.text-center
-      %select{'ng-model': 'newMeeting', 'ng-options':'option.name for option in meetingOptions'}
-      %br
-      %a{'ng-click': 'createMeeting()', 'ng-if': "user.role_names.includes('admin')"}
+      %a{'ng-click': 'open()', 'ng-if': "user.role_names.includes('admin')"}
         %i.fa.fa-plus.fa-2x
 %hr/

@@ -6,12 +6,10 @@ var councils = angular.module('councils',[
     'monospaced.qrcode',
     'ng-token-auth',
     'ngSanitize',
-    'xeditable'
+    'ngAnimate',
+    'ui.bootstrap',
+    'ui.bootstrap.datetimepicker'
 ])
-
-.run(['editableOptions', function(editableOptions) {
-    editableOptions.theme = 'bs3'
-}])
 
 .config(['restmodProvider', function(restmodProvider) {
     restmodProvider.rebase('AMSApi');

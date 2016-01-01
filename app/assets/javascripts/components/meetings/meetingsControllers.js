@@ -8,21 +8,51 @@ councils.controller('MeetingController', ['$scope','Meeting','$routeParams','$in
     }
 ])
 
-.controller('MeetingIndexController', ['$scope','Meeting','$routeParams', function($scope,Meeting,$routeParams) {
-    $scope.meetings = Meeting.$search();
+.controller('MeetingIndexController', ['$scope','Meeting','$routeParams','$uibModal',
+    function($scope,Meeting,$routeParams,$uibModal) {
+        $scope.meetings = Meeting.$search();
 
-    $scope.meetingOptions = [
-        {name: 'Elevrådsmøde', color: 'black'},
-        {name: 'Bestyrelsesmøde', color:'red'}
-    ];
+        $scope.date = moment("20111031", "YYYYMMDD").fromNow();
 
+        $scope.readableDate = function(date){
+            return moment(date).format('LLLL');
+        };
+
+        $scope.meetingOptions = [
+            {name: 'Elevrådsmøde', color: 'black', date: new Date()},
+            {name: 'Bestyrelsesmøde', color:'red'}
+        ];
+
+        $scope.destroyMeeting = function(meeting){
+            meeting.$destroy();
+        };
+
+        $scope.open = function (size) {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'meetings/new_meeting.html',
+                controller: 'ModalInstanceCtrl',
+                scope: $scope,
+                size: size
+            });
+        };
+}])
+.controller('ModalInstanceCtrl',['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
     $scope.newMeeting = $scope.meetingOptions[0];
 
     $scope.createMeeting = function(){
-        $scope.meetings.$create({name: $scope.newMeeting.name});
+        $scope.meetings.$create({
+            name: $scope.newMeeting.name,
+            date: $scope.newMeeting.date
+        });
     };
 
-    $scope.destroyMeeting = function(meeting){
-        meeting.$destroy();
+    $scope.ok = function () {
+        $scope.createMeeting();
+        $uibModalInstance.close();
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
     };
 }]);

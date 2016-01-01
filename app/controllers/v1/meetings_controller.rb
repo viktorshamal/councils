@@ -49,6 +49,6 @@ class V1::MeetingsController < V1::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def meeting_params
-      params.require(:meeting).permit(:name)
+      params.require(:meeting).permit(:name, :date)
     end
 end
