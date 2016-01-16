@@ -1,3 +1,4 @@
+=begin
 require 'googleauth'
 require 'google/apis/drive_v3'
 
@@ -17,3 +18,4 @@ GOOGLE_DRIVE = DRIVE::DriveService.new
 GOOGLE_DRIVE.authorization = authorization # See Googleauth or Signet libraries
 
 
+=end

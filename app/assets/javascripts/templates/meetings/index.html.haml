@@ -1,22 +1,33 @@
 .container
   .row
-    .col-md-3{"ng-repeat" => "meeting in meetings", 'ng-href':'#/meetings/{{meeting.id}}'}
+    .col-sm-6.col-md-4.col-lg-3{"ng-repeat" => "meeting in meetings", 'ng-href':'#/meetings/{{meeting.id}}'}
       .card.meeting-card
         .card-block.card-primary.text-center{style:"background-color: {{ meeting.color }}"}
           %p.card-text
             {{ meeting.name }}
           %span.meeting-date
             {{ readableDate(meeting.date) }}
-        .card-block.card-warning.card-info
-          .col-xs-2.col-xs-offset-1.text-center
+        %ul.list-group.list-group-flush
+          %li.list-group-item
             %a.card-link{'ng-href' => "/#/meetings/{{meeting.id}}"}
+              %span.div-link
               %i.fa.fa-users
-          .col-xs-2.col-xs-offset-2.text-center
+              View
+          %li.list-group-item
             %a.card-link{href: 'https://docs.google.com/document/d/{{meeting.agendaDriveId}}', target: '_blank'}
+              %span.div-link
               %i.fa.fa-file-text
-          .col-xs-2.col-xs-offset-2.text-center
-            %a{'ng-click': 'destroyMeeting(meeting)', 'ng-if': "user.role_names.includes('admin')"}
+              Dagsorden
+          %li.list-group-item
+            %a.card-link{href: 'https://docs.google.com/document/d/{{meeting.summaryDriveId}}', target: '_blank'}
+              %span.div-link
+              %i.fa.fa-file-text
+              Referat
+          %li.list-group-item.list-item-warning{'ng-if': "user.role_names.includes('admin')"}
+            %a{'ng-click': 'destroyMeeting(meeting)'}
+              %span.div-link
               %i.fa.fa-trash
+              Slet
     .col-md-3.text-center
       %a{'ng-click': 'open()', 'ng-if': "user.role_names.includes('admin')"}
         %i.fa.fa-plus.fa-2x
