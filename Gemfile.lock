@@ -314,6 +314,7 @@ DEPENDENCIES
   figaro
   foreman
   google-api-client (= 0.9.pre4)
+  googleauth
   haml
   jbuilder (~> 2.0)
   jquery-rails

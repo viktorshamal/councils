@@ -1,16 +1,18 @@
 councils.directive("clickToEdit", function() {
-    var editorTemplate = '<div class="click-to-edit">' +
-        '<div ng-hide="view.editorEnabled">' +
-        '<a ng-click="enableEditor()">' +
-        '{{ value }}' +
-        '</a>' +
-        '</div>' +
-        '<div ng-show="view.editorEnabled">' +
-        '<textarea auto-grow class="editor" ng-model="view.editableValue"></textarea>' +
-        '<br>' +
-        '<a ng-click="save()">Save</a>' +
-        ' or ' +
-        '<a ng-click="disableEditor()">cancel</a>.' +
+    var editorTemplate =
+        '<div class="click-to-edit">' +
+            '<a ng-click="switchTab()" ng-show="view.editorEnabled">Switch</a>' +
+            '<div ng-hide="view.editorEnabled && !view.editorTab">' +
+                '<a ng-click="enableEditor()">' +
+                    '{{ value }}' +
+                '</a>' +
+            '</div>' +
+        '<div ng-show="view.editorEnabled && view.editorTab">' +
+            '<textarea auto-grow class="editor" ng-model="view.editableValue"></textarea>' +
+            '<br>' +
+            '<a ng-click="save()">Save</a>' +
+            ' or ' +
+            '<a ng-click="disableEditor()">cancel</a>.' +
         '</div>';
 
     return {
@@ -24,15 +26,22 @@ councils.directive("clickToEdit", function() {
         controller: function($scope) {
             $scope.view = {
                 editableValue: $scope.value,
-                editorEnabled: false
+                editorEnabled: false,
+                editorTab: false
             };
 
             $scope.enableEditor = function() {
                 $scope.view.editorEnabled = true;
+                $scope.editorTab = true;
                 $scope.view.editableValue = $scope.value;
             };
 
+            $scope.switchTab = function() {
+              $scope.view.editorTab = !$scope.view.editorTab;
+            };
+
             $scope.disableEditor = function() {
+                $scope.editorTab = false;
                 $scope.view.editorEnabled = false;
             };
 

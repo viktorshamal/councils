@@ -1,6 +1,6 @@
 .container
   .row
-    .col-md-3{"ng-repeat" => "meeting in meetings"}
+    .col-md-3{"ng-repeat" => "meeting in meetings", 'ng-href':'#/meetings/{{meeting.id}}'}
       .card.meeting-card
         .card-block.card-primary.text-center{style:"background-color: {{ meeting.color }}"}
           %p.card-text
@@ -8,10 +8,13 @@
           %span.meeting-date
             {{ readableDate(meeting.date) }}
         .card-block.card-warning.card-info
-          .col-xs-2.col-xs-offset-2.text-center
+          .col-xs-2.col-xs-offset-1.text-center
             %a.card-link{'ng-href' => "/#/meetings/{{meeting.id}}"}
               %i.fa.fa-users
-          .col-xs-2.col-xs-offset-4.text-center
+          .col-xs-2.col-xs-offset-2.text-center
+            %a.card-link{href: 'https://docs.google.com/document/d/{{meeting.agendaDriveId}}', target: '_blank'}
+              %i.fa.fa-file-text
+          .col-xs-2.col-xs-offset-2.text-center
             %a{'ng-click': 'destroyMeeting(meeting)', 'ng-if': "user.role_names.includes('admin')"}
               %i.fa.fa-trash
     .col-md-3.text-center

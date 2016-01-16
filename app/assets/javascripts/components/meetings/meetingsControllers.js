@@ -15,7 +15,7 @@ councils.controller('MeetingController', ['$scope','Meeting','$routeParams','$in
         $scope.date = moment("20111031", "YYYYMMDD").fromNow();
 
         $scope.readableDate = function(date){
-            return moment(date).format('LLLL');
+            return moment(date).format('LL');
         };
 
         $scope.meetingOptions = [

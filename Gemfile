@@ -24,6 +24,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 #assets
+gem 'googleauth'
 gem 'google-api-client', '0.9.pre4'
 
 source 'https://rails-assets.org' do

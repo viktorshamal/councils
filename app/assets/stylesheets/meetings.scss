@@ -31,6 +31,12 @@ input[type="text"].focus {
 
 .datetimepicker{
   width: 100% !important;
+
+  .table{
+    td{
+      height: 10px;
+    }
+  }
 }
 
 .meeting-date{
