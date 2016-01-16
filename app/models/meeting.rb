@@ -13,7 +13,7 @@ class Meeting < ActiveRecord::Base
   before_validation :create_google_documents, on: :create
 
   def create_google_documents
-    permission_callback = lambda { |res, err| self.errors.add(:agenda_drive_id, 'Could not share agenda.') if err }
+    permission_callback = lambda { |res, err| puts err.body if err }
     file_callback = lambda do |res, err|
       err ? self.errors.add(:agenda_drive_id, 'Could not share agenda.') : self.agenda_drive_id = res.id
     end
