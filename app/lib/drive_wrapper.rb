@@ -11,13 +11,25 @@ module DriveWrapper
   SERVICE = DRIVE::DriveService.new
   SERVICE.authorization = authorization
 
-  def self.create_public_document(metadata)
-    callback = lambda { |res, err| puts err.body if err }
+  def self.create_public_document(metadata, editors)
+    file = SERVICE.create_file(metadata, content_type: 'text/plain')
 
-    file = SERVICE.create_file(metadata, content_type: 'text/plain', &callback)
+    permissions = editors.map do |editor|
+      DRIVE::Permission.new(
+          type:'user',
+          role: 'writer',
+          email_address: editor
+      )
+    end
 
-    permission = DRIVE::Permission.new(type: 'anyone',role: 'reader')
-    SERVICE.create_permission(file.id, permission, fields: 'id', &callback)
+    permissions << DRIVE::Permission.new(
+        type: 'anyone',
+        role: 'reader'
+    )
+
+    SERVICE.batch do |service|
+      permissions.each {|perm| service.create_permission(file.id, perm)}
+    end
 
     file.id
   end

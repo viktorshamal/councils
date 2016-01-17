@@ -11,12 +11,16 @@ class Meeting < ActiveRecord::Base
 
     self.agenda_drive_id = DriveWrapper.create_public_document({
       name: "Agenda: #{self.date.strftime('%A, %e. %B %Y')}",
-      mime_type: 'application/vnd.google-apps.document'
-    })
+      mime_type: 'application/vnd.google-apps.document',
+    }, Meeting.editors)
 
     self.summary_drive_id = DriveWrapper.create_public_document({
       name: "Summary: #{self.date.strftime('%A, %e. %B %Y')}",
       mime_type: 'application/vnd.google-apps.document'
-    })
+    }, Meeting.editors)
+  end
+
+  def self.editors
+    User.with_role(:admin).map(&:email)
   end
 end
