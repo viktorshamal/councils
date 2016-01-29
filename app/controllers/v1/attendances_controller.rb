@@ -11,8 +11,7 @@ class V1::AttendancesController < V1::BaseController
           render json: { errors: @attendance.errors.full_messages }, status: 422
         end
       else
-        render json: {errors:['Secret not found.']}, status: 404
+        render json: {errors:['Secret not found.']}, status: 422
       end
-
   end
 end

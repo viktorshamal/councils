@@ -6,7 +6,7 @@ Rails.application.routes.draw do
       resources :meetings do
         resources :users, shallow: true
       end
-      resources :attendances
+      post 'attendances' => 'attendances#create'
       resources :documents do
         resources :paragraphs, shallow: true
       end
