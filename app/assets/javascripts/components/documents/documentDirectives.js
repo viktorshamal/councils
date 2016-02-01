@@ -21,7 +21,7 @@ councils.directive("clickToEdit", function() {
             value: "=clickToEdit",
             callback: "&callback"
         },
-        controller: function($scope) {
+        controller: ['$scope',function($scope) {
             $scope.view = {
                 editableValue: $scope.value,
                 editorEnabled: false
@@ -40,6 +40,6 @@ councils.directive("clickToEdit", function() {
                 $scope.callback({description: $scope.view.editableValue});
                 $scope.disableEditor();
             };
-        }
+        }]
     };
 });
