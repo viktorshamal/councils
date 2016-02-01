@@ -9,7 +9,7 @@
             {{ readableDate(meeting.date) }}
         %ul.list-group.list-group-flush
           %li.list-group-item
-            %a.card-link{'ng-href' => "/#/meetings/{{meeting.id}}"}
+            %a.card-link{'ui-sref': "root.councils.meetings.show({id:meeting.id})"}
               %span.div-link
               %i.fa.fa-users
               View

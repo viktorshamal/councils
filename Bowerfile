@@ -1,5 +1,6 @@
 asset 'angular'
 asset 'angular-route'
+asset 'angular-ui-router'
 asset 'bootstrap', 'v4.0.0-alpha'
 asset 'angular-bootstrap'
 asset 'angular-animate'

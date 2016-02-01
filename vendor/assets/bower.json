@@ -3,6 +3,7 @@
   "dependencies": {
     "angular": "latest",
     "angular-route": "latest",
+    "angular-ui-router": "latest",
     "bootstrap": "v4.0.0-alpha",
     "angular-bootstrap": "latest",
     "angular-animate": "latest",

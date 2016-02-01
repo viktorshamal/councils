@@ -1,6 +1,6 @@
-councils.controller('MeetingController', ['$scope','Meeting','$routeParams','$interval',
-    function($scope,Meeting,$routeParams,$interval) {
-        $scope.meeting = Meeting.$find($routeParams.id);
+councils.controller('MeetingController', ['$scope','Meeting','$stateParams','$interval',
+    function($scope,Meeting,$stateParams,$interval) {
+        $scope.meeting = Meeting.$find($stateParams.id);
         $scope.users = $scope.meeting.users.$fetch();
 
         var intervalPromise = $interval(function(){$scope.users.$refresh(); },2000);
@@ -8,9 +8,9 @@ councils.controller('MeetingController', ['$scope','Meeting','$routeParams','$in
     }
 ])
 
-.controller('MeetingIndexController', ['$scope','Meeting','$routeParams','$uibModal',
-    function($scope,Meeting,$routeParams,$uibModal) {
-        $scope.meetings = Meeting.$search();
+.controller('MeetingIndexController', ['$scope','Meeting','$stateParams','$uibModal',
+    function($scope,Meeting,$stateParams,$uibModal) {
+        $scope.meetings = Meeting.$search({council:$stateParams.council});
 
         $scope.date = moment("20111031", "YYYYMMDD").fromNow();
 

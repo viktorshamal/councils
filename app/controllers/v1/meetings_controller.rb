@@ -1,9 +1,9 @@
 class V1::MeetingsController < V1::BaseController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_meeting, only: [:show, :update, :destroy]
 
   def index
-    @meetings = Meeting.where(council_id: current_user.council_id)
+    @meetings = Meeting.joins(:council).where(councils: {identifier: params[:council]}).all
     render json: @meetings
   end
 
@@ -49,6 +49,6 @@ class V1::MeetingsController < V1::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def meeting_params
-      params.require(:meeting).permit(:name, :date)
+      params.require(:meeting).permit(:name, :date, :council_name)
     end
 end

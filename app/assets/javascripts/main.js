@@ -1,6 +1,6 @@
 var councils = angular.module('councils',[
     'templates',
-    'ngRoute',
+    //ngRoute',
     'controllers',
     'restmod',
     'monospaced.qrcode',
@@ -8,7 +8,8 @@ var councils = angular.module('councils',[
     'ngSanitize',
     'ngAnimate',
     'ui.bootstrap',
-    'ui.bootstrap.datetimepicker'
+    'ui.bootstrap.datetimepicker',
+    'ui.router'
 ])
 
 .config(['restmodProvider', function(restmodProvider) {
@@ -20,7 +21,7 @@ var councils = angular.module('councils',[
     });
 }])
 
-.config(['$routeProvider', function($routeProvider) {
+/*.config(['$routeProvider', function($routeProvider) {
     $routeProvider
         .when('/documents/:id', {
             templateUrl: 'documents/show.html',
@@ -30,11 +31,11 @@ var councils = angular.module('councils',[
             templateUrl: 'documents/index.html',
             controller: 'DocumentIndexController'
         })
-        .when('/meetings/:id', {
+        .when('/:council/meetings/:id', {
         templateUrl: 'meetings/show.html',
         controller: 'MeetingController'
         })
-        .when('/meetings/', {
+        .when('/:council/meetings/', {
         templateUrl: 'meetings/index.html',
         controller: 'MeetingIndexController'
         })
@@ -50,6 +51,43 @@ var councils = angular.module('councils',[
             }
         })
   }
-]);
+])*/
+    .config(function($stateProvider, $urlRouterProvider) {
+        $urlRouterProvider.otherwise("/");
+
+        $stateProvider
+            .state('root', {
+                url: "",
+                views: {
+                    'header': {
+                        templateUrl: "header.html",
+                        controller: 'headerController'
+                    },
+                    'body': {
+                        templateUrl: "<div ui-view></div>"
+                    }
+                }
+            })
+            .state('root.councils', {
+                url: "/c/:council",
+                templateUrl: "council/councils.html"
+            })
+            .state('root.councils.meetings', {
+                url: "/meetings",
+                templateUrl: "meetings/meetings.html"
+            })
+            .state('root.councils.meetings.list',{
+                url: "/",
+                templateUrl: "meetings/index.html",
+                controller: 'MeetingIndexController'
+            })
+            .state('root.councils.meetings.show', {
+                url: "/:id",
+                templateUrl: "meetings/show.html",
+                controller: "MeetingController"
+            });
+    }).run(function($state){
+       console.log($state.get());
+    });
 
 controllers = angular.module('controllers',[]);

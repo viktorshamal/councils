@@ -1,0 +1,19 @@
+%nav.navbar.navbar-light
+  / Brand
+  %a.navbar-brand{'ui-sref' => "root"} Councils
+  / Links
+  %ul.nav.navbar-nav
+    %li.nav-item
+      %a.nav-link{'ui-sref' => "root.councils.meetings.list"} Meetings
+    %li.nav-item
+      %a.nav-link{'ui-sref' => "root.councils.documents.list"} Documents
+  %ul.nav.navbar-nav.pull-right
+    %li.nav-item
+      %a.nav-link
+        {{ user.name }}
+    %li.nav-item
+      %a.nav-link{'ng-show' => "user.council.name"} {{ user.council.name }}
+    %li.nav-item{'ng-if' => "!user.name"}
+      %a.btn.btn-primary-outline{'ng-click' => "authenticate('google')", :type => "submit"} Log in
+    %li.nav-item{'ng-if' => "user.name"}
+      %a.nav-link{'ng-click' => "signOut()", :type => "submit"} Log out
