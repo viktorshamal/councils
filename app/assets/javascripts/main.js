@@ -24,7 +24,7 @@ var councils = angular.module('councils',[
 
     $stateProvider
         .state('root', {
-            url: "",
+            url: "/",
             views: {
                 'header': {
                     templateUrl: "header.html",
@@ -36,7 +36,7 @@ var councils = angular.module('councils',[
             }
         })
         .state('root.councils', {
-            url: "/c/:council",
+            url: "c/:council",
             templateUrl: "council/councils.html"
         })
         .state('root.councils.meetings', {

@@ -1,6 +1,6 @@
 %nav.navbar.navbar-light
   / Brand
-  %a.navbar-brand{'ui-sref' => "root"} Councils
+  %a.navbar-brand{'ui-sref' => "root.councils"} Councils
   / Links
   %ul.nav.navbar-nav
     %li.nav-item
@@ -12,7 +12,7 @@
       %a.nav-link
         {{ user.name }}
     %li.nav-item
-      %a.nav-link{'ng-show' => "user.council.name"} {{ user.council.name }}
+      %a.nav-link{'ng-show' => "user.council.name", 'ui-sref': 'root.councils.meetings.list({council:user.council.identifier})'} {{ user.council.name }}
     %li.nav-item{'ng-if' => "!user.name"}
       %a.btn.btn-primary-outline{'ng-click' => "authenticate('google')", :type => "submit"} Log in
     %li.nav-item{'ng-if' => "user.name"}

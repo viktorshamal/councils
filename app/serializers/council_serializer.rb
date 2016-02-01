@@ -1,3 +1,3 @@
 class CouncilSerializer < ActiveModel::Serializer
-  attributes :name
+  attributes :name, :identifier
 end
