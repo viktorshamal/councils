@@ -3,8 +3,8 @@
     .col-md-8.col-md-offset-2{'ng-repeat': "paragraph in paragraphs | orderBy: 'id' track by $index "}
       .card.meeting-card
         .card-block.card-primary.text-center
-          %a.pull-left{'ng-click': 'previousVersion(paragraph)'}
-            %i.fa.fa-arrow-left
+          /%a.pull-left{'ng-click': 'previousVersion(paragraph)'}
+          /  %i.fa.fa-arrow-left
           %a.pull-right{'ng-click': 'deleteParagraph(paragraph)'}
             %i.fa.fa-close
           .paragraph

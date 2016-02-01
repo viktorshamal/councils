@@ -41,7 +41,7 @@ var councils = angular.module('councils',[
         })
         .state('root.councils.meetings', {
             url: "/meetings",
-            templateUrl: "meetings/meetings.html"
+            template: "<div ui-view></div>"
         })
         .state('root.councils.meetings.list',{
             url: "/",
@@ -52,6 +52,20 @@ var councils = angular.module('councils',[
             url: "/:id",
             templateUrl: "meetings/show.html",
             controller: "MeetingController"
+        })
+        .state('root.councils.documents', {
+            url: "/documents",
+            template: "<div ui-view></div>"
+        })
+        .state('root.councils.documents.list',{
+            url: "/",
+            templateUrl: "documents/index.html",
+            controller: 'DocumentIndexController'
+        })
+        .state('root.councils.documents.show', {
+            url: "/:id",
+            templateUrl: "documents/show.html",
+            controller: "DocumentController"
         });
 }]);
 

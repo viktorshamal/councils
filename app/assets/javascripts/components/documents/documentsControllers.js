@@ -1,5 +1,5 @@
-councils.controller('DocumentIndexController', ['$scope','Document','$window',
-    function($scope,Document,$window) {
+councils.controller('DocumentIndexController', ['$scope','Document',
+    function($scope,Document) {
         $scope.documents = Document.$search();
 
         $scope.createDocument = function(){
@@ -11,9 +11,9 @@ councils.controller('DocumentIndexController', ['$scope','Document','$window',
         }
     }
 ])
-.controller('DocumentController', ['$scope','$http','$routeParams','Paragraph','Document',
-    function($scope,$http,$routeParams,Paragraph,Document) {
-        $scope.document = Document.$new($routeParams.id);
+.controller('DocumentController', ['$scope','$http','$stateParams','Paragraph','Document',
+    function($scope,$http,$stateParams,Paragraph,Document) {
+        $scope.document = Document.$new($stateParams.id);
         $scope.paragraphs = $scope.document.paragraphs.$fetch();
 
         $scope.suggest = function(paragraph,description){

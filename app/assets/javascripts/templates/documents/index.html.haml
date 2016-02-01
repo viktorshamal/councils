@@ -6,7 +6,7 @@
           %p.card-text Document
         .card-block.card-warning
           .col-xs-2.col-xs-offset-2.text-center
-            %a.card-link{'ng-href' => "/#/documents/{{document.id}}"}
+            %a.card-link{'ui-sref': 'root.councils.documents.show({id:document.id})'}
               %i.fa.fa-list
           .col-xs-2.col-xs-offset-4.text-center
             %a{'ng-click': 'deleteDocument(document)', 'ng-if': "user.role_names.includes('admin')"}
