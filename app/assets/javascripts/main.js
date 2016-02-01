@@ -31,7 +31,7 @@ var councils = angular.module('councils',[
                     controller: 'headerController'
                 },
                 'body': {
-                    templateUrl: "<div ui-view></div>"
+                    template: "<div ui-view></div>"
                 }
             }
         })
