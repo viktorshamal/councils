@@ -1,18 +1,18 @@
 .container
   .row
-    .col-sm-6.col-md-4.col-lg-3{"ng-repeat" => "meeting in meetings", 'ng-href':'#/meetings/{{meeting.id}}'}
+    .col-sm-6.col-md-4.col-lg-3{'ng-repeat': 'meeting in meetings', 'ng-href':'#/meetings/{{meeting.id}}'}
       .card.meeting-card
-        .card-block.card-primary.text-center{style:"background-color: {{ meeting.color }}"}
+        .card-block.card-primary.text-center{style:'background-color: {{ meeting.color }}'}
           %p.card-text
             {{ meeting.name }}
           %span.meeting-date
             {{ readableDate(meeting.date) }}
         %ul.list-group.list-group-flush
           %li.list-group-item
-            %a.card-link{'ui-sref': "root.councils.meetings.show({id:meeting.id})"}
+            %a.card-link{'ui-sref': 'root.councils.meetings.show({id:meeting.id})'}
               %span.div-link
               %i.fa.fa-users
-              View
+              Se
           %li.list-group-item
             %a.card-link{href: 'https://docs.google.com/document/d/{{meeting.agendaDriveId}}', target: '_blank'}
               %span.div-link

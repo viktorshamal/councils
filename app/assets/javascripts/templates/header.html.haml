@@ -4,16 +4,16 @@
   / Links
   %ul.nav.navbar-nav
     %li.nav-item
-      %a.nav-link{'ui-sref' => "root.councils.meetings.list"} Meetings
+      %a.nav-link{'ui-sref' => "root.councils.meetings.list"} Møder
     %li.nav-item
-      %a.nav-link{'ui-sref' => "root.councils.documents.list"} Documents
+      %a.nav-link{'ui-sref' => "root.councils.documents.list"} Vedtægter
   %ul.nav.navbar-nav.pull-right
     %li.nav-item
       %a.nav-link
         {{ user.name }}
     %li.nav-item
-      %a.nav-link{'ng-show' => "user.council.name", 'ui-sref': 'root.councils.meetings.list({council:user.council.identifier})'} {{ user.council.name }}
+      %a.nav-link{'ng-if' => "user.council.name", 'ui-sref': 'root.councils.meetings.list({council:user.council.identifier})'} {{ user.council.name }}
     %li.nav-item{'ng-if' => "!user.name"}
-      %a.btn.btn-primary-outline{'ng-click' => "authenticate('google')", :type => "submit"} Log in
+      %a.btn.btn-primary-outline{'ng-click' => "authenticate('google')", :type => "submit"} Log ind
     %li.nav-item{'ng-if' => "user.name"}
-      %a.nav-link{'ng-click' => "signOut()", :type => "submit"} Log out
+      %a.nav-link{'ng-click' => "signOut()", :type => "submit"} Log ud

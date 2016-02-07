@@ -1,15 +1,41 @@
-%section.row
-  .text-center.col-md-6.col-md-offset-3
-    %qrcode{data: '{{meeting.secret}}', size:'230', 'ng-if': "user.role_names.includes('admin')"}
-    %h3 Attendees
-%hr
 .container
   .row
-    %div.col-md-2.col-xs-4{'ng-repeat':'user in users'}
-      .card.text-center
-        %a.card-link{'ng-href': '/#/users/{{user.id}}'}
-          %img.card-img-top{src: '{{ user.image }}?width=500'}
+    .col-md-8.text-center
+      %qrcode{data: '{{meeting.secret}}', size:'230', 'ng-if': "user.role_names.includes('admin')"}
+      %h3 Opmødte elevrødder
+      %hr
+      .row
+      %div.col-md-2.col-xs-4{'ng-repeat':'user in users'}
+        .card.text-center
+          %a.card-link{'ng-href': '/#/users/{{user.id}}'}
+            %img.card-img-top{src: '{{ user.image }}?width=500'}
+          %ul.list-group.list-group-flush
+            %li.list-group-item
+              %p
+                {{user.name}}
+    .col-md-4
+      .card.meeting-card
+        .card-block.card-primary.text-center{style:"background-color: {{ meeting.color }}"}
+          %p.card-text
+            {{ meeting.name }}
+          %span.meeting-date
+            {{ readableDate(meeting.date) }}
         %ul.list-group.list-group-flush
           %li.list-group-item
-            %p
-              {{user.name}}
+            %a.card-link{href: 'https://docs.google.com/document/d/{{meeting.agendaDriveId}}', target: '_blank'}
+              %span.div-link
+              %i.fa.fa-bars
+              Dagsorden
+          %li.list-group-item
+            %a.card-link{href: 'https://docs.google.com/document/d/{{meeting.summaryDriveId}}', target: '_blank'}
+              %span.div-link
+              %i.fa.fa-file-text
+              Referat
+          %li.list-group-item.list-item-warning{'ng-if': "user.role_names.includes('admin')"}
+            %a{'ng-click': 'destroyMeeting(meeting)'}
+              %span.div-link
+              %i.fa.fa-trash
+              Slet
+
+
+

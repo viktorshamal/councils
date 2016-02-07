@@ -1,16 +1,16 @@
 .modal-header
   %button.close{'ng-click':'cancel()', type: 'button'}
     %span{'aria-hidden': 'true'} &times;
-  %h4.modal-title Add a Meeting
+  %h4.modal-title Tilføj et møde
 .modal-body
   .form-group
     %label{for:'meeting-select'}
-      Meeting type
+      Mødetype
     %select{'ng-model': 'newMeeting', 'ng-options':'option.name for option in meetingOptions', class:'form-control', id:'meeting-select'}
     %label{for:'datetime-select'}
-      Date and Time
+      Dato og tid
     %input{'ng-model': 'readableDate(newMeeting.date)', class: 'form-control', disabled:true, id: 'datetime-select'}
     %datetimepicker{'ng-model':'newMeeting.date'}
 .modal-footer
-  %button.btn.btn-default{'ng-click':'cancel()', :type => 'button' } Close
-  %button.btn.btn-primary{'ng-click':'ok()', type: 'button' } Save changes
+  %button.btn.btn-default{'ng-click':'cancel()', :type => 'button' } Luk
+  %button.btn.btn-primary{'ng-click':'ok()', type: 'button' } Tilføj
