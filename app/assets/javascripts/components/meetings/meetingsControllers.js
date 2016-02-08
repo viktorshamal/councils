@@ -3,6 +3,12 @@ councils.controller('MeetingController', ['$scope','Meeting','$stateParams','$in
         $scope.meeting = Meeting.$find($stateParams.id);
         $scope.users = $scope.meeting.users.$fetch();
 
+        $scope.showQr = false;
+
+        $scope.toggleQr = function(){
+            $scope.showQr = !$scope.showQr;
+        };
+
         var intervalPromise = $interval(function(){$scope.users.$refresh(); },2000);
         $scope.$on('$destroy', function () { $interval.cancel(intervalPromise); });
     }

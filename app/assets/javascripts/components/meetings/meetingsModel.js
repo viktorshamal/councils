@@ -4,7 +4,6 @@ councils.factory('Meeting', ['restmod',function(restmod) {
         $extend: {
             Record: {
                 readableDate: function() {
-                    console.log('hello');
                     moment("20111031", "YYYYMMDD").fromNow();
                 }
             }

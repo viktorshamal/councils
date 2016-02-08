@@ -23,11 +23,6 @@
               %span.div-link
               %i.fa.fa-file-text
               Referat
-          %li.list-group-item.list-item-warning{'ng-if': "user.role_names.includes('admin')"}
-            %a{'ng-click': 'destroyMeeting(meeting)'}
-              %span.div-link
-              %i.fa.fa-trash
-              Slet
     .col-md-3.text-center
       %a{'ng-click': 'open()', 'ng-if': "user.role_names.includes('admin')"}
         %i.fa.fa-plus.fa-2x

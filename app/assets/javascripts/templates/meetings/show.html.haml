@@ -1,11 +1,14 @@
 .container
   .row
-    .col-md-8.text-center
-      %qrcode{data: '{{meeting.secret}}', size:'230', 'ng-if': "user.role_names.includes('admin')"}
+    .col-md-12.text-center{'ng-if': "user.role_names.includes('admin')"}
+      %a{'ng-click':'toggleQr()'}
+        {{showQr ? "Hide QR" : "Show QR"}}
+      %qrcode{data: '{{meeting.secret}}', size:'230', 'ng-if': 'showQr'}
+    .col-md-8
       %h3 Opmødte elevrødder
       %hr
       .row
-      %div.col-md-2.col-xs-4{'ng-repeat':'user in users'}
+      .col-md-2.col-xs-4{'ng-repeat':'user in users'}
         .card.text-center
           %a.card-link{'ng-href': '/#/users/{{user.id}}'}
             %img.card-img-top{src: '{{ user.image }}?width=500'}
