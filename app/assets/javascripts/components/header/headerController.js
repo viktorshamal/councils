@@ -1,3 +1,3 @@
-councils.controller('headerController', ['$scope','$stateParams','$auth', function($scope,$stateParams,$auth) {
+councils.controller('headerController', ['$scope','$state','$auth', function($scope,$state,$auth) {
     //$scope.identifier = $auth.user.council.identifier;
 }]);

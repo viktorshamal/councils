@@ -1,2 +1,9 @@
-%h1 hello
+.row.council-list{'ng-hide':'hideCouncilPicker'}
+  .col-md-12.text-center
+    %h2 Vælg et elevråd
+    .collection
+      %a.collection-item{'ui-sref':"root.councils.meetings.list({council:'google'})"}
+        Google
+      %a.collection-item{'ui-sref':"root.councils.meetings.list({council:'gefion'})"}
+        Gefion Gymnasium
 %div{'ui-view':true}
