@@ -1,12 +1,13 @@
-$brand-primary: #43B5AD;
-$brand-warning: #3CA39C;
+@import "bootstrap";
+@import "materialize";
 
-@import "bootstrap/scss/bootstrap";
 @import "angular-bootstrap-datetimepicker/src/scss/datetimepicker";
+
+// Custom
 @import "meetings";
 @import "navbar";
 @import 'documents';
-//@import "angular-xeditable/dist/css/xeditable";
+
 
 .profile-miniature{
   width: 25px;

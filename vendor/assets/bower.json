@@ -15,6 +15,7 @@
     "angular-restmod": "v1.2.x",
     "angular-sanitize": "latest",
     "angular-xeditable": "latest",
-    "components-font-awesome": "latest"
+    "components-font-awesome": "latest",
+    "materialize": "latest"
   }
 }

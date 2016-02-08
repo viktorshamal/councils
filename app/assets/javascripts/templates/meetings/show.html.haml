@@ -1,21 +1,22 @@
 .container
   .row
-    .col-md-12.text-center{'ng-if': "user.role_names.includes('admin')"}
-      %a{'ng-click':'toggleQr()'}
+    .col-md-12.qr-holder.text-center{'ng-if': "user.role_names.includes('admin')"}
+      %a.waves-effect.waves-light.btn{'ng-click':'toggleQr()'}
         {{showQr ? "Hide QR" : "Show QR"}}
-      %qrcode{data: '{{meeting.secret}}', size:'230', 'ng-if': 'showQr'}
+      %br
+      %qrcode{data: '{{meeting.secret}}', size:'300', 'ng-if': 'showQr'}
     .col-md-8
       %h3 Opmødte elevrødder
       %hr
       .row
-      .col-md-2.col-xs-4{'ng-repeat':'user in users'}
-        .card.text-center
-          %a.card-link{'ng-href': '/#/users/{{user.id}}'}
-            %img.card-img-top{src: '{{ user.image }}?width=500'}
-          %ul.list-group.list-group-flush
-            %li.list-group-item
-              %p
-                {{user.name}}
+        .col-md-2.col-xs-4{'ng-repeat':'user in users'}
+          .card.text-center
+            %a.card-link{'ng-href': '/#/users/{{user.id}}'}
+              %img.card-img-top{src: '{{ user.image }}?width=500'}
+            %ul.list-group.list-group-flush
+              %li.list-group-item
+                %p
+                  {{user.name}}
     .col-md-4
       .card.meeting-card
         .card-block.card-primary.text-center{style:"background-color: {{ meeting.color }}"}

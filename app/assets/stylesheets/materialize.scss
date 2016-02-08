@@ -1,0 +1,19 @@
+@import "materialize/sass/components/mixins";
+@import "materialize/sass/components/color";
+@import "materialize/sass/components/variables";
+@import "materialize/sass/components/normalize";
+@import "materialize/sass/components/global";
+@import "materialize/sass/components/roboto";
+@import "materialize/sass/components/typography";
+@import "materialize/sass/components/buttons";
+@import "materialize/sass/components/waves";
+
+// Incompatibility fixes
+
+.btn {
+  text-decoration: none !important;
+
+  &:hover {
+    color: white !important;
+  }
+}

@@ -20,7 +20,7 @@ var councils = angular.module('councils',[
     });
 }])
 .config(['$stateProvider','$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise("/");
+    $urlRouterProvider.otherwise("/c/");
 
     $stateProvider
         .state('root', {
@@ -31,7 +31,8 @@ var councils = angular.module('councils',[
                     controller: 'headerController'
                 },
                 'body': {
-                    template: "<div ui-view></div>"
+                    template: "<div ui-view></div>",
+                    controller: "HomeController"
                 }
             }
         })

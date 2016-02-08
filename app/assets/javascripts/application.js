@@ -21,7 +21,6 @@
 //= require ng-token-auth/dist/ng-token-auth
 //= require angular-restmod/dist/angular-restmod-bundle.min
 //= require angular-restmod/dist/styles/ams.min
-//= #require angular-route/angular-route
 //= require angular-ui-router/release/angular-ui-router.min
 //= require angular-rails-templates
 //= require angular-qrcode/angular-qrcode
@@ -29,5 +28,8 @@
 //= require angular-xeditable/dist/js/xeditable
 //= require angular-bootstrap-datetimepicker/src/js/datetimepicker.js
 //= require qrcode-engine
+//= require materialize/js/animation.js
+//= require materialize/js/buttons.js
+//= require materialize/js/waves.js
 //= require main
 //= require_tree .
