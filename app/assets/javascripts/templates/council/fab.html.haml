@@ -1,0 +1,8 @@
+.fixed-action-btn.click-to-toggle
+  %a.btn-floating.btn-large.red
+    %i.large.material-icons add
+  %ul
+    %li{'ng-repeat':'action in actions'}
+      %a.btn-floating{class:'{{action.color}}', 'ng-click':'open()'}
+        %i.material-icons
+          {{ action.icon }}

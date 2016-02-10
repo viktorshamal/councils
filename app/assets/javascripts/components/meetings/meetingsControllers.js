@@ -20,34 +20,29 @@ councils.controller('MeetingController', ['$scope','Meeting','$stateParams','$in
 
         $scope.date = moment("20111031", "YYYYMMDD").fromNow();
 
-        $scope.readableDate = function(date){
-            return moment(date).format('LL');
-        };
-
-        $scope.meetingOptions = [
-            {name: 'Elevrådsmøde', color: 'black', date: new Date()},
-            {name: 'Bestyrelsesmøde', color:'red'}
-        ];
-
         $scope.destroyMeeting = function(meeting){
             meeting.$destroy();
         };
 
-        $scope.open = function (size) {
-            var modalInstance = $uibModal.open({
-                animation: true,
-                templateUrl: 'meetings/new_meeting.html',
-                controller: 'ModalInstanceCtrl',
-                scope: $scope,
-                size: size
-            });
+        $scope.readableDate = function(date){
+            return moment(date).format('LL');
         };
 }])
-.controller('ModalInstanceCtrl',['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
+.controller('ModalInstanceCtrl',['$scope', '$uibModalInstance','Meeting', function ($scope, $uibModalInstance, Meeting) {
+
+    $scope.meetingOptions = [
+        {name: 'Elevrådsmøde', color: 'black', date: new Date()},
+        {name: 'Bestyrelsesmøde', color:'red'}
+    ];
+
     $scope.newMeeting = $scope.meetingOptions[0];
 
+    $scope.readableDate = function(date){
+        return moment(date).format('LL');
+    };
+
     $scope.createMeeting = function(){
-        $scope.meetings.$create({
+        Meeting.$create({
             name: $scope.newMeeting.name,
             date: $scope.newMeeting.date
         });

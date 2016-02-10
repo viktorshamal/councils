@@ -31,5 +31,6 @@
 //= require materialize/js/animation.js
 //= require materialize/js/buttons.js
 //= require materialize/js/waves.js
+//= require materialize/js/velocity.min.js
 //= require main
 //= require_tree .

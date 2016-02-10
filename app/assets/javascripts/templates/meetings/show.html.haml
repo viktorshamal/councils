@@ -1,7 +1,7 @@
 .container
   .row
     .col-md-12.qr-holder.text-center{'ng-if': "user.role_names.includes('admin')"}
-      %a.waves-effect.waves-light.btn{'ng-click':'toggleQr()'}
+      %a.btn-flat.waves-effect.waves-teal{'ng-click':'toggleQr()'}
         {{showQr ? "Hide QR" : "Show QR"}}
       %br
       %qrcode{data: '{{meeting.secret}}', size:'300', 'ng-if': 'showQr'}

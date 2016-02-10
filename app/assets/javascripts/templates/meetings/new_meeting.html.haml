@@ -9,7 +9,7 @@
     %select{'ng-model': 'newMeeting', 'ng-options':'option.name for option in meetingOptions', class:'form-control', id:'meeting-select'}
     %label{for:'datetime-select'}
       Dato og tid
-    %input{'ng-model': 'readableDate(newMeeting.date)', class: 'form-control', disabled:true, id: 'datetime-select'}
+    %input{class: 'form-control', disabled:true, id: 'datetime-select', value: '{{readableDate(newMeeting.date)}}' }
     %datetimepicker{'ng-model':'newMeeting.date'}
 .modal-footer
   %button.btn.btn-default{'ng-click':'cancel()', :type => 'button' } Luk

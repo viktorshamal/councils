@@ -1,19 +1,19 @@
 %nav.navbar.navbar-light
   / Brand
-  %a.navbar-brand{'ui-sref' => "root.councils"} Councils
+  %a.navbar-brand{'ui-sref': 'root.councils'} Councils
   / Links
   %ul.nav.navbar-nav
     %li.nav-item
-      %a.nav-link{'ui-sref' => "root.councils.meetings.list"} Møder
+      %a.nav-link{'ui-sref': 'root.councils.meetings.list'} Møder
     %li.nav-item
-      %a.nav-link{'ui-sref' => "root.councils.documents.list"} Vedtægter
+      %a.nav-link{'ui-sref': 'root.councils.documents.list'} Vedtægter
   %ul.nav.navbar-nav.pull-right
     %li.nav-item
       %a.nav-link
         {{ user.name }}
     %li.nav-item
-      %a.nav-link{'ng-if' => "user.council.name", 'ui-sref': 'root.councils.meetings.list({council:user.council.identifier})'} {{ user.council.name }}
-    %li.nav-item{'ng-if' => "!user.name"}
-      %a.btn.btn-primary-outline{'ng-click' => "authenticate('google')", :type => "submit"} Log ind
-    %li.nav-item{'ng-if' => "user.name"}
-      %a.nav-link{'ng-click' => "signOut()", :type => "submit"} Log ud
+      %a.nav-link{'ng-if': 'user.council.name', 'ui-sref': 'root.councils.meetings.list({council:user.council.identifier})'} {{ user.council.name }}
+    %li.nav-item{'ng-if': '!user.name'}
+      %a.nav-link{'ng-click': "authenticate('google')"} Log ind
+    %li.nav-item{'ng-if': 'user.name'}
+      %a.nav-link{'ng-click': 'signOut()'} Log ud

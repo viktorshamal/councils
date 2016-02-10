@@ -38,7 +38,15 @@ var councils = angular.module('councils',[
         })
         .state('root.councils', {
             url: "c/:council",
-            templateUrl: "council/councils.html"
+            views: {
+                'content': {
+                    templateUrl: "council/councils.html"
+                },
+                'fab': {
+                    templateUrl: "council/fab.html",
+                    controller:  "FabController"
+                }
+            }
         })
         .state('root.councils.meetings', {
             url: "/meetings",
