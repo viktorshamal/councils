@@ -3,14 +3,17 @@ councils.controller('FabController', ['$scope','$uibModal', function($scope, $ui
         {
             icon: 'group',
             modal: 'meetingsModal',
-            color: 'green'
-        },
-        {
+            color: 'green',
+            tooltip: 'Nyt møde'
+        }
+        /*,{
             icon: 'format_align_justify',
             modal: 'documentsModal',
             color: 'blue'
-        }
+        }*/
     ];
+
+    $scope.showSpinner = false;
 
     $scope.open = function () {
         var modalInstance = $uibModal.open({

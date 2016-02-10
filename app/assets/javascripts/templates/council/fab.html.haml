@@ -1,6 +1,14 @@
 .fixed-action-btn.click-to-toggle
   %a.btn-floating.btn-large.red
-    %i.large.material-icons add
+    %i.material-icons{'ng-hide':'showSpinner'} add
+    .preloader-wrapper.small.active{'ng-show':'showSpinner'}
+      .spinner-layer.spinner-blue-only
+        .circle-clipper.left
+          .circle
+        .gap-patch
+          .circle
+        .circle-clipper.right
+          .circle
   %ul
     %li{'ng-repeat':'action in actions'}
       %a.btn-floating{class:'{{action.color}}', 'ng-click':'open()'}

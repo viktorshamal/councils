@@ -14,6 +14,14 @@
 //= require jquery_ujs
 //= require moment/min/moment.min
 //= require bootstrap/dist/js/bootstrap.min
+//= require materialize/js/initial.js
+//= require materialize/js/velocity.min.js
+//= require materialize/js/global.js
+//= require materialize/js/hammer.min.js
+//= require materialize/js/animation.js
+//= require materialize/js/buttons.js
+//= require materialize/js/waves.js
+//= require materialize/js/toasts.js
 //= require angular/angular
 //= require angular-animate/angular-animate
 //= require angular-bootstrap/ui-bootstrap-tpls
@@ -28,9 +36,5 @@
 //= require angular-xeditable/dist/js/xeditable
 //= require angular-bootstrap-datetimepicker/src/js/datetimepicker.js
 //= require qrcode-engine
-//= require materialize/js/animation.js
-//= require materialize/js/buttons.js
-//= require materialize/js/waves.js
-//= require materialize/js/velocity.min.js
 //= require main
 //= require_tree .

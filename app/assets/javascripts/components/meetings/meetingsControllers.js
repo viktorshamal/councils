@@ -26,9 +26,10 @@ councils.controller('MeetingController', ['$scope','Meeting','$stateParams','$in
 
         $scope.readableDate = function(date){
             return moment(date).format('LL');
-        };
+          };
 }])
-.controller('ModalInstanceCtrl',['$scope', '$uibModalInstance','Meeting', function ($scope, $uibModalInstance, Meeting) {
+.controller('ModalInstanceCtrl',['$scope', '$uibModalInstance','Meeting', '$state',
+ function ($scope, $uibModalInstance, Meeting, $state) {
 
     $scope.meetingOptions = [
         {name: 'Elevrådsmøde', color: 'black', date: new Date()},
@@ -45,6 +46,10 @@ councils.controller('MeetingController', ['$scope','Meeting','$stateParams','$in
         Meeting.$create({
             name: $scope.newMeeting.name,
             date: $scope.newMeeting.date
+        }).$then(function(meeting){
+            $state.go('root.councils.meetings.show',{id:meeting.id});
+        }, function(error){
+            Materialize.toast('Der opstod en fejl',3000);
         });
     };
 
