@@ -6,12 +6,16 @@ Rails.application.routes.draw do
       resources :meetings do
         resources :users, shallow: true
       end
+
       post 'attendances' => 'attendances#create'
+
       resources :documents do
         resources :paragraphs, shallow: true
       end
 
       resources :paragraphs, only: [:create, :destroy]
+
+      resources :councils, only: [:index]
 
       get 'paragraphs/:id/previous' => 'paragraphs#previous_version'
       post 'paragraphs/:id/accept' => 'paragraphs#accept'

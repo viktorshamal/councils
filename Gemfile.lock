@@ -83,9 +83,9 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
-    devise_token_auth (0.1.36)
-      devise (~> 3.5.2)
-      rails (~> 4.2)
+    devise_token_auth (0.1.37)
+      devise (> 3.5.2, < 4.1)
+      rails (< 6)
     diff-lcs (1.2.5)
     erubis (2.7.0)
     eventmachine (1.0.8)
@@ -309,7 +309,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   database_cleaner
   devise
-  devise_token_auth
+  devise_token_auth (~> 0.1.37)
   factory_girl_rails (~> 4.0)
   figaro
   foreman
