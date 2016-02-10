@@ -1,5 +1,7 @@
 .container
   .row
+    .col-12.text-center{'ng-hide':'meetings.length'}
+      %p Der er ingen møder
     .col-sm-6.col-md-4.col-lg-3{'ng-repeat': "meeting in meetings | orderBy: '-date'", 'ng-href':'#/meetings/{{meeting.id}}'}
       .card.meeting-card
         .card-block.card-primary.text-center{style:'background-color: {{ meeting.color }}'}
