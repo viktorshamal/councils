@@ -54,7 +54,7 @@ var councils = angular.module('councils',[
         })
         .state('root.councils.meetings.list',{
             url: "/",
-            templateUrl: "meetings/index.html",
+            templateUrl: "meetings/list.html",
             controller: 'MeetingIndexController'
         })
         .state('root.councils.meetings.show', {
@@ -68,7 +68,7 @@ var councils = angular.module('councils',[
         })
         .state('root.councils.documents.list',{
             url: "/",
-            templateUrl: "documents/index.html",
+            templateUrl: "documents/list.html",
             controller: 'DocumentIndexController'
         })
         .state('root.councils.documents.show', {

@@ -1,0 +1,16 @@
+.container
+  .row
+    .col-md-3{"ng-repeat" => "document in documents"}
+      .card.meeting-card
+        .card-block.card-primary.text-center
+          %p.card-text Document
+        .card-block.card-warning
+          .col-xs-2.col-xs-offset-2.text-center
+            %a.card-link{'ui-sref': 'root.councils.documents.show({id:document.id})'}
+              %i.fa.fa-list
+          .col-xs-2.col-xs-offset-4.text-center
+            %a{'ng-click': 'deleteDocument(document)', 'ng-if': "user.role_names.includes('admin')"}
+              %i.fa.fa-trash
+    .col-md-3.text-center
+      %a{'ng-click': 'createDocument()', 'ng-if': "user.role_names.includes('admin')"}
+        %i.fa.fa-plus.fa-2x

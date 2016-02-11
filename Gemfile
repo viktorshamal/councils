@@ -11,8 +11,8 @@ gem 'paper_trail', '~> 4.0.0'
 
 #front-end
 gem 'bower-rails'
-gem 'angular-rails-templates'
-gem 'sprockets', '2.12.3'
+gem 'angular-rails-templates', '~> 1.0.0'
+gem 'sprockets', '~> 3.0.0'
 
 #pre-processing
 gem 'haml'
