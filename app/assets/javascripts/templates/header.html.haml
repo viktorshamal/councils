@@ -1,6 +1,6 @@
 %nav.navbar.navbar-light
   / Brand
-  %a.navbar-brand{'ui-sref': 'root.councils'} Councils
+  %a.navbar-brand{'ui-sref': 'root'} Gefions Elevråd
   / Links
   %ul.nav.navbar-nav
     %li.nav-item
@@ -11,8 +11,8 @@
     %li.nav-item
       %a.nav-link
         {{ user.name }}
-    %li.nav-item
-      %a.nav-link{'ng-if': 'user.council.name', 'ui-sref': 'root.councils.meetings.list({council:user.council.identifier})'} {{ user.council.name }}
+    / %li.nav-item
+    /  %a.nav-link{'ng-if': 'user.council.name', 'ui-sref': 'root.councils.meetings.list({council:user.council.identifier})'} {{ user.council.name }}
     %li.nav-item{'ng-if': '!user.name'}
       %a.nav-link{'ng-click': "authenticate('google')"} Log ind
     %li.nav-item{'ng-if': 'user.name'}

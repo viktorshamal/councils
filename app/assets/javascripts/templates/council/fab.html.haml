@@ -1,4 +1,4 @@
-.fixed-action-btn.click-to-toggle
+.fixed-action-btn.click-to-toggle{'ng-show':"user.role_names.includes('admin')"}
   %a.btn-floating.btn-large.red
     %i.material-icons{'ng-hide':'showSpinner'} add
     .preloader-wrapper.small.active{'ng-show':'showSpinner'}
