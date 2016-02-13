@@ -2,7 +2,7 @@
   / Brand
   %a.navbar-brand{'ui-sref': 'root'} Gefions Elevråd
   / Links
-  %ul.nav.navbar-nav
+  %ul.nav.navbar-nav{'ng-show':'councilChosen'}
     %li.nav-item
       %a.nav-link{'ui-sref': 'root.councils.meetings.list'} Møder
     %li.nav-item

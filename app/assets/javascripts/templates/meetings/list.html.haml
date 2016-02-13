@@ -1,27 +1,26 @@
-.container
-  .row
-    .col-12.text-center{'ng-hide':'meetings.length'}
-      %p Der er ingen møder
-    .col-sm-6.col-md-4.col-lg-3{'ng-repeat': "meeting in meetings | orderBy: '-date'", 'ng-href':'#/meetings/{{meeting.id}}'}
-      .card.meeting-card
-        .card-block.card-primary.text-center{style:'background-color: {{ meeting.color }}'}
-          %p.card-text
-            {{ meeting.name }}
-          %span.meeting-date
-            {{ readableDate(meeting.date) }}
-        %ul.list-group.list-group-flush
-          %li.list-group-item
-            %a.card-link{'ui-sref': 'root.councils.meetings.show({id:meeting.id})'}
-              %span.div-link
-              %i.fa.fa-users
-              Se
-          %li.list-group-item
-            %a.card-link{href: 'https://docs.google.com/document/d/{{meeting.agendaDriveId}}', target: '_blank'}
-              %span.div-link
-              %i.fa.fa-bars
-              Dagsorden
-          %li.list-group-item
-            %a.card-link{href: 'https://docs.google.com/document/d/{{meeting.summaryDriveId}}', target: '_blank'}
-              %span.div-link
-              %i.fa.fa-file-text
-              Referat
+.row
+  .col-12.text-center{'ng-hide':'meetings.length'}
+    %p Der er ingen møder
+  .col-sm-6.col-md-4.col-lg-3{'ng-repeat': "meeting in meetings | orderBy: '-date'", 'ng-href':'#/meetings/{{meeting.id}}'}
+    .card.meeting-card
+      .card-block.card-primary.text-center{style:'background-color: {{ meeting.color }}'}
+        %p.card-text
+          {{ meeting.name }}
+        %span.meeting-date
+          {{ readableDate(meeting.date) }}
+      %ul.list-group.list-group-flush
+        %li.list-group-item
+          %a.card-link{'ui-sref': 'root.councils.meetings.show({id:meeting.id})'}
+            %span.div-link
+            %i.fa.fa-users
+            Se
+        %li.list-group-item
+          %a.card-link{href: 'https://docs.google.com/document/d/{{meeting.agendaDriveId}}', target: '_blank'}
+            %span.div-link
+            %i.fa.fa-bars
+            Dagsorden
+        %li.list-group-item
+          %a.card-link{href: 'https://docs.google.com/document/d/{{meeting.summaryDriveId}}', target: '_blank'}
+            %span.div-link
+            %i.fa.fa-file-text
+            Referat
