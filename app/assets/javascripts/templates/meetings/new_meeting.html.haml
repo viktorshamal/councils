@@ -7,7 +7,7 @@
     %label{for:'meeting-select'}
       Mødetype
     %select{'ng-model': 'meetingTemplate', class:'form-control', id:'meeting-select',
-            'ng-options':'option.name for option in meetingOptions track by item.id'}
+            'ng-options':'option as option.name for option in meetingOptions track by option.id'}
     %label{for:'datetime-select'}
       Dato og tid
     %input{class: 'form-control', disabled:true, id: 'datetime-select', value: '{{readableDate(meetingDate)}}' }
