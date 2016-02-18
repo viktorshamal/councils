@@ -9,4 +9,6 @@ councils.factory('Meeting', ['restmod',function(restmod) {
             }
         }
     });
+}]).factory('MeetingTemplate', ['restmod', function(restmod){
+    return restmod.model('meeting_templates');
 }]);

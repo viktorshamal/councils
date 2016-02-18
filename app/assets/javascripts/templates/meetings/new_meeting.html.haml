@@ -6,11 +6,12 @@
   .form-group
     %label{for:'meeting-select'}
       Mødetype
-    %select{'ng-model': 'newMeeting', 'ng-options':'option.name for option in meetingOptions', class:'form-control', id:'meeting-select'}
+    %select{'ng-model': 'meetingTemplate', class:'form-control', id:'meeting-select',
+            'ng-options':'option.name for option in meetingOptions track by item.id'}
     %label{for:'datetime-select'}
       Dato og tid
-    %input{class: 'form-control', disabled:true, id: 'datetime-select', value: '{{readableDate(newMeeting.date)}}' }
-    %datetimepicker{'ng-model':'newMeeting.date'}
+    %input{class: 'form-control', disabled:true, id: 'datetime-select', value: '{{readableDate(meetingDate)}}' }
+    %datetimepicker{'ng-model':'meetingDate'}
 .modal-footer
   %button.btn.btn-default{'ng-click':'cancel()', :type => 'button' } Luk
   %button.btn.btn-primary{'ng-click':'ok()', type: 'button' } Tilføj

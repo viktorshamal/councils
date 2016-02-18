@@ -6,11 +6,11 @@ councils.controller('FabController', ['$scope','$uibModal', function($scope, $ui
             color: 'green',
             tooltip: 'Nyt møde'
         }
-        /*,{
-            icon: 'format_align_justify',
+        ,{
+            icon: 'group_work',
             modal: 'documentsModal',
             color: 'blue'
-        }*/
+        }
     ];
 
     $scope.showSpinner = false;

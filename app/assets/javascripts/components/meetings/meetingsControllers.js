@@ -14,9 +14,9 @@ councils.controller('MeetingController', ['$scope','Meeting','$stateParams','$in
     }
 ])
 
-.controller('MeetingIndexController', ['$scope','Meeting','$stateParams','$uibModal',
-    function($scope,Meeting,$stateParams,$uibModal) {
-        $scope.meetings = Meeting.$search({council:$stateParams.council});
+.controller('MeetingIndexController', ['$scope','Meeting','$stateParams',
+    function($scope,Meeting,$stateParams) {
+        $scope.meetings = Meeting.$search({identifier:$stateParams.council});
 
         $scope.date = moment("20111031", "YYYYMMDD").fromNow();
 
@@ -28,15 +28,13 @@ councils.controller('MeetingController', ['$scope','Meeting','$stateParams','$in
             return moment(date).format('LL');
           };
 }])
-.controller('ModalInstanceCtrl',['$scope', '$uibModalInstance','Meeting', '$state',
- function ($scope, $uibModalInstance, Meeting, $state) {
+.controller('ModalInstanceCtrl',['$scope', '$uibModalInstance','Meeting', 'MeetingTemplate', '$state',
+ function ($scope, $uibModalInstance, Meeting, MeetingTemplate, $state) {
 
-    $scope.meetingOptions = [
-        {name: 'Elevrådsmøde', color: 'black', date: new Date()},
-        {name: 'Bestyrelsesmøde', color:'red'}
-    ];
+    $scope.meetingOptions = MeetingTemplate.$search({identifier:$state.params.council});
 
-    $scope.newMeeting = $scope.meetingOptions[0];
+    $scope.meetingTemplate = $scope.meetingOptions[0];
+    $scope.meetingDate = new Date();
 
     $scope.readableDate = function(date){
         return moment(date).format('LL');
@@ -44,8 +42,8 @@ councils.controller('MeetingController', ['$scope','Meeting','$stateParams','$in
 
     $scope.createMeeting = function(){
         Meeting.$create({
-            name: $scope.newMeeting.name,
-            date: $scope.newMeeting.date
+            meetingTemplateId: $scope.meetingTemplate.id,
+            date: $scope.meetingDate
         }).$then(function(meeting){
             $state.go('root.councils.meetings.show',{id:meeting.id});
         }, function(error){

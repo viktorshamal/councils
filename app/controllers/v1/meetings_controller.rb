@@ -3,7 +3,7 @@ class V1::MeetingsController < V1::BaseController
   before_action :set_meeting, only: [:show, :update, :destroy]
 
   def index
-    @meetings = Meeting.joins(:council).where(councils: {identifier: params[:council]}).all
+    @meetings = Council.find_by_identifier(params[:identifier]).meetings
     render json: @meetings
   end
 
@@ -13,7 +13,6 @@ class V1::MeetingsController < V1::BaseController
 
   def create
     @meeting = Meeting.new meeting_params
-    @meeting.council_id = current_user.council_id
 
     authorize @meeting
 
@@ -49,6 +48,6 @@ class V1::MeetingsController < V1::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def meeting_params
-      params.require(:meeting).permit(:name, :date, :council_name)
+      params.require(:meeting).permit(:date, :meeting_template_id)
     end
 end
