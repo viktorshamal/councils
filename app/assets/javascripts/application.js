@@ -13,7 +13,21 @@
 //= require jquery
 //= require jquery_ujs
 //= require moment/min/moment.min
-//= require bootstrap/dist/js/bootstrap.min
+
+// Angular
+//= require angular/angular
+//= require angular-rails-templates
+//= require angular-animate/angular-animate
+//= require angular-cookie/angular-cookie
+//= require ng-token-auth/dist/ng-token-auth
+//= require angular-restmod/dist/angular-restmod-bundle.min
+//= require angular-restmod/dist/styles/ams.min
+//= require angular-ui-router/release/angular-ui-router.min
+//= require angular-qrcode/angular-qrcode
+//= require angular-sanitize/angular-sanitize.min.js
+//= require angular-xeditable/dist/js/xeditable
+
+// Materialize
 //= require materialize/js/initial.js
 //= require materialize/js/velocity.min.js
 //= require materialize/js/global.js
@@ -22,19 +36,13 @@
 //= require materialize/js/buttons.js
 //= require materialize/js/waves.js
 //= require materialize/js/toasts.js
-//= require angular/angular
-//= require angular-animate/angular-animate
-//= require angular-bootstrap/ui-bootstrap-tpls
-//= require angular-cookie/angular-cookie
-//= require ng-token-auth/dist/ng-token-auth
-//= require angular-restmod/dist/angular-restmod-bundle.min
-//= require angular-restmod/dist/styles/ams.min
-//= require angular-ui-router/release/angular-ui-router.min
-//= require angular-rails-templates
-//= require angular-qrcode/angular-qrcode
-//= require angular-sanitize/angular-sanitize.min.js
-//= require angular-xeditable/dist/js/xeditable
+//= require materialize/js/tooltip.js
+
+// Angular Bootstrap
+//= require ui-bootstrap-custom-tpls-1.1.2.min
 //= require angular-bootstrap-datetimepicker/src/js/datetimepicker.js
+
+
 //= require qrcode-engine
 //= require main
 //= require_tree .

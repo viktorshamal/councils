@@ -9,7 +9,8 @@ councils.controller('FabController', ['$scope','$uibModal', function($scope, $ui
         ,{
             icon: 'group_work',
             modal: 'documentsModal',
-            color: 'blue'
+            color: 'blue',
+            tooltip: 'Nyt udvalg'
         }
     ];
 
