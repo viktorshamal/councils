@@ -12,7 +12,7 @@
           .circle
   %ul
     %li{'ng-repeat':'action in actions'}
-      %a.btn-floating.tooltipped{class:'{{action.color}}', 'ng-click':'open()',
+      %a.btn-floating.tooltipped{class:'{{action.color}}', 'ng-click':'open(action)',
         data:{'delay': '50', 'position': 'left', tooltip:'{{action.tooltip}}'}}
         %i.material-icons
           {{ action.icon }}

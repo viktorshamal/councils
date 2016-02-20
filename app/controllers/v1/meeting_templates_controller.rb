@@ -1,9 +1,7 @@
 class V1::MeetingTemplatesController < V1::BaseController
   before_action :set_meeting_template, only: [:show, :edit, :update, :destroy]
-  #before_action :authenticate_user!
+  before_action :authenticate_user!
 
-  # GET /meeting_templates
-  # GET /meeting_templates.json
   def index
     @meeting_templates = Council.find_by_identifier(params[:identifier]).meeting_templates
     render json: @meeting_templates
@@ -15,6 +13,7 @@ class V1::MeetingTemplatesController < V1::BaseController
 
   def create
     @meeting_template = MeetingTemplate.new(meeting_template_params)
+    @meeting_template.council_id = current_user.council_id
     if @meeting_template.save!
       render json: @meeting_template
     end

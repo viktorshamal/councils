@@ -1,0 +1,12 @@
+.modal-header
+  %button.close{'ng-click':'cancel()', type: 'button'}
+    %span{'aria-hidden': 'true'} &times;
+  %h4.modal-title Tilføj en mødetype
+.modal-body
+  .form-group
+    %label{for:'meeting-select'}
+      Navn
+    %input.form-control#template-name{'ng-model':'template.name'}
+.modal-footer
+  %button.btn-flat{'ng-click':'cancel()'} Luk
+  %button.btn{'ng-click':'ok()'} Tilføj

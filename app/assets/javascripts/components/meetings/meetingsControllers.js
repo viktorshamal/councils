@@ -28,7 +28,7 @@ councils.controller('MeetingController', ['$scope','Meeting','$stateParams','$in
             return moment(date).format('LL');
           };
 }])
-.controller('ModalInstanceCtrl',['$scope', '$uibModalInstance','Meeting', 'MeetingTemplate', '$state',
+.controller('MeetingModalController',['$scope', '$uibModalInstance','Meeting', 'MeetingTemplate', '$state',
  function ($scope, $uibModalInstance, Meeting, MeetingTemplate, $state) {
 
     $scope.meetingOptions = MeetingTemplate.$search({identifier:$state.params.council});
@@ -59,4 +59,27 @@ councils.controller('MeetingController', ['$scope','Meeting','$stateParams','$in
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
-}]);
+}])
+.controller('MeetingTemplateModalController',['$scope', '$uibModalInstance','MeetingTemplate',
+    function ($scope, $uibModalInstance, MeetingTemplate) {
+        $scope.template = {name:''};
+
+        $scope.createTemplate = function(){
+            MeetingTemplate.$create({
+                name: $scope.template.name
+            }).$then(function(){
+                $uibModalInstance.close();
+                Materialize.toast('Mødetypen blev oprettet', 3000);
+            }, function(){
+                Materialize.toast('Der opstod en fejl', 3000);
+            });
+        };
+        $scope.ok = function () {
+            $scope.createTemplate();
+            $uibModalInstance.close();
+        };
+
+        $scope.cancel = function () {
+            $uibModalInstance.dismiss('cancel');
+        };
+    }]);

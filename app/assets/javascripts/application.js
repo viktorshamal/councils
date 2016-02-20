@@ -27,6 +27,10 @@
 //= require angular-sanitize/angular-sanitize.min.js
 //= require angular-xeditable/dist/js/xeditable
 
+// Angular Bootstrap
+//= require ui-bootstrap-custom-tpls-1.1.2.min
+//= require angular-bootstrap-datetimepicker/src/js/datetimepicker.js
+
 // Materialize
 //= require materialize/js/initial.js
 //= require materialize/js/velocity.min.js
@@ -37,11 +41,6 @@
 //= require materialize/js/waves.js
 //= require materialize/js/toasts.js
 //= require materialize/js/tooltip.js
-
-// Angular Bootstrap
-//= require ui-bootstrap-custom-tpls-1.1.2.min
-//= require angular-bootstrap-datetimepicker/src/js/datetimepicker.js
-
 
 //= require qrcode-engine
 //= require main

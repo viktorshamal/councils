@@ -1,14 +1,16 @@
 councils.controller('FabController', ['$scope','$uibModal', function($scope, $uibModal) {
     $scope.actions = [
         {
+            modalUrl: 'meetings/modals/meeting.html',
+            controller: 'MeetingModalController',
             icon: 'group',
-            modal: 'meetingsModal',
             color: 'green',
             tooltip: 'Nyt møde'
         }
         ,{
+            modalUrl: 'meetings/modals/meetingTemplate.html',
+            controller: 'MeetingTemplateModalController',
             icon: 'group_work',
-            modal: 'documentsModal',
             color: 'blue',
             tooltip: 'Nyt udvalg'
         }
@@ -16,11 +18,11 @@ councils.controller('FabController', ['$scope','$uibModal', function($scope, $ui
 
     $scope.showSpinner = false;
 
-    $scope.open = function () {
-        var modalInstance = $uibModal.open({
+    $scope.open = function (action) {
+        $uibModal.open({
             animation: true,
-            templateUrl: 'meetings/new_meeting.html',
-            controller: 'ModalInstanceCtrl',
+            templateUrl: action.modalUrl,
+            controller: action.controller,
             scope: $scope,
             size: "md"
         });
