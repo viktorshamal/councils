@@ -76,6 +76,8 @@ var councils = angular.module('councils',[
             templateUrl: "documents/show.html",
             controller: "DocumentController"
         });
-}]);
+}]).config(function(){
+    moment.locale('da');
+});
 
 controllers = angular.module('controllers',[]);

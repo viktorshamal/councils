@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require moment/min/moment.min
 
 // Angular
 //= require angular/angular
@@ -26,6 +25,10 @@
 //= require angular-qrcode/angular-qrcode
 //= require angular-sanitize/angular-sanitize.min.js
 //= require angular-xeditable/dist/js/xeditable
+
+// Moment
+//= require moment/min/moment.min
+//= require moment/locale/da.js
 
 // Angular Bootstrap
 //= require ui-bootstrap-custom-tpls-1.1.2.min

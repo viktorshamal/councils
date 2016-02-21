@@ -4,8 +4,8 @@
       {{showQr ? "Hide QR" : "Show QR"}}
     %br
     %qrcode{data: '{{meeting.secret}}', size:'300', 'ng-if': 'showQr'}
-  .col-md-8
-    %h3 Opmødte elevrødder
+  .col-md-12
+    %h3 Fremmødte elevrødder
     %hr
     .row
       .col-md-2.col-xs-4{'ng-repeat':'user in users'}
@@ -16,29 +16,30 @@
             %li.list-group-item
               %p
                 {{user.name}}
-  .col-md-4
-    .card.meeting-card
-      .card-block.card-primary.text-center{style:"background-color: {{ meeting.color }}"}
-        %p.card-text
-          {{ meeting.name }}
-        %span.meeting-date
-          {{ readableDate(meeting.date) }}
-      %ul.list-group.list-group-flush
-        %li.list-group-item
-          %a.card-link{href: 'https://docs.google.com/document/d/{{meeting.agendaDriveId}}', target: '_blank'}
-            %span.div-link
-            %i.fa.fa-bars
-            Dagsorden
-        %li.list-group-item
-          %a.card-link{href: 'https://docs.google.com/document/d/{{meeting.summaryDriveId}}', target: '_blank'}
-            %span.div-link
-            %i.fa.fa-file-text
-            Referat
-        %li.list-group-item.list-item-warning{'ng-if': "user.role_names.includes('admin')"}
-          %a{'ng-click': 'destroyMeeting(meeting)'}
-            %span.div-link
-            %i.fa.fa-trash
-            Slet
+  -#
+    .col-md-4
+      .card.meeting-card
+        .card-block.card-primary.text-center{style:"background-color: {{ meeting.color }}"}
+          %p.card-text
+            {{ meeting.name }}
+          %span.meeting-date
+            {{ readableDate(meeting.date) }}
+        %ul.list-group.list-group-flush
+          %li.list-group-item
+            %a.card-link{href: 'https://docs.google.com/document/d/{{meeting.agendaDriveId}}', target: '_blank'}
+              %span.div-link
+              %i.fa.fa-bars
+              Dagsorden
+          %li.list-group-item
+            %a.card-link{href: 'https://docs.google.com/document/d/{{meeting.summaryDriveId}}', target: '_blank'}
+              %span.div-link
+              %i.fa.fa-file-text
+              Referat
+          %li.list-group-item.list-item-warning{'ng-if': "user.role_names.includes('admin')"}
+            %a{'ng-click': 'destroyMeeting(meeting)'}
+              %span.div-link
+              %i.fa.fa-trash
+              Slet
 
 
 

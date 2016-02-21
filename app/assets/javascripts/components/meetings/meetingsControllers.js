@@ -37,7 +37,7 @@ councils.controller('MeetingController', ['$scope','Meeting','$stateParams','$in
     $scope.meetingDate = new Date();
 
     $scope.readableDate = function(date){
-        return moment(date).format('LL');
+        return moment(date).format('LLL');
     };
 
     $scope.createMeeting = function(){

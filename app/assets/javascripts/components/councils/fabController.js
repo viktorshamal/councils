@@ -12,7 +12,7 @@ councils.controller('FabController', ['$scope','$uibModal', function($scope, $ui
             controller: 'MeetingTemplateModalController',
             icon: 'group_work',
             color: 'blue',
-            tooltip: 'Nyt udvalg'
+            tooltip: 'Ny mødetype'
         }
     ];
 
