@@ -10,8 +10,7 @@
     .row
       .col-md-2.col-xs-4{'ng-repeat':'user in users'}
         .card.text-center
-          %a.card-link{'ng-href': '/#/users/{{user.id}}'}
-            %img.card-img-top{src: '{{ user.image }}?width=500'}
+          %img.card-img-top{src: '{{ user.image }}?width=500'}
           %ul.list-group.list-group-flush
             %li.list-group-item
               %p
