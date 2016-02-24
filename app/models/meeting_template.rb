@@ -1,4 +1,6 @@
 class MeetingTemplate < ActiveRecord::Base
+  resourcify
+
   belongs_to :council
   has_many :meetings
 
