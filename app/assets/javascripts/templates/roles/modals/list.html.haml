@@ -1,0 +1,17 @@
+.modal-header
+  %button.close{'ng-click':'cancel()', type: 'button'}
+    %span{'aria-hidden': 'true'} &times;
+  %h4.modal-title Administrer roller
+.modal-body
+  .form-group
+    %label{for:'meeting-select'}
+      Mødetype
+    %select.form-control#meeting-select{'ng-model': 'meetingTemplate',
+    'ng-options':'option as option.name for option in meetingOptions track by option.id'}
+    %label{for:'datetime-select'}
+      Dato og tid
+    %input{class: 'form-control', disabled:true, id: 'datetime-select', value: '{{readableDate(meetingDate)}}' }
+    %datetimepicker{'ng-model':'meetingDate'}
+.modal-footer
+  %button.btn-flat{'ng-click':'cancel()'} Luk
+  %button.btn{'ng-click':'ok()'} Tilføj
