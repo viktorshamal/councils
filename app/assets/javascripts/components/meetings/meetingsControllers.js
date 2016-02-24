@@ -18,8 +18,6 @@ councils.controller('MeetingController', ['$scope','Meeting','$stateParams','$in
     function($scope,Meeting,$stateParams) {
         $scope.meetings = Meeting.$search({identifier:$stateParams.council});
 
-        $scope.date = moment("20111031", "YYYYMMDD").fromNow();
-
         $scope.destroyMeeting = function(meeting){
             meeting.$destroy();
         };
@@ -65,7 +63,7 @@ function($rootScope, $scope, $uibModalInstance, Meeting, MeetingTemplate, $state
 .controller('MeetingTemplateModalController',
 ['$rootScope','$scope', '$uibModalInstance','MeetingTemplate',
 function ($rootScope, $scope, $uibModalInstance, MeetingTemplate) {
-    $scope.template = {name:'test'};
+    $scope.template = {name:''};
 
     $scope.createTemplate = function(){
         $scope.$emit('working');
