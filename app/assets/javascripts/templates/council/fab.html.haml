@@ -1,17 +1,9 @@
-.fixed-action-btn.click-to-toggle{'ng-show':"user.role_names.includes('admin')"}
+.fixed-action-btn.click-to-toggle{'ng-show': 'user.is_admin || user.is_moderator'}
   %a.btn-floating.btn-large.red
-    %i.material-icons{'ng-hide':'showSpinner'}
+    %i.material-icons
       add
-    .preloader-wrapper.small.active{'ng-show':'showSpinner'}
-      .spinner-layer.spinner-blue-only
-        .circle-clipper.left
-          .circle
-        .gap-patch
-          .circle
-        .circle-clipper.right
-          .circle
   %ul
-    %li{'ng-repeat':'action in actions'}
+    %li{'ng-repeat':'action in actions', 'ng-hide': '!user.is_admin && action.requireAdmin'}
       %a.btn-floating.tooltipped{class:'{{action.color}}', 'ng-click':'open(action)',
         data:{'delay': '50', 'position': 'left', tooltip:'{{action.tooltip}}'}}
         %i.material-icons

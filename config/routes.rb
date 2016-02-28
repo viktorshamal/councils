@@ -7,6 +7,8 @@ Rails.application.routes.draw do
         resources :users, shallow: true
       end
 
+      resources :users
+
       resources :documents do
         resources :paragraphs, shallow: true
       end
@@ -14,6 +16,9 @@ Rails.application.routes.draw do
       resources :meeting_templates
       resources :paragraphs, only: [:create, :destroy]
       resources :councils, only: [:index]
+      resources :roles
+
+      delete 'roles' => 'roles#destroy'
 
       get 'paragraphs/:id/previous' => 'paragraphs#previous_version'
       post 'paragraphs/:id/accept' => 'paragraphs#accept'

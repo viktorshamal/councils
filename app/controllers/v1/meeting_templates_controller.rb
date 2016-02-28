@@ -14,6 +14,8 @@ class V1::MeetingTemplatesController < V1::BaseController
   def create
     @meeting_template = MeetingTemplate.new(meeting_template_params)
     @meeting_template.council_id = current_user.council_id
+
+    authorize @meeting_template
     if @meeting_template.save!
       current_user.add_role(:moderator, @meeting_template)
       render json: @meeting_template

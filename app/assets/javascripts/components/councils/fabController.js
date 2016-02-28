@@ -12,7 +12,16 @@ councils.controller('FabController', ['$scope','$uibModal', function($scope, $ui
             controller: 'MeetingTemplateModalController',
             icon: 'group_work',
             color: 'blue',
-            tooltip: 'Ny mødetype'
+            tooltip: 'Ny mødetype',
+            requireAdmin: true
+        },
+        {
+            modalUrl: 'roles/modals/list.html',
+            controller: 'RolesModalController',
+            icon: 'face',
+            color: 'yellow',
+            tooltip: 'Ny rolle',
+            requireAdmin: true
         }
     ];
 

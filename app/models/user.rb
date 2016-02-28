@@ -18,6 +18,14 @@ class User < ActiveRecord::Base
     self.roles.collect(&:name)
   end
 
+  def is_admin
+    self.has_role? :admin, :any
+  end
+
+  def is_moderator
+    self.has_role? :moderator, :any
+  end
+
   # overrides devise_token_auths default because we didn't want the root key.
   def token_validation_response
     ActiveModel::SerializableResource.new(self).serializable_hash.as_json(except: [:tokens, :created_at, :updated_at])['user']
