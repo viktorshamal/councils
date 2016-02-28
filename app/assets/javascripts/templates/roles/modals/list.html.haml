@@ -8,7 +8,9 @@
       Mødetype
     %select.form-control#meeting-select{'ng-model': 'activeTemplate',
     'ng-options':'option as option.name for option in templates track by option.id'}
-    %ul.collection.with-header
+    %label{for:'user-list'}
+      Ansvarlige
+    %ul.collection.with-header#user-list
       %li.collection-item{'ng-repeat': 'user in role.users'}
         %div
           {{ user.name }}
