@@ -37,6 +37,7 @@ group :production, :staging do
   gem 'newrelic_rpm'
   gem 'rails_stdout_logging'
   gem 'rails_serve_static_assets'
+  gem 'puma-heroku'
 end
 
 group :test, :development do
