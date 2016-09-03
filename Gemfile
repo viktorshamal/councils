@@ -15,6 +15,7 @@ gem 'haml'
 gem 'sass-rails', '5.0.5'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'react_on_rails', '~> 6'
 
 #assets
 gem 'googleauth'
