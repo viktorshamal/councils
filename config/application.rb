@@ -30,6 +30,7 @@ module Councils
 
     config.filter_parameters += [:password, :password_confirmation, :tokens]
     config.assets.precompile << %r(.*.(?:eot|svg|ttf|woff|woff2)$)
+    config.assets.paths << Rails.root.join("vendor","bootstrap","assets","fonts")
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true

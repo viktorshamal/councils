@@ -8,16 +8,11 @@ gem 'thin'
 gem 'rack-cors'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'paper_trail', '~> 4.0.0'
-
-#front-end
-gem 'bower-rails'
 gem 'sprockets'
 
 #pre-processing
 gem 'haml'
 gem 'sass-rails', '5.0.5'
-gem 'uglifier', '>= 1.3.0'
-gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
@@ -41,7 +36,6 @@ gem 'foreman'
 
 group :production, :staging do
   gem 'newrelic_rpm'
-  gem 'rails_12factor'
   gem 'rails_stdout_logging'
   gem 'rails_serve_static_assets'
 end
