@@ -290,6 +290,7 @@ DEPENDENCIES
   omniauth-google-oauth2
   paper_trail (~> 4.0.0)
   pg
+  puma
   puma-heroku
   pundit
   rack-cors
