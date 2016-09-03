@@ -114,6 +114,7 @@ GEM
     jsonapi (0.1.1.beta2)
       json (~> 1.8)
     jwt (1.5.4)
+    libv8 (5.0.71.48.3)
     little-plugger (1.1.4)
     logging (2.1.0)
       little-plugger (~> 1.1)
@@ -128,6 +129,8 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
     mini_portile2 (2.1.0)
+    mini_racer (0.1.4)
+      libv8 (~> 5.0, < 5.1.11)
     minitest (5.9.0)
     multi_json (1.12.1)
     multi_xml (0.5.5)
@@ -294,6 +297,7 @@ DEPENDENCIES
   googleauth
   haml
   jbuilder (~> 2.0)
+  mini_racer
   newrelic_rpm
   omniauth
   omniauth-facebook
