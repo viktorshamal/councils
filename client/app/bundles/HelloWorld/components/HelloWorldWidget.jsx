@@ -21,9 +21,9 @@ export default class HelloWorldWidget extends React.Component {
   render() {
     const { name } = this.props;
     return (
-      <div className="container">
+      <div style={{backgroundColor:'orange'}} className="container">
         <h3>
-          Hej med dig, {name}!
+          Hello, {name}!
         </h3>
         <hr />
         <form className="form-horizontal">

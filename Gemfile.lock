@@ -266,6 +266,9 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.5)
+    turbolinks (5.0.1)
+      turbolinks-source (~> 5)
+    turbolinks-source (5.0.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uber (0.0.15)
@@ -320,6 +323,7 @@ DEPENDENCIES
   selenium-webdriver
   spring
   sprockets
+  turbolinks (~> 5.0.0)
   web-console (~> 2.0)
 
 RUBY VERSION

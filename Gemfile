@@ -16,6 +16,7 @@ gem 'sass-rails', '5.0.5'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'react_on_rails', '~> 6'
+gem 'turbolinks', '~> 5.0.0'
 
 #assets
 gem 'googleauth'
