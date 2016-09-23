@@ -13,6 +13,7 @@
     "lint": "cd client && npm run lint",
     "install-react-on-rails": "cd client && npm run install-react-on-rails",
     "build:clean": "rm -r app/assets/webpack/* || true",
+    "build:production": "npm run build:production:client && build:production:server",
     "build:production:client": "(cd client && npm run build:production:client --silent)",
     "build:production:server": "(cd client && npm run build:production:server --silent)",
     "build:client": "(cd client && npm run build:client --silent",
@@ -26,5 +27,10 @@
     "eslint": "^1.10.3",
     "eslint-config-airbnb": "^3.1.0",
     "eslint-config-shakacode": "0.0.1"
+  },
+  "dependencies": {
+    "immutable": "^3.8.1",
+    "material-ui": "^0.15.4",
+    "react-immutable-proptypes": "^2.1.0"
   }
 }

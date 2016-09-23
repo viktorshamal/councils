@@ -1,0 +1,36 @@
+@import "../../../assets/styles/app-variables";
+
+.main {
+    display: flex;
+    position: relative;
+    min-height: 100vh;
+    flex-direction: row;
+    max-width: $container-width;
+    margin: 1rem auto;
+}
+
+.meetings {
+    display: flex;
+    flex-flow: row wrap;
+    flex: 1;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.sidebar {
+    display: flex;
+    flex: 0 0 20em;
+}
+
+
+
+@media (max-width: 400px) {
+    .main {
+        flex-direction: column;
+    }
+
+    .meetings {
+        display: block;
+        margin-left: 0;
+    }
+}

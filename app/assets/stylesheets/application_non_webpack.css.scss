@@ -21,3 +21,22 @@ input[type='text'] {
   background: red;
   padding: 20px;
 }
+
+body {
+  background-color: #FAFAFA;
+  margin: 0 0.5rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+header {
+  height: 3rem;
+  background-color: #FAFAFA;
+
+  display: flex;
+  align-items: center;
+
+  .logo {
+    font-size: 1.5rem;
+    margin-left: 3.5rem;
+  }
+}

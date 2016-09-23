@@ -9,6 +9,7 @@ gem 'rack-cors'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'paper_trail', '~> 4.0.0'
 gem 'sprockets'
+gem 'execjs'
 
 #pre-processing
 gem 'haml'
