@@ -39,25 +39,29 @@ class Meetings extends React.Component {
   };
 
   render() {
+    var sidebar;
+    var fullWidth=true;
+
+    if (this.props.selectedMeeting !== null) {
+      sidebar = (
+          <div className={styles.sidebar}>
+              <Sidebar {...this.props}/>
+          </div>
+      );
+      fullWidth = false;
+    } else {
+      sidebar = null;
+    }
+
     var meetings = this.props.meetings.map((meeting, index) => {
       return (<MeetingCard
                 key={meeting.get('id')}
                 {...meeting.toObject()}
                 index={index}
+                fullWidth={fullWidth}
                 onMeetingClick={this.props.onMeetingClick}
           />);
     });
-
-    var sidebar;
-    if (this.props.selectedMeeting !== null) {
-        sidebar = (
-            <div className={styles.sidebar}>
-                <Sidebar {...this.props}/>
-            </div>
-        );
-    } else {
-        sidebar = null;
-    }
 
     return (
         <MuiThemeProvider>

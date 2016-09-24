@@ -1,17 +1,10 @@
 $color: #43B5AD;
+$margin-top:1rem;
 
 .header {
   padding: 0.25em 1em 0 1em;
   text-align: center;
   position: relative;
-
-  h2 {
-    padding: 0;
-    font-size: 1.2em;
-  }
-  p {
-    font-size: 0.8em;
-  }
 }
 
 .spanLink {
@@ -25,44 +18,87 @@ $color: #43B5AD;
 }
 
 .card {
-  width: 20%;
-  height: 13rem;
+  //flex: 1 0 auto;
   background-color: $color;
   color: white;
-  margin: 0 2rem 1rem 0;
+  margin: 0 1rem 1rem 0;
   font-family: "Roboto", "Helvetica Neue", "Arial", sans-serif;
-  border: 0.0625rem solid #e5e5e5;
-  border-radius: 0.25rem;
+  border-bottom: 0.2rem solid;
+  border-radius: 0.1rem 0.1rem 0.2rem 0.2rem;
+  z-index: 1;
 
-  h2 {
-    font-size: 1.2rem;
-    font-weight: normal;
+}
+
+.fullWidth {
+  composes: card;
+
+  width: 20%;
+}
+
+.narrow {
+  composes: card;
+  width: 30%;
+}
+
+.title {
+  font-size: 1.2rem;
+  font-weight: normal;
+  margin-top: $margin-top;
+}
+
+$timestamp-font-size: 0.8rem;
+
+.timestamp {
+  margin-top: $margin-top;
+  display: flex;
+  flex-direction: column;
+
+  span {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+
+    font-size: $timestamp-font-size;
   }
+}
 
-  ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+.links {
+  margin-top: $margin-top - 0.6rem;
+  display: flex;
+  background-color: $color;
+  z-index: 10;
+}
 
-    li {
-      padding: 1em;
-      position: relative;
+$link-font-size: 1.4rem;
 
-      a {
-        color: white;
-        text-decoration: none;
+.link {
+  flex: 1 0 auto;
+  display: flex;
 
-        span {
-          border-top: 1px white solid;
-        }
-      }
+  a {
+    display: flex;
+    align-content: center;
+    justify-content: center;
 
-      &:hover {
-        background-color: darken($color, 10%);
-      }
+    padding: 0.6rem 0 0.6rem 0;
+    width: 100%;
+
+    font-size: 0.8rem;
+    line-height: $link-font-size;
+    color: white;
+    text-decoration: none;
+
+    svg {
+      height: $link-font-size;
+      width: $link-font-size;
+    }
+
+    &:hover {
+      background-color: darken($color, 10%);
     }
   }
 }
+
 
 @media (max-width: 400px) {
   .card {

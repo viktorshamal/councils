@@ -24,13 +24,13 @@
   },
   "devDependencies": {
     "babel-eslint": "^5.0.0-beta6",
+    "babel-plugin-transform-export-extensions": "^6.8.0",
     "eslint": "^1.10.3",
     "eslint-config-airbnb": "^3.1.0",
     "eslint-config-shakacode": "0.0.1"
   },
   "dependencies": {
     "immutable": "^3.8.1",
-    "material-ui": "^0.15.4",
     "react-immutable-proptypes": "^2.1.0"
   }
 }

@@ -1,6 +1,7 @@
 class Meeting < ActiveRecord::Base
   resourcify
-  attr_accessor :name, :color
+  attribute :name, :string
+  attribute :color, :string
 
   validates_presence_of :secret, :meeting_template_id, :agenda_drive_id, :summary_drive_id
 
@@ -41,6 +42,7 @@ class Meeting < ActiveRecord::Base
     inherited_attributes = [:name, :color]
     inherited_attributes.each do |attr|
       next unless self.respond_to?(attr.to_s) && self.meeting_template.respond_to?(attr.to_s)
+      #e.g: self.color = self.meeting_template.color
       self.send(attr.to_s + '=', self.meeting_template.send(attr).to_s)
     end
   end
