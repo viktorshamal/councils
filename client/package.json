@@ -79,9 +79,5 @@
     "build:server": "webpack --config webpack.server.rails.build.config.js",
     "hot-assets": "./node_modules/babel-cli/bin/babel-node.js server-rails-hot.js",
     "install-react-on-rails": "npm install 'react-on-rails@../'"
-  },
-  "cacheDirectories": [
-    "node_modules",
-    "client/node_modules"
-  ]
+  }
 }

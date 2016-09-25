@@ -32,5 +32,9 @@
   "dependencies": {
     "immutable": "^3.8.1",
     "react-immutable-proptypes": "^2.1.0"
-  }
+  },
+  "cacheDirectories": [
+    "node_modules",
+    "client/node_modules"
+  ]
 }

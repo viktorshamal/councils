@@ -13,7 +13,7 @@ class Meeting < ActiveRecord::Base
 
   after_initialize :inherit_attributes
   before_validation(on: :create) do
-    self.secret = SecureRandom.base64(10)
+    self.secret = 4.times.map{rand(10)}.join
     create_google_documents
   end
 

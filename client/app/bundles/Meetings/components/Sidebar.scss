@@ -6,6 +6,7 @@
   width: 100%;
   border: 0.0625rem solid #e5e5e5;
   border-radius: 0.25rem;
+  position: relative;
 }
 
 .tabs {
@@ -15,4 +16,10 @@
 
 .wrapper {
   padding: 0 1rem;
+}
+
+.button {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
 }

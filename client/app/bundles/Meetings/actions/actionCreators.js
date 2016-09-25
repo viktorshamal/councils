@@ -6,3 +6,9 @@ export function selectMeeting(id) {
         id: id
     }
 }
+
+export function toggleSecretModal() {
+    return {
+        type: actionTypes.TOGGLE_SECRET_MODAL
+    }
+}

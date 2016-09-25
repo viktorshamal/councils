@@ -6,13 +6,12 @@ import { connect } from 'react-redux';
 import * as actionCreators from '../actions/actionCreators.js';
 
 import MeetingCard from '../components/MeetingCard';
-import styles from './Meetings.scss';
-
 import Header from './Header.jsx';
+import Sidebar from '../components/Sidebar';
+import SecretModal from '../components/SecretModal';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
-import Sidebar from '../components/Sidebar';
+import styles from './Meetings.scss';
 
 
 function mapStateToProps(state){
@@ -20,7 +19,8 @@ function mapStateToProps(state){
 
     return {
         meetings: store.get('$$meetings'),
-        selectedMeeting: store.get('$$selectedMeeting')
+        selectedMeeting: store.get('$$selectedMeeting'),
+        secretModalToggled: store.get('$$secretModalToggled')
     }
 }
 
@@ -28,6 +28,9 @@ function mapDispatchToProps(dispatch){
     return {
         onMeetingClick: (id) => {
             dispatch(actionCreators.selectMeeting(id));
+        },
+        onModalClick: () => {
+            dispatch(actionCreators.toggleSecretModal());
         }
     };
 }
@@ -66,6 +69,7 @@ class Meetings extends React.Component {
     return (
         <MuiThemeProvider>
             <div>
+                <SecretModal {...this.props}/>
                 <Header />
                 <div className={styles.main}>
                   <div className={styles.meetings}>
