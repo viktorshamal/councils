@@ -22,7 +22,7 @@ export default (props, railsContext) => {
       store
     );
 
-    var port = railsContext.port ? `:${railsContext.port}` : null;
+    var port = railsContext.port ? `:${railsContext.port}` : '';
 
     store.dispatch(configure(
         {
