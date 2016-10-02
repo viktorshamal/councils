@@ -20,7 +20,8 @@ function mapStateToProps(state){
     return {
         meetings: store.get('$$meetings'),
         selectedMeeting: store.get('$$selectedMeeting'),
-        secretModalToggled: store.get('$$secretModalToggled')
+        secretModalToggled: store.get('$$secretModalToggled'),
+        user: state.auth.get('user')
     }
 }
 
@@ -70,7 +71,7 @@ class Meetings extends React.Component {
         <MuiThemeProvider>
             <div>
                 <SecretModal {...this.props}/>
-                <Header />
+                <Header user={this.props.user} />
                 <div className={styles.main}>
                   <div className={styles.meetings}>
                     {meetings}

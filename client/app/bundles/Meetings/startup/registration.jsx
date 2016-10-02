@@ -9,3 +9,4 @@ injectTapEventPlugin();
 
 ReactOnRails.registerStore({ meetingsStore });
 ReactOnRails.register({ MeetingsApp });
+

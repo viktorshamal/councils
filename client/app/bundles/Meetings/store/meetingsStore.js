@@ -5,6 +5,7 @@ import thunkMiddleware from 'redux-thunk';
 import loggerMiddleware from 'libs/middlewares/loggerMiddleware';
 
 import reducers, { initialStates } from '../reducers';
+import {configure, authStateReducer} from "redux-auth";
 
 export default (props, railsContext) => {
     const initialMeetings = props;
@@ -19,7 +20,8 @@ export default (props, railsContext) => {
     // https://github.com/reactjs/react-router-redux
     const reducer = combineReducers({
         ...reducers,
-        routing: routerReducer
+        routing: routerReducer,
+        auth: authStateReducer
     });
 
     // Sync dispatched route actions to the history
