@@ -16,7 +16,7 @@ export default ({user}) => {
         <div className={styles.main}>
             <span className={styles.logo}>Gefions Elevråd</span>
             <span className={styles.right}>
-                {user.getIn(['attributes', 'name'])}
+                <p>{user.getIn(['attributes', 'name'])}</p>
                 {button}
             </span>
         </div>

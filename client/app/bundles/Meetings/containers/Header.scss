@@ -3,10 +3,10 @@
 .main {
   height: $header-height;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   max-width: $container-width;
   margin: 0 auto;
-  padding: 0.5rem 0 1rem 0;
+  padding: 0.75rem 0 0.75rem 0;
   border-bottom: 0.0625rem solid #e5e5e5;
 }
 
@@ -15,5 +15,11 @@
 }
 
 .right {
+  display: flex;
+  align-items: center;
   margin-left: auto;
+
+  p {
+    margin-right: 0.75rem;
+  }
 }

@@ -22,12 +22,18 @@ export default (props, railsContext) => {
       store
     );
 
+    var port = railsContext.port ? `:${railsContext.port}` : null;
+
     store.dispatch(configure(
-        {apiUrl: "http://localhost:3000/v1/"},
+        {
+            apiUrl: `${railsContext.scheme}://${railsContext.host + port}/v1`
+        },
         {
             isServer: railsContext.serverSide,
             cookies:{},
-            currentLocation: railsContext.href
+            currentLocation: railsContext.href,
+            storage: 'localStorage',
+            clientOnly: true
         }
     ));
 
