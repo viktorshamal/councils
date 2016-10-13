@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -12,7 +13,9 @@ import SecretModal from '../components/SecretModal';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import styles from './Meetings.scss';
+import sidebarStyles from '../components/Sidebar.scss';
 
+import { CSSGrid, measureItems, makeResponsive } from 'react-stonecutter';
 
 function mapStateToProps(state){
     var store = state.$$meetingsStore;
@@ -44,15 +47,9 @@ class Meetings extends React.Component {
 
   render() {
     var sidebar;
-    var fullWidth=true;
 
     if (this.props.selectedMeeting !== null) {
-      sidebar = (
-          <div className={styles.sidebar}>
-              <Sidebar {...this.props}/>
-          </div>
-      );
-      fullWidth = false;
+      sidebar = (<Sidebar {...this.props}/>);
     } else {
       sidebar = null;
     }
@@ -62,7 +59,7 @@ class Meetings extends React.Component {
                 key={meeting.get('id')}
                 {...meeting.toObject()}
                 index={index}
-                fullWidth={fullWidth}
+                fullWidth={!sidebar}
                 onMeetingClick={this.props.onMeetingClick}
           />);
     });
@@ -73,15 +70,22 @@ class Meetings extends React.Component {
                 <SecretModal {...this.props}/>
                 <Header user={this.props.user} />
                 <div className={styles.main}>
-                  <div className={styles.meetings}>
-                    {meetings}
-                  </div>
-                  {sidebar}
+                    <div className={styles.meetings}>
+                        {meetings}
+                    </div>
+                    <div className={sidebar ? styles.sidebarVisible : styles.sidebarHidden}>
+                        {sidebar}
+                    </div>
                 </div>
             </div>
         </MuiThemeProvider>
     );
   }
 }
+
+const Grid = makeResponsive(measureItems(CSSGrid), {
+    maxWidth: 1920,
+    minPadding: 100
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Meetings);

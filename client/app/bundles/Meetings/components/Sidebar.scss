@@ -2,10 +2,9 @@
 
 .sidebar {
   background-color: #FAFAFA;
-  height: 26rem;
   width: 100%;
   border: 0.0625rem solid #e5e5e5;
-  border-radius: 0.25rem;
+  border-radius: 0.1rem 0.1rem 0.2rem 0.2rem;
   position: relative;
 }
 
@@ -23,3 +22,21 @@
   bottom: 0.5rem;
   right: 0.5rem;
 }
+
+/*.enter {
+  opacity: 0.01;
+}
+
+.enter.enterActive {
+  opacity: 1;
+  transition: opacity 250ms ease-in;
+}
+
+.leave {
+  opacity: 1;
+}
+
+.leave.leaveActive {
+  opacity: 0.01;
+  transition: opacity 250ms ease-in;
+}*/

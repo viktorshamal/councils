@@ -4,7 +4,9 @@ import * as actionTypes from '../actions/actionTypes.js';
 export const $$initialState = Immutable.fromJS({
     $$meetings: [],
     $$selectedMeeting: null,
-    $$secretModalToggled: false
+    $$secretModalToggled: false,
+    $$attendants: {},
+    $$isFetching: false
 });
 
 export default function ($$state = $$initialState, action=null){
@@ -17,9 +19,28 @@ export default function ($$state = $$initialState, action=null){
         case actionTypes.TOGGLE_SECRET_MODAL: {
             return $$state.merge({
                 $$secretModalToggled: !$$state.get('$$secretModalToggled')
-            })
+            });
         }
-    }
 
-    return $$state;
+        case actionTypes.FETCH_USERS: {
+            return $$state.merge({
+                $$isFetching: true
+            });
+        }
+
+        case actionTypes.FETCH_USERS_SUCCESS: {
+            return $$state.merge({
+                $$isFetching: false
+            });
+        }
+
+        case actionTypes.FETCH_USERS_ERROR: {
+            return $$state.merge({
+                $$isFetching: false
+            });
+        }
+
+        default:
+            return $$state;
+    }
 };

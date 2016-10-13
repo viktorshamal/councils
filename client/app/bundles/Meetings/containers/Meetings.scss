@@ -3,13 +3,13 @@
 .main {
   display: flex;
   position: relative;
-  min-height: 100vh;
   flex-direction: row;
   max-width: $container-width;
   margin: 1rem auto;
 }
 
 .meetings {
+  margin-right: -3rem;
   display: flex;
   flex-flow: row wrap;
   flex: 1;
@@ -23,20 +23,22 @@
   flex: auto;
 }
 
-.sidebar {
+.sidebarVisible {
   display: flex;
-  flex: 0 0 20em;
+  flex: 0 0 20rem;
 }
 
+.sidebarHidden {
+  display: none;
+}
 
-
-@media (max-width: 400px) {
+@media (max-width: 700px) {
     .main {
         flex-direction: column;
     }
 
     .meetings {
         display: block;
-        margin-left: 0;
+        margin: 0;
     }
 }

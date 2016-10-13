@@ -12,3 +12,10 @@ export function toggleSecretModal() {
         type: actionTypes.TOGGLE_SECRET_MODAL
     }
 }
+
+export function fetchUsers(meetingId) {
+    return {
+        type: actionTypes.FETCH_USERS,
+        meetingId
+    }
+}
