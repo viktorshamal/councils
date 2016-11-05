@@ -3,22 +3,23 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import FloatingButton from '../components/ActionButton.jsx';
+import MeetingModal from '../components/modals/MeetingModal.jsx';
+import RoleModal from '../components/modals/RoleModal.jsx';
+import TypeModal from '../components/modals/TypeModal.jsx';
 
 import * as actionCreators from '../actions/actionCreators.js';
 
 function mapStateToProps(state){
     return {
-        user: state.auth.get('user')
+        user: state.auth.get('user'),
+        modals: state.$$modalsStore
     }
 }
 
 function mapDispatchToProps(dispatch){
     return {
-        onMeetingClick: (id) => {
-            dispatch(actionCreators.selectMeeting(id));
-        },
-        onModalClick: () => {
-            dispatch(actionCreators.toggleSecretModal());
+        toggleModal: (modal) => {
+            dispatch(actionCreators.toggleModal(modal));
         }
     };
 }
@@ -38,12 +39,21 @@ class ActionButton extends React.Component {
             authorized = attributes.get('role_names').some(function (role, i) {
                 return authorizedRoles[i]==role;
             });
-            if(authorized) button = (<FloatingButton/>);
+            if(authorized) button = (<FloatingButton toggleModal={this.props.toggleModal}/>);
         }
 
         return (
             <div>
                 {button}
+                <MeetingModal
+                    open={this.props.modals.getIn(['meetingModal','open'])}
+                    toggleModal={this.props.toggleModal}/>
+                <TypeModal
+                    open={this.props.modals.getIn(['typeModal','open'])}
+                    toggleModal={this.props.toggleModal}/>
+                <RoleModal
+                    open={this.props.modals.getIn(['roleModal','open'])}
+                    toggleModal={this.props.toggleModal}/>
             </div>
         );
 

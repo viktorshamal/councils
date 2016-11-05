@@ -1,5 +1,6 @@
 export const SELECT_MEETING = 'SELECT_MEETING';
 
+export const TOGGLE_MODAL = 'TOGGLE_MODAL';
 export const TOGGLE_SECRET_MODAL = 'TOGGLE_SECRET_MODAL';
 
 export const FETCH_USERS = 'FETCH_USERS';
