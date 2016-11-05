@@ -45,6 +45,16 @@ config.module.loaders.push(
   },
   {
     test: /\.css$/,
+    include: /node_modules/,
+    loaders: [
+        'style',
+        'css'
+
+    ]
+  },
+  {
+    test: /\.css$/,
+    exclude: /node_modules/,
     loaders: [
       'style',
       'css?modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]',
@@ -53,6 +63,7 @@ config.module.loaders.push(
   },
   {
     test: /\.scss$/,
+    exclude: /node_modules/,
     loaders: [
       'style',
       'css?modules&importLoaders=3&localIdentName=[name]__[local]__[hash:base64:5]',

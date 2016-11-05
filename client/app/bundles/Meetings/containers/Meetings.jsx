@@ -8,6 +8,7 @@ import * as actionCreators from '../actions/actionCreators.js';
 
 import MeetingCard from '../components/MeetingCard';
 import Header from './Header.jsx';
+import ActionButton from './ActionButton.jsx';
 import Sidebar from '../components/Sidebar';
 import SecretModal from '../components/SecretModal';
 
@@ -77,6 +78,7 @@ class Meetings extends React.Component {
                         {sidebar}
                     </div>
                 </div>
+                <ActionButton {...this.props}/>
             </div>
         </MuiThemeProvider>
     );

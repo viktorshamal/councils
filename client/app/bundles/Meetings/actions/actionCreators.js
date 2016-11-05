@@ -19,3 +19,22 @@ export function fetchUsers(meetingId) {
         meetingId
     }
 }
+
+export function createMeetingOptimistic(meeting) {
+    return {
+        type: actionTypes.CREATE_MEETING,
+        meeting
+    }
+}
+
+export function createMeeting(meeting) {
+    return function(dispatch) {
+        dispatch(createMeetingOptimistic(meeting));
+
+        setTimeout(()=>{
+            console.log('hello');
+        },1000);
+
+        return null;
+    }
+}

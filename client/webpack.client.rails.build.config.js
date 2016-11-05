@@ -29,6 +29,7 @@ config.module.loaders.push(
       'css?minimize&modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]' +
       '!postcss'
     ),
+    exclude: /node_modules/
   },
   {
     test: /\.scss$/,
@@ -39,6 +40,7 @@ config.module.loaders.push(
       '!sass' +
       '!sass-resources'
     ),
+    exclude: /node_modules/
   },
   {
     test: require.resolve('react'),
