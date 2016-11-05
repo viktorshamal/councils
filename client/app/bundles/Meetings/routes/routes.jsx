@@ -5,7 +5,7 @@ import { AuthGlobals } from 'redux-auth/default-theme';
 
 
 export default (
-    <Route path="/meetings" >
+    <Route path="/" >
         <IndexRoute component={Meetings} >
         </IndexRoute>
     </Route>
