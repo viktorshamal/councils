@@ -50,6 +50,7 @@ $timestamp-font-size: 0.8rem;
   margin-top: $margin-top;
   display: flex;
   flex-direction: column;
+  font-weight: 300;
 
   span {
     display: flex;
@@ -72,6 +73,7 @@ $link-font-size: 1.4rem;
 .link {
   flex: 1 0 auto;
   display: flex;
+  font-weight: 300;
 
   a {
     display: flex;
