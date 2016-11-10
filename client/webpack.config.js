@@ -27,8 +27,11 @@ const config = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify(nodeEnv),
+        NODE_ENV: JSON.stringify(nodeEnv)
       },
+    }),
+    new webpack.DefinePlugin({
+       'API_URL': JSON.stringify(devBuild ? 'http://localhost:3000' : 'https://councils-staging.herokuapp.com')
     }),
   ],
   module: {

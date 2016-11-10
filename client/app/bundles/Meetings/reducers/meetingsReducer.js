@@ -16,6 +16,23 @@ export default function ($$state = $$initialState, action=null){
                 $$selectedMeeting: action.id
             });
         }
+        case actionTypes.CREATE_MEETING: {
+            return $$state.merge({
+                $$isFetching: true
+            })
+        }
+        case actionTypes.CREATE_MEETING_ERROR: {
+            return $$state.merge({
+                $$isFetching: false
+            })
+        }
+        case actionTypes.CREATE_MEETING_SUCCESS: {
+            const newMeetings = $$state.get('$$meetings').insert(0,Immutable.fromJS(action.meeting));
+            return $$state.merge({
+                $$meetings: Immutable.fromJS(newMeetings),
+                $$isFetching: false
+            })
+        }
         case actionTypes.TOGGLE_SECRET_MODAL: {
             return $$state.merge({
                 $$secretModalToggled: !$$state.get('$$secretModalToggled')

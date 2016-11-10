@@ -2,8 +2,9 @@ class Meeting < ActiveRecord::Base
   resourcify
   attribute :name, :string
   attribute :color, :string
+  attribute :timestamp, :string
 
-  validates_presence_of :secret, :meeting_template_id, :agenda_drive_id, :summary_drive_id
+  validates_presence_of :secret, :meeting_template_id, :agenda_drive_id, :summary_drive_id, :date
 
   belongs_to :meeting_template
   belongs_to :council
@@ -19,6 +20,13 @@ class Meeting < ActiveRecord::Base
 
   def editors
     User.with_role(:moderator, self.meeting_template).map(&:email)
+  end
+
+  def date=(date)
+    if date.is_a? Integer
+      date = DateTime.strptime(date.to_s,'%s')
+    end
+    write_attribute(:date, date)
   end
 
   private
