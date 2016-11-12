@@ -8,11 +8,13 @@ import reducers, { initialStates } from '../reducers';
 import {configure, authStateReducer} from "redux-auth";
 
 export default (props, railsContext) => {
-    const initialMeetings = props;
+    const initialMeetings = props.meetings;
+    const initialTemplates = props.meeting_templates;
     const { $$meetingsState, $$modalsState } = initialStates;
     const initialState = {
         $$meetingsStore: $$meetingsState.merge({
-            $$meetings: initialMeetings
+            $$meetings: initialMeetings,
+            $$meetingTemplates: initialTemplates
         }),
         $$modalsStore: $$modalsState,
         railsContext

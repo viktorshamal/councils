@@ -3,6 +3,7 @@ import * as actionTypes from '../actions/actionTypes.js';
 
 export const $$initialState = Immutable.fromJS({
     $$meetings: [],
+    $$meetingTemplates: [],
     $$selectedMeeting: null,
     $$secretModalToggled: false,
     $$attendants: {},

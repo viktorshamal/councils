@@ -12,7 +12,8 @@ import * as actionCreators from '../actions/actionCreators.js';
 function mapStateToProps(state){
     return {
         user: state.auth.get('user'),
-        modals: state.$$modalsStore
+        modals: state.$$modalsStore,
+        meetingTemplates: state.$$meetingsStore.get('$$meetingTemplates')
     }
 }
 
@@ -52,6 +53,7 @@ class ActionButton extends React.Component {
                     open={this.props.modals.getIn(['meetingModal','open'])}
                     toggleModal={this.props.toggleModal}
                     handleSubmit={this.props.createMeeting}
+                    meetingTemplates={this.props.meetingTemplates}
                     />
                 <TypeModal
                     open={this.props.modals.getIn(['typeModal','open'])}

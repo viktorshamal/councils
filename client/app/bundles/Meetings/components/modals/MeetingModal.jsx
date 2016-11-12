@@ -9,15 +9,15 @@ import MenuItem from 'material-ui/MenuItem';
 import moment from 'moment';
 
 export default class extends React.Component {
-    state = {
-        meeting_template_id: '26',
-        date: Date.now(),
-        time: Date.now()
-    };
-
     constructor(props){
         super(props);
     }
+
+    state = {
+        meeting_template_id: this.props.meetingTemplates.get(0).get('id'),
+        date: Date.now(),
+        time: Date.now()
+    };
 
     handleSubmit(){
         const { meeting_template_id, date, time } = this.state;
@@ -58,33 +58,32 @@ export default class extends React.Component {
                 modal={true}
                 onRequestClose={()=>this.close()}
                 >
-                <Forms
-                    handleDateChange={this.handleDateChange}
-                    handleTimeChange={this.handleTimeChange}
+                <TemplateSelector
                     handleSelectChange={this.handleSelectChange}
                     selected={this.state.meeting_template_id}
+                    templates={this.props.meetingTemplates}
                     />
+                <DatePicker floatingLabelText="Dato" onChange={this.handleDateChange} formatDate={formatDate}/>
+                <TimePicker floatingLabelText="Klokkeslæt" format='24hr' onChange={this.handleTimeChange} />
             </Dialog>
         );
     }
 }
 
-const Forms = ({handleDateChange,handleTimeChange,handleSelectChange,selected}) => {
-  return (
-      <div>
-          <SelectField
-              floatingLabelText="Mødetype"
-              value={selected}
-              onChange={handleSelectChange}
-              >
-              <MenuItem value={26} primaryText="Elevrådsmøde" />
-              <MenuItem value={27} primaryText="Bestyrelsesmøde" />
-              <MenuItem value={1}  primaryText="Elevrådsmøde" />
-          </SelectField>
-          <DatePicker hintText='Dato' onChange={handleDateChange} formatDate={formatDate}/>
-          <TimePicker hintText='Klokkeslæt' format='24hr' onChange={handleTimeChange} />
-      </div>
-  );
+const TemplateSelector = ({handleSelectChange, selected, templates}) => {
+    const items = templates.map((template)=>{
+        return (<MenuItem value={template.get('id')} primaryText={template.get('name')} />);
+    });
+
+    return (
+      <SelectField
+          floatingLabelText="Mødetype"
+          value={selected}
+          onChange={handleSelectChange}
+          >
+          {items}
+      </SelectField>
+    );
 };
 
 const formatDate = (date) => {return moment(date).format('LL')};
