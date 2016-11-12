@@ -8,8 +8,4 @@ class V1::BaseController < ApplicationController
   def set_default_response_format
     #request.format = :json
   end
-
-  def identifier
-    @identifier ||= ((params[:identifier].present? && params[:identifier]) || ENV['DEFAULT_COUNCIL'])
-  end
 end

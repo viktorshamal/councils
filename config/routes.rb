@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  get 'hello_world', to: 'hello_world#index'
+  root 'home#index'
+
   get 'meetings', to: 'v1/meetings#index'
   mount_devise_token_auth_for 'User', at: 'v1/auth'
-  root 'v1/meetings#index'
   namespace :v1 do
     defaults format: 'json' do
       resources :meetings do
