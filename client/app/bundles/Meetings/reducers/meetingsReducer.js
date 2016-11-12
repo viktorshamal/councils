@@ -34,6 +34,25 @@ export default function ($$state = $$initialState, action=null){
                 $$isFetching: false
             })
         }
+
+        case actionTypes.CREATE_MEETING_TEMPLATE: {
+            return $$state.merge({
+                $$isFetching: true
+            })
+        }
+        case actionTypes.CREATE_MEETING_TEMPLATE_ERROR: {
+            return $$state.merge({
+                $$isFetching: false
+            })
+        }
+        case actionTypes.CREATE_MEETING_TEMPLATE_SUCCESS: {
+            const template = Immutable.fromJS(action.meetingTemplate.meeting_template);
+            const newTemplates = $$state.get('$$meetingTemplates').insert(0,template);
+            return $$state.merge({
+                $$meetingTemplates: Immutable.fromJS(newTemplates),
+                $$isFetching: false
+            })
+        }
         case actionTypes.TOGGLE_SECRET_MODAL: {
             return $$state.merge({
                 $$secretModalToggled: !$$state.get('$$secretModalToggled')

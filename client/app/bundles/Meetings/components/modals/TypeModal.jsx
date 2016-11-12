@@ -2,35 +2,43 @@ import React from 'react';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
-import DatePicker from 'material-ui/DatePicker';
-import TimePicker from 'material-ui/TimePicker';
+import TextField from 'material-ui/TextField';
 
 export default class extends React.Component {
     state = {
-        type:'Yes',
-        date: Date.now(),
-        time: Date.now()
+        name:''
     };
 
     constructor(props){
         super(props);
     }
 
+    handleSubmit() {
+        this.props.handleSubmit({
+            meeting_template: {
+                name:this.state.name
+            }
+        });
+        this.close();
+    }
+
     close() {
         this.props.toggleModal('typeModal');
     }
 
+    handleChange = (event) => {this.setState({name:event.target.value})};
+
     render() {
         const actions = [
             <FlatButton
-                label="Cancel"
+                label="Anuller"
                 primary={true}
                 onClick={()=>this.close()}
                 />,
             <FlatButton
-                label="Submit"
+                label="Gem"
                 primary={true}
-                onClick={()=>this.close()}
+                onClick={()=>this.handleSubmit()}
                 />
         ];
 
@@ -42,7 +50,7 @@ export default class extends React.Component {
                 modal={false}
                 onRequestClose={()=>this.close()}
                 >
-                The actions in this window were passed in as an array of React objects.
+                <TextField hintText="Navn" onChange={this.handleChange}/>
             </Dialog>
         );
     }

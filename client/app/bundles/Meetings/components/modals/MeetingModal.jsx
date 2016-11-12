@@ -22,8 +22,10 @@ export default class extends React.Component {
     handleSubmit(){
         const { meeting_template_id, date, time } = this.state;
         this.props.handleSubmit({
-            meeting_template_id: meeting_template_id,
-            date: mergeDates(date, time)
+            meeting:{
+                meeting_template_id,
+                date: mergeDates(date, time)
+            }
         });
         this.close();
     }
@@ -63,8 +65,8 @@ export default class extends React.Component {
                     selected={this.state.meeting_template_id}
                     templates={this.props.meetingTemplates}
                     />
-                <DatePicker floatingLabelText="Dato" onChange={this.handleDateChange} formatDate={formatDate}/>
-                <TimePicker floatingLabelText="Klokkeslæt" format='24hr' onChange={this.handleTimeChange} />
+                <DatePicker hintText="Dato" onChange={this.handleDateChange} formatDate={formatDate}/>
+                <TimePicker hintText="Klokkeslæt" format='24hr' onChange={this.handleTimeChange} />
             </Dialog>
         );
     }

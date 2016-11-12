@@ -49,19 +49,38 @@ export function createMeetingError(error) {
 }
 
 export function createMeeting(meeting) {
-    return function(dispatch) {
-        dispatch(createMeetingOptimistic(meeting));
+    return (dispatch) => createResource('/meetings', meeting, dispatch, createMeetingSuccess, createMeetingError)
+}
 
-        return fetch(getApiUrl() + '/meetings', {
-            method: 'POST',
-            body: JSON.stringify({meeting}),
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json'
-            }
-        })
-        .then(response => response.json())
-        .then(data => dispatch(createMeetingSuccess(data.meeting)))
-        .catch(error => dispatch(createMeetingError(error)));
+export function createMeetingTemplateSuccess(meetingTemplate) {
+    return {
+        type: actionTypes.CREATE_MEETING_TEMPLATE_SUCCESS,
+        meetingTemplate
     }
+}
+
+export function createMeetingTemplateError(error) {
+    return {
+        type: actionTypes.CREATE_MEETING_TEMPLATE_ERROR,
+        error
+    }
+}
+
+export function createMeetingTemplate(meetingTemplate) {
+    return (dispatch) => createResource('/meeting_templates', meetingTemplate,
+        dispatch, createMeetingTemplateSuccess, createMeetingTemplateError)
+}
+
+function createResource(path,resource,dispatch,successAction,errorAction) {
+    return fetch(getApiUrl() + path, {
+        method: 'POST',
+        body: JSON.stringify(resource),
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => dispatch(successAction(data)))
+    .catch(error => dispatch(errorAction(error)));
 }

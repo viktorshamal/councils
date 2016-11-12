@@ -24,6 +24,9 @@ function mapDispatchToProps(dispatch){
         },
         createMeeting: (meeting) => {
             dispatch(actionCreators.createMeeting(meeting));
+        },
+        createMeetingTemplate: (meetingTemplate) => {
+            dispatch(actionCreators.createMeetingTemplate(meetingTemplate));
         }
     };
 }
@@ -58,6 +61,7 @@ class ActionButton extends React.Component {
                 <TypeModal
                     open={this.props.modals.getIn(['typeModal','open'])}
                     toggleModal={this.props.toggleModal}
+                    handleSubmit={this.props.createMeetingTemplate}
                     />
                 <RoleModal
                     open={this.props.modals.getIn(['roleModal','open'])}
