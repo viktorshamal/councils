@@ -1,5 +1,5 @@
 import * as actionTypes from '../actions/actionTypes.js';
-import { fetch, getApiUrl } from 'redux-auth';
+import { fetchResource, createResource } from './apiUtils.js';
 
 export function selectMeeting(id) {
     return {
@@ -28,11 +28,17 @@ export function fetchUsers(meetingId) {
     }
 }
 
+// Meetings
 export function createMeetingOptimistic(meeting) {
     return {
         type: actionTypes.CREATE_MEETING,
         meeting
     }
+}
+
+export function createMeeting(meeting) {
+    return (dispatch) => createResource('/meetings', meeting,
+        dispatch, createMeetingSuccess, createMeetingError)
 }
 
 export function createMeetingSuccess(meeting) {
@@ -48,8 +54,11 @@ export function createMeetingError(error) {
     }
 }
 
-export function createMeeting(meeting) {
-    return (dispatch) => createResource('/meetings', meeting, dispatch, createMeetingSuccess, createMeetingError)
+
+// Meeting Templates
+export function createMeetingTemplate(meetingTemplate) {
+    return (dispatch) => createResource('/meeting_templates', meetingTemplate,
+        dispatch, createMeetingTemplateSuccess, createMeetingTemplateError)
 }
 
 export function createMeetingTemplateSuccess(meetingTemplate) {
@@ -66,21 +75,24 @@ export function createMeetingTemplateError(error) {
     }
 }
 
-export function createMeetingTemplate(meetingTemplate) {
-    return (dispatch) => createResource('/meeting_templates', meetingTemplate,
-        dispatch, createMeetingTemplateSuccess, createMeetingTemplateError)
+// Roles
+
+export function fetchRoles(meeting_template_id) {
+    return (dispatch) => fetchResource('/roles', { meeting_template_id },
+        dispatch, fetchRolesSuccess, fetchRolesError)
 }
 
-function createResource(path,resource,dispatch,successAction,errorAction) {
-    return fetch(getApiUrl() + path, {
-        method: 'POST',
-        body: JSON.stringify(resource),
-        headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json'
-        }
-    })
-    .then(response => response.json())
-    .then(data => dispatch(successAction(data)))
-    .catch(error => dispatch(errorAction(error)));
+export function fetchRolesSuccess(roles) {
+    return {
+        type: actionTypes.FETCH_ROLES_SUCCESS,
+        data: roles
+    }
 }
+
+export function fetchRolesError(error) {
+    return {
+        type: actionTypes.FETCH_ROLES_ERROR,
+        error
+    }
+}
+

@@ -4,6 +4,9 @@ import * as actionTypes from '../actions/actionTypes.js';
 export const $$initialState = Immutable.fromJS({
     $$meetings: [],
     $$meetingTemplates: [],
+    $$message: '',
+    $$users: { 1: {name:'Viktor Shamal'} },
+    $$roles: {},
     $$selectedMeeting: null,
     $$secretModalToggled: false,
     $$attendants: {},
@@ -52,6 +55,34 @@ export default function ($$state = $$initialState, action=null){
                 $$meetingTemplates: Immutable.fromJS(newTemplates),
                 $$isFetching: false
             })
+        }
+
+        case actionTypes.FETCH_ROLES: {
+            return $$state.merge({
+                $$isFetching: true
+            });
+        }
+
+        case actionTypes.FETCH_ROLES_SUCCESS: {
+            const newRoles = {};
+            action.data.roles.map((role)=>{
+                let { resource_id, name } = role;
+
+                newRoles[resource_id] = role.user_ids.map((user_id) => {
+                    return {name, user_id}
+                });
+            });
+            const $$roles = $$state.get('$$roles').merge(Immutable.fromJS(newRoles));
+            return $$state.merge({
+                $$roles,
+                $$isFetching: false
+            });
+        }
+
+        case actionTypes.FETCH_ROLES_ERROR: {
+            return $$state.merge({
+                $$isFetching: false
+            });
         }
         case actionTypes.TOGGLE_SECRET_MODAL: {
             return $$state.merge({

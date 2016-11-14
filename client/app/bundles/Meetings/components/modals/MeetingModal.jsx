@@ -4,8 +4,8 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
+import TemplateSelector from './TemplateSelector.jsx';
+
 import moment from 'moment';
 
 export default class extends React.Component {
@@ -61,7 +61,7 @@ export default class extends React.Component {
                 onRequestClose={()=>this.close()}
                 >
                 <TemplateSelector
-                    handleSelectChange={this.handleSelectChange}
+                    onSelectChange={this.handleSelectChange}
                     selected={this.state.meeting_template_id}
                     templates={this.props.meetingTemplates}
                     />
@@ -71,22 +71,6 @@ export default class extends React.Component {
         );
     }
 }
-
-const TemplateSelector = ({handleSelectChange, selected, templates}) => {
-    const items = templates.map((template)=>{
-        return (<MenuItem value={template.get('id')} primaryText={template.get('name')} />);
-    });
-
-    return (
-      <SelectField
-          floatingLabelText="Mødetype"
-          value={selected}
-          onChange={handleSelectChange}
-          >
-          {items}
-      </SelectField>
-    );
-};
 
 const formatDate = (date) => {return moment(date).format('LL')};
 

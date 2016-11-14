@@ -6,14 +6,18 @@ import FloatingButton from '../components/ActionButton.jsx';
 import MeetingModal from '../components/modals/MeetingModal.jsx';
 import RoleModal from '../components/modals/RoleModal.jsx';
 import TypeModal from '../components/modals/TypeModal.jsx';
+import Snackbar from 'material-ui/Snackbar';
 
 import * as actionCreators from '../actions/actionCreators.js';
 
 function mapStateToProps(state){
     return {
         user: state.auth.get('user'),
+        users: state.$$meetingsStore.get('$$users'),
+        roles: state.$$meetingsStore.get('$$roles'),
         modals: state.$$modalsStore,
-        meetingTemplates: state.$$meetingsStore.get('$$meetingTemplates')
+        meetingTemplates: state.$$meetingsStore.get('$$meetingTemplates'),
+        message: state.$$meetingsStore.get('$$message')
     }
 }
 
@@ -27,6 +31,9 @@ function mapDispatchToProps(dispatch){
         },
         createMeetingTemplate: (meetingTemplate) => {
             dispatch(actionCreators.createMeetingTemplate(meetingTemplate));
+        },
+        fetchRoles: (meeting_template_id) => {
+            dispatch(actionCreators.fetchRoles(meeting_template_id));
         }
     };
 }
@@ -66,7 +73,12 @@ class ActionButton extends React.Component {
                 <RoleModal
                     open={this.props.modals.getIn(['roleModal','open'])}
                     toggleModal={this.props.toggleModal}
+                    meetingTemplates={this.props.meetingTemplates}
+                    onChange={this.props.fetchRoles}
+                    users={this.props.users}
+                    roles={this.props.roles}
                     />
+                <Snackbar open={false} message={this.props.message} autoHideDuration={4000}/>
             </div>
         );
 

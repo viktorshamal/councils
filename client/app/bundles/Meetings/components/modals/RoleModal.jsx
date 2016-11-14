@@ -2,19 +2,24 @@ import React from 'react';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
-import DatePicker from 'material-ui/DatePicker';
-import TimePicker from 'material-ui/TimePicker';
+import { List, ListItem } from 'material-ui/List';
+import TemplateSelector from './TemplateSelector.jsx';
 
 export default class extends React.Component {
     state = {
-        type:'Yes',
-        date: Date.now(),
-        time: Date.now()
+        meeting_template_id: this.props.meetingTemplates.get(0).get('id')
     };
 
     constructor(props){
         super(props);
     }
+
+    handleSelectChange = (event, index, value) => {
+        this.setState({
+            meeting_template_id: value
+        });
+        this.props.onChange(value);
+    };
 
     close() {
         this.props.toggleModal('roleModal');
@@ -42,8 +47,34 @@ export default class extends React.Component {
                 modal={false}
                 onRequestClose={()=>this.close()}
                 >
-                The actions in this window were passed in as an array of React objects.
+                <TemplateSelector
+                    onSelectChange={this.handleSelectChange}
+                    selected={this.state.meeting_template_id}
+                    templates={this.props.meetingTemplates}
+                    />
+                <RoleList
+                    users={this.props.users}
+                    roles={this.props.roles}
+                    meeting_template_id={this.state.meeting_template_id}
+                    />
             </Dialog>
         );
     }
 }
+
+const RoleList = ({users,roles,meeting_template_id}) => {
+    var items;
+    if(roles.has(meeting_template_id.toString())){
+        items = roles.get(meeting_template_id.toString()).map((role)=>{
+            let user_id = role.get('user_id').toString();
+            let user = users.get(user_id);
+            return (<ListItem primaryText={user.get('name')}/>);
+        });
+    }
+
+    return (
+        <List>
+            {items}
+        </List>
+    );
+};

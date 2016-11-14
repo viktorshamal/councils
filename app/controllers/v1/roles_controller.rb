@@ -1,8 +1,7 @@
 class V1::RolesController < V1::BaseController
   def index
     roles = MeetingTemplate.find(params[:meeting_template_id]).roles.where(name: 'moderator')
-    #template = MeetingTemplate.find params[:meeting_template_id]
-    #users = User.with_role :moderator, template
+
     render json: roles
   end
 
