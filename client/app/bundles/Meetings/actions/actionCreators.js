@@ -21,13 +21,6 @@ export function toggleSecretModal() {
     }
 }
 
-export function fetchUsers(meetingId) {
-    return {
-        type: actionTypes.FETCH_USERS,
-        meetingId
-    }
-}
-
 // Meetings
 export function createMeetingOptimistic(meeting) {
     return {
@@ -92,6 +85,27 @@ export function fetchRolesSuccess(roles) {
 export function fetchRolesError(error) {
     return {
         type: actionTypes.FETCH_ROLES_ERROR,
+        error
+    }
+}
+
+// Users
+
+export function fetchUsers() {
+    return (dispatch) => fetchResource('/users', {},
+        dispatch, fetchUsersSuccess, fetchUsersError)
+}
+
+export function fetchUsersSuccess(users) {
+    return {
+        type: actionTypes.FETCH_USERS_SUCCESS,
+        data: users
+    }
+}
+
+export function fetchUsersError(error) {
+    return {
+        type: actionTypes.FETCH_USERS_ERROR,
         error
     }
 }

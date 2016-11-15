@@ -34,6 +34,9 @@ function mapDispatchToProps(dispatch){
         },
         fetchRoles: (meeting_template_id) => {
             dispatch(actionCreators.fetchRoles(meeting_template_id));
+        },
+        fetchUsers: () => {
+            dispatch(actionCreators.fetchUsers());
         }
     };
 }
@@ -41,6 +44,10 @@ function mapDispatchToProps(dispatch){
 class ActionButton extends React.Component {
     static propTypes = {
         user: ImmutablePropTypes.map.isRequired
+    };
+
+    componentDidMount(){
+        this.props.fetchUsers();
     };
 
     render () {

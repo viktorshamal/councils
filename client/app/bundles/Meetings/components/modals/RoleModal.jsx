@@ -14,11 +14,9 @@ export default class extends React.Component {
         super(props);
     }
 
-    handleSelectChange = (event, index, value) => {
-        this.setState({
-            meeting_template_id: value
-        });
-        this.props.onChange(value);
+    handleSelectChange = (e, i, meeting_template_id) => {
+        this.setState({meeting_template_id});
+        this.props.onChange(meeting_template_id);
     };
 
     close() {

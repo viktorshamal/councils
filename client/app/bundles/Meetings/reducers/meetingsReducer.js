@@ -97,7 +97,10 @@ export default function ($$state = $$initialState, action=null){
         }
 
         case actionTypes.FETCH_USERS_SUCCESS: {
+            const $$users = {};
+            action.data.users.map((user) => $$users[user.id] = user);
             return $$state.merge({
+                $$users: Immutable.fromJS($$users),
                 $$isFetching: false
             });
         }
