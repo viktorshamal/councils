@@ -10,7 +10,7 @@ export function createResource(path,payload,dispatch,successAction,errorAction) 
         }
     })
     .then(response => response.json())
-    .then(data => dispatch(successAction(data[Object.keys(payload)[0]])))
+    .then(data => dispatch(successAction(data)))
     .catch(error => dispatch(errorAction(error)));
 }
 

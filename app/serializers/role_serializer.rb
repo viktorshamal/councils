@@ -1,7 +1,9 @@
 class RoleSerializer < ActiveModel::Serializer
-  attributes :id, :name, :resource_id, :resource_type, :user_ids
+  attributes :resource_id, :user_ids
 
   def user_ids
-    object.users.map(&:id)
+    object.users.map do |user|
+      {type: object.name, user_id: user.id}
+    end
   end
 end

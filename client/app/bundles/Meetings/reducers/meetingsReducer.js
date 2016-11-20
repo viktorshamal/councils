@@ -5,7 +5,7 @@ export const $$initialState = Immutable.fromJS({
     $$meetings: [],
     $$meetingTemplates: [],
     $$message: '',
-    $$users: { 1: {name:'Viktor Shamal'} },
+    $$users: {},
     $$roles: {},
     $$selectedMeeting: null,
     $$secretModalToggled: false,
@@ -21,19 +21,48 @@ export default function ($$state = $$initialState, action=null){
             });
         }
         case actionTypes.CREATE_MEETING: {
-            return $$state.merge({
-                $$isFetching: true
-            })
-        }
+        return $$state.merge({
+            $$isFetching: true
+        })
+    }
         case actionTypes.CREATE_MEETING_ERROR: {
             return $$state.merge({
                 $$isFetching: false
             })
         }
         case actionTypes.CREATE_MEETING_SUCCESS: {
-            const newMeetings = $$state.get('$$meetings').insert(0,Immutable.fromJS(action.meeting));
+            const newMeetings = $$state.get('$$meetings').insert(0,Immutable.fromJS(action.data.meeting));
             return $$state.merge({
                 $$meetings: Immutable.fromJS(newMeetings),
+                $$isFetching: false
+            })
+        }
+        case actionTypes.CREATE_ROLE: {
+            return $$state.merge({
+                $$isFetching: true
+            })
+        }
+        case actionTypes.CREATE_ROLE_ERROR: {
+            return $$state.merge({
+                $$isFetching: false
+            })
+        }
+        case actionTypes.CREATE_ROLE_SUCCESS: {
+            let $$roles = $$state.get('$$roles');
+            var newRoles = [];
+
+            let {name, resource_id} = action.role;
+            let role = { name, user_id };
+
+            if($$roles.has(resource_id)) {
+                newRoles = $$roles.get(resource_id);
+            }
+            newRoles.push(role);
+            const $$newRoles = $$roles.set(resource_id,newRoles);
+            console.log($$newRoles);
+
+            return $$state.merge({
+                $$roles: $$newRoles,
                 $$isFetching: false
             })
         }
@@ -49,7 +78,7 @@ export default function ($$state = $$initialState, action=null){
             })
         }
         case actionTypes.CREATE_MEETING_TEMPLATE_SUCCESS: {
-            const template = Immutable.fromJS(action.meetingTemplate.meeting_template);
+            const template = Immutable.fromJS(action.data.meetingTemplate.meeting_template);
             const newTemplates = $$state.get('$$meetingTemplates').insert(0,template);
             return $$state.merge({
                 $$meetingTemplates: Immutable.fromJS(newTemplates),
@@ -64,17 +93,12 @@ export default function ($$state = $$initialState, action=null){
         }
 
         case actionTypes.FETCH_ROLES_SUCCESS: {
-            const newRoles = {};
-            action.data.roles.map((role)=>{
-                let { resource_id, name } = role;
+            let $$roles = $$state.get('$$roles');
+            let { resource_id, user_ids} = action.data.role;
+            let newRoles = $$roles.set(resource_id, user_ids);
 
-                newRoles[resource_id] = role.user_ids.map((user_id) => {
-                    return {name, user_id}
-                });
-            });
-            const $$roles = $$state.get('$$roles').merge(Immutable.fromJS(newRoles));
             return $$state.merge({
-                $$roles,
+                $$roles: newRoles,
                 $$isFetching: false
             });
         }

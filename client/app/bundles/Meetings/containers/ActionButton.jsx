@@ -35,6 +35,9 @@ function mapDispatchToProps(dispatch){
         fetchRoles: (meeting_template_id) => {
             dispatch(actionCreators.fetchRoles(meeting_template_id));
         },
+        createRole: (role) => {
+            dispatch(actionCreators.createRole(role));
+        },
         fetchUsers: () => {
             dispatch(actionCreators.fetchUsers());
         }
@@ -82,6 +85,7 @@ class ActionButton extends React.Component {
                     toggleModal={this.props.toggleModal}
                     meetingTemplates={this.props.meetingTemplates}
                     onChange={this.props.fetchRoles}
+                    createRole={this.props.createRole}
                     users={this.props.users}
                     roles={this.props.roles}
                     />

@@ -71,7 +71,7 @@ export function createMeetingTemplateError(error) {
 // Roles
 
 export function fetchRoles(meeting_template_id) {
-    return (dispatch) => fetchResource('/roles', { meeting_template_id },
+    return (dispatch) => fetchResource('/roles/' + meeting_template_id, {},
         dispatch, fetchRolesSuccess, fetchRolesError)
 }
 
@@ -85,6 +85,25 @@ export function fetchRolesSuccess(roles) {
 export function fetchRolesError(error) {
     return {
         type: actionTypes.FETCH_ROLES_ERROR,
+        error
+    }
+}
+
+export function createRole(role) {
+    return (dispatch) => createResource('/roles', role,
+        dispatch, fetchRolesSuccess, createRoleError)
+}
+
+export function createRoleSuccess(role) {
+    return {
+        type: actionTypes.CREATE_ROLE_SUCCESS,
+        role
+    }
+}
+
+export function createRoleError(error) {
+    return {
+        type: actionTypes.CREATE_ROLE_ERROR,
         error
     }
 }
