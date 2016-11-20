@@ -20,15 +20,22 @@ export default function ($$state = $$initialState, action=null){
                 $$selectedMeeting: action.id
             });
         }
-        case actionTypes.CREATE_MEETING: {
-        return $$state.merge({
-            $$isFetching: true
-        })
-    }
-        case actionTypes.CREATE_MEETING_ERROR: {
+
+        case actionTypes.TOGGLE_SECRET_MODAL: {
             return $$state.merge({
-                $$isFetching: false
-            })
+                $$secretModalToggled: !$$state.get('$$secretModalToggled')
+            });
+        }
+
+        case actionTypes.CREATE_MEETING: {
+            return $$state.merge({
+                $$isFetching: true
+            });
+        }
+
+        case actionTypes.FETCH_ERROR: {
+            throw new Error(action.error);
+            return $$state;
         }
         case actionTypes.CREATE_MEETING_SUCCESS: {
             const newMeetings = $$state.get('$$meetings').insert(0,Immutable.fromJS(action.data.meeting));
@@ -42,43 +49,14 @@ export default function ($$state = $$initialState, action=null){
                 $$isFetching: true
             })
         }
-        case actionTypes.CREATE_ROLE_ERROR: {
-            return $$state.merge({
-                $$isFetching: false
-            })
-        }
-        case actionTypes.CREATE_ROLE_SUCCESS: {
-            let $$roles = $$state.get('$$roles');
-            var newRoles = [];
-
-            let {name, resource_id} = action.role;
-            let role = { name, user_id };
-
-            if($$roles.has(resource_id)) {
-                newRoles = $$roles.get(resource_id);
-            }
-            newRoles.push(role);
-            const $$newRoles = $$roles.set(resource_id,newRoles);
-            console.log($$newRoles);
-
-            return $$state.merge({
-                $$roles: $$newRoles,
-                $$isFetching: false
-            })
-        }
 
         case actionTypes.CREATE_MEETING_TEMPLATE: {
             return $$state.merge({
                 $$isFetching: true
             })
         }
-        case actionTypes.CREATE_MEETING_TEMPLATE_ERROR: {
-            return $$state.merge({
-                $$isFetching: false
-            })
-        }
         case actionTypes.CREATE_MEETING_TEMPLATE_SUCCESS: {
-            const template = Immutable.fromJS(action.data.meetingTemplate.meeting_template);
+            const template = Immutable.fromJS(action.data.meeting_template);
             const newTemplates = $$state.get('$$meetingTemplates').insert(0,template);
             return $$state.merge({
                 $$meetingTemplates: Immutable.fromJS(newTemplates),
@@ -103,17 +81,6 @@ export default function ($$state = $$initialState, action=null){
             });
         }
 
-        case actionTypes.FETCH_ROLES_ERROR: {
-            return $$state.merge({
-                $$isFetching: false
-            });
-        }
-        case actionTypes.TOGGLE_SECRET_MODAL: {
-            return $$state.merge({
-                $$secretModalToggled: !$$state.get('$$secretModalToggled')
-            });
-        }
-
         case actionTypes.FETCH_USERS: {
             return $$state.merge({
                 $$isFetching: true
@@ -125,12 +92,6 @@ export default function ($$state = $$initialState, action=null){
             action.data.users.map((user) => $$users[user.id] = user);
             return $$state.merge({
                 $$users: Immutable.fromJS($$users),
-                $$isFetching: false
-            });
-        }
-
-        case actionTypes.FETCH_USERS_ERROR: {
-            return $$state.merge({
                 $$isFetching: false
             });
         }

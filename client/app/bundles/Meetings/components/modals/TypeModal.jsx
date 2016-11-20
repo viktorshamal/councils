@@ -49,6 +49,8 @@ export default class extends React.Component {
                 open={this.props.open}
                 modal={false}
                 onRequestClose={()=>this.close()}
+                autoScrollBodyContent={true}
+
                 >
                 <TextField hintText="Navn" onChange={this.handleChange}/>
             </Dialog>

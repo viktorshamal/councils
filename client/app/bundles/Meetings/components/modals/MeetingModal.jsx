@@ -59,6 +59,7 @@ export default class extends React.Component {
                 open={this.props.open}
                 modal={true}
                 onRequestClose={()=>this.close()}
+                autoScrollBodyContent={true}
                 >
                 <TemplateSelector
                     onSelectChange={this.handleSelectChange}
