@@ -30,6 +30,7 @@ export default class extends React.Component {
 
     selectMeeting() {
         this.props.onMeetingClick(this.props.index);
+        this.props.fetchAttendance(this.props.id);
     }
 
   render() {

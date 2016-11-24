@@ -25,7 +25,9 @@ function mapStateToProps(state){
         meetings: store.get('$$meetings'),
         selectedMeeting: store.get('$$selectedMeeting'),
         secretModalToggled: store.get('$$secretModalToggled'),
-        user: state.auth.get('user')
+        user: state.auth.get('user'),
+        users: store.get('$$users'),
+        attendance: store.get('$$attendance')
     }
 }
 
@@ -36,6 +38,9 @@ function mapDispatchToProps(dispatch){
         },
         onModalClick: () => {
             dispatch(actionCreators.toggleSecretModal());
+        },
+        fetchAttendance: (id) => {
+            dispatch(actionCreators.fetchAttendance(id));
         }
     };
 }
@@ -62,6 +67,7 @@ class Meetings extends React.Component {
                 index={index}
                 fullWidth={!sidebar}
                 onMeetingClick={this.props.onMeetingClick}
+                fetchAttendance={this.props.fetchAttendance}
           />);
     });
 

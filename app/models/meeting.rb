@@ -3,7 +3,7 @@ class Meeting < ActiveRecord::Base
   attribute :name, :string
   attribute :color, :string
   attribute :timestamp, :string
-
+  attribute :user_ids, :integer, array: true
   validates_presence_of :secret, :meeting_template_id, :agenda_drive_id, :summary_drive_id, :date
 
   belongs_to :meeting_template
@@ -14,12 +14,16 @@ class Meeting < ActiveRecord::Base
 
   after_initialize :inherit_attributes
   before_validation(on: :create) do
-    self.secret = 4.times.map{rand(10)}.join
+    self.secret = 10.times.map{rand(10)}.join
     create_google_documents
   end
 
   def editors
     User.with_role(:moderator, self.meeting_template).map(&:email)
+  end
+
+  def user_ids
+    self.users.map(&:id)
   end
 
   def date=(date)
@@ -29,7 +33,24 @@ class Meeting < ActiveRecord::Base
     write_attribute(:date, date)
   end
 
+  def current_token
+    generate_token(2,self.secret)
+  end
+
   private
+  def generate_token(interval,secret)
+    time = DateTime.now
+    minutes = time.minute - (time.minute % interval)
+    normalized_time = time.change(min: minutes).to_i
+
+    code = Digest::MD5.hexdigest(secret + normalized_time.to_s).delete("^0-9")[0..3]
+    expires = time.change(min: time.minute + interval).to_i
+
+    { token: {
+        code: code,
+        expires: expires}
+    }
+  end
   def create_google_documents
     unless self.agenda_drive_id
       self.agenda_drive_id = DriveWrapper.create_public_document({
@@ -54,4 +75,6 @@ class Meeting < ActiveRecord::Base
       self.send(attr.to_s + '=', self.meeting_template.send(attr).to_s)
     end
   end
+
+
 end

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     defaults format: 'json' do
       resources :meetings do
         resources :users, shallow: true
+        resources :attendances, shallow: true
       end
 
       resources :users
@@ -24,7 +25,6 @@ Rails.application.routes.draw do
 
       get 'paragraphs/:id/previous' => 'paragraphs#previous_version'
       post 'paragraphs/:id/accept' => 'paragraphs#accept'
-      post 'attendances' => 'attendances#create'
     end
   end
 end

@@ -27,10 +27,13 @@ export default (props, railsContext) => {
         auth: authStateReducer
     });
 
+    const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
     // Sync dispatched route actions to the history
-    const finalCreateStore = compose(
+    const finalCreateStore = composeEnhancers(
         applyMiddleware(thunkMiddleware, loggerMiddleware)
     )(createStore);
+
 
     return finalCreateStore(reducer, initialState);
 };

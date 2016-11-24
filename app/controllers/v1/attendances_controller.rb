@@ -1,6 +1,4 @@
 class V1::AttendancesController < V1::BaseController
-  before_action :authenticate_user!
-
   def create
       @meeting = Meeting.find_by_secret(params[:secret])
       if @meeting
@@ -13,5 +11,12 @@ class V1::AttendancesController < V1::BaseController
       else
         render json: {errors:['Secret not found.']}, status: 422
       end
+  end
+
+  def show
+    attendances = Attendance.where(meeting_id: params[:id])
+    user_ids = attendances.map(&:id)
+    hash = Hash[params[:id],user_ids]
+    render json: {attendance: hash}
   end
 end

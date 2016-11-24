@@ -1,13 +1,15 @@
 import React, { PropTypes } from 'react';
 import {selectMeeting} from '../actions/actionCreators.js'
 import {Tabs, Tab} from 'material-ui/Tabs';
+import Avatar from 'material-ui/Avatar';
+import {List, ListItem} from 'material-ui/List';
 
 import FlatButton from 'material-ui/FlatButton';
 
 import styles from './Sidebar.scss';
 
 
-export default class extends React.Component {
+export default class Sidebar extends React.Component {
     constructor(props){
         super(props);
         this.close = this.close.bind(this);
@@ -23,7 +25,7 @@ export default class extends React.Component {
     }
 
     render () {
-        var meeting = this.props.meetings.get(this.props.selectedMeeting);
+        const meeting = this.props.meetings.get(this.props.selectedMeeting);
 
         return(
             <div className={styles.sidebar}>
@@ -37,7 +39,13 @@ export default class extends React.Component {
                         </div>
                     </Tab>
                     <Tab label="Fremmødte" style={{color:'black'}}>
-                        <div className={styles.wrapper}></div>
+                        <div className={styles.wrapper}>
+                            <AttendanceList
+                                users={this.props.users}
+                                meeting_id={meeting.get('id')}
+                                attendance={this.props.attendance}
+                                />
+                        </div>
                     </Tab>
                 </Tabs>
                 <FlatButton
@@ -50,3 +58,31 @@ export default class extends React.Component {
         );
     }
 }
+
+Sidebar.propTypes = {
+    selectedMeeting: PropTypes.number
+};
+
+const AttendanceList = ({users,meeting_id,attendance}) => {
+    var items = null;
+    var meetingAttendance = attendance.get(meeting_id.toString());
+    if(meetingAttendance){
+        items = meetingAttendance.map((id)=>{
+            let user = users.get(id.toString());
+            if(!user) return null;
+            return (
+                <ListItem
+                    primaryText={user.get('name')}
+                    leftAvatar={<Avatar >V</Avatar>}
+                    key={id}
+                    />
+            );
+        });
+    }
+
+    return (
+        <List>
+            {items}
+        </List>
+    );
+};

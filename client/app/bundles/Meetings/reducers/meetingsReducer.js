@@ -9,7 +9,7 @@ export const $$initialState = Immutable.fromJS({
     $$roles: {},
     $$selectedMeeting: null,
     $$secretModalToggled: false,
-    $$attendants: {},
+    $$attendance: {},
     $$isFetching: false
 });
 
@@ -94,6 +94,16 @@ export default function ($$state = $$initialState, action=null){
                 $$users: Immutable.fromJS($$users),
                 $$isFetching: false
             });
+        }
+
+        case actionTypes.FETCH_ATTENDANCE_SUCCESS: {
+            const $$attendance = $$state.get('$$attendance');
+            const newAttendance = $$attendance.merge(action.data.attendance);
+
+            return $$state.merge({
+                $$attendance: Immutable.fromJS(newAttendance),
+                $$isFetching: false
+            })
         }
 
         default:
