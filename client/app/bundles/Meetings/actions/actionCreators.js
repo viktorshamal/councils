@@ -1,11 +1,6 @@
 import * as actionTypes from '../actions/actionTypes.js';
 import { fetchResource, createResource } from './apiUtils.js';
 
-export function fetchAttendance(meeting_id) {
-    return (dispatch) => fetchResource('/attendances/' + meeting_id, {},
-        dispatch, fetchAttendanceSuccess, fetchError)
-}
-
 export function selectMeeting(id) {
     return {
         type: actionTypes.SELECT_MEETING,
@@ -13,10 +8,28 @@ export function selectMeeting(id) {
     }
 }
 
+export function fetchAttendance(meeting_id) {
+    return (dispatch) => fetchResource('/attendances/' + meeting_id, {},
+        dispatch, fetchAttendanceSuccess, fetchError)
+}
+
 export function fetchAttendanceSuccess(attendance) {
     return {
         type: actionTypes.FETCH_ATTENDANCE_SUCCESS,
         data: attendance
+    }
+}
+
+export function fetchToken(meeting_id) {
+    return (dispath) => fetchResource('/tokens/' + meeting_id, {},
+        dispath, fetchTokenSuccess, fetchError, {meeting_id} )
+}
+
+export function fetchTokenSuccess(token,extras={}) {
+    return {
+        type: actionTypes.FETCH_TOKEN_SUCCESS,
+        token,
+        ...extras
     }
 }
 

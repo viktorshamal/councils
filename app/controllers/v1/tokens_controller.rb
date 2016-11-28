@@ -6,7 +6,7 @@ class V1::TokensController < V1::BaseController
   end
 
   def show
-    meeting = Meeting.find(params[:meeting_id])
+    meeting = Meeting.find(params[:id])
     render json: meeting.current_token
   end
 end

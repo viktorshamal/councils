@@ -16,6 +16,7 @@ Rails.application.routes.draw do
         resources :paragraphs, shallow: true
       end
 
+      resources :tokens, only: [:show]
       resources :meeting_templates
       resources :paragraphs, only: [:create, :destroy]
       resources :councils, only: [:index]

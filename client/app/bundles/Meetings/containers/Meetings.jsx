@@ -10,7 +10,6 @@ import MeetingCard from '../components/MeetingCard';
 import Header from './Header.jsx';
 import ActionButton from './ActionButton.jsx';
 import Sidebar from '../components/Sidebar';
-import SecretModal from '../components/SecretModal';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import styles from './Meetings.scss';
@@ -27,7 +26,8 @@ function mapStateToProps(state){
         secretModalToggled: store.get('$$secretModalToggled'),
         user: state.auth.get('user'),
         users: store.get('$$users'),
-        attendance: store.get('$$attendance')
+        attendance: store.get('$$attendance'),
+        tokens: store.get('$$tokens')
     }
 }
 
@@ -41,6 +41,9 @@ function mapDispatchToProps(dispatch){
         },
         fetchAttendance: (id) => {
             dispatch(actionCreators.fetchAttendance(id));
+        },
+        fetchToken: (id) => {
+            dispatch(actionCreators.fetchToken(id));
         }
     };
 }
@@ -68,13 +71,13 @@ class Meetings extends React.Component {
                 fullWidth={!sidebar}
                 onMeetingClick={this.props.onMeetingClick}
                 fetchAttendance={this.props.fetchAttendance}
+                fetchToken={this.props.fetchToken}
           />);
     });
 
     return (
         <MuiThemeProvider>
             <div>
-                <SecretModal {...this.props}/>
                 <Header user={this.props.user} />
                 <div className={styles.main}>
                     <div className={styles.meetings}>

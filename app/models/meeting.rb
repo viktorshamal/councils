@@ -46,9 +46,11 @@ class Meeting < ActiveRecord::Base
     code = Digest::MD5.hexdigest(secret + normalized_time.to_s).delete("^0-9")[0..3]
     expires = time.change(min: time.minute + interval).to_i
 
-    { token: {
+    {
+      token: {
         code: code,
-        expires: expires}
+        expires: expires
+      }
     }
   end
   def create_google_documents

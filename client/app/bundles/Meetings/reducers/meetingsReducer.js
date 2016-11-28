@@ -10,11 +10,16 @@ export const $$initialState = Immutable.fromJS({
     $$selectedMeeting: null,
     $$secretModalToggled: false,
     $$attendance: {},
+    $$tokens: {},
     $$isFetching: false
 });
 
 export default function ($$state = $$initialState, action=null){
     switch(action.type) {
+        case actionTypes.FETCH_ERROR: {
+            throw new Error(action.error);
+        }
+
         case actionTypes.SELECT_MEETING: {
             return $$state.merge({
                 $$selectedMeeting: action.id
@@ -31,11 +36,6 @@ export default function ($$state = $$initialState, action=null){
             return $$state.merge({
                 $$isFetching: true
             });
-        }
-
-        case actionTypes.FETCH_ERROR: {
-            throw new Error(action.error);
-            return $$state;
         }
         case actionTypes.CREATE_MEETING_SUCCESS: {
             const newMeetings = $$state.get('$$meetings').insert(0,Immutable.fromJS(action.data.meeting));
@@ -79,6 +79,18 @@ export default function ($$state = $$initialState, action=null){
                 $$roles: newRoles,
                 $$isFetching: false
             });
+        }
+
+        case actionTypes.FETCH_TOKEN: {
+            return $$state.merge({
+                $$isFetching: true
+            });
+        }
+
+        case actionTypes.FETCH_TOKEN_SUCCESS: {
+            let tokens = $$state.get('$$tokens');
+            let newTokens = tokens.set(action.meeting_id,Immutable.fromJS(action.token));
+            return $$state.merge({ $$tokens: newTokens });
         }
 
         case actionTypes.FETCH_USERS: {

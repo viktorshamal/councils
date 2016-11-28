@@ -14,7 +14,7 @@ export function createResource(path,payload,dispatch,successAction,errorAction) 
     .catch(error => dispatch(errorAction(error)));
 }
 
-export function fetchResource(path,params,dispatch,successAction,errorAction) {
+export function fetchResource(path,params,dispatch,successAction,errorAction,extras) {
     return fetch(getApiUrl() + path + '?' + queryParams(params),{
         method: 'GET',
         headers: {
@@ -23,7 +23,7 @@ export function fetchResource(path,params,dispatch,successAction,errorAction) {
         }
     })
     .then(response => response.json())
-    .then(data => dispatch(successAction(data)))
+    .then(data => dispatch(successAction(data,extras)))
     .catch(error => dispatch(errorAction(error)));
 }
 
