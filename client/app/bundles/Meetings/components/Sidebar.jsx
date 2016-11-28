@@ -29,10 +29,15 @@ export default class Sidebar extends React.Component {
     render () {
         let meeting = this.props.meetings.get(this.props.selectedMeeting);
         let token = this.props.tokens.get(meeting.get('id')).get('token');
-        console.log(this.props.tokens,token);
+
         return(
             <div className={styles.sidebar}>
-                <SecretModal token={token} open={this.props.secretModalToggled} close={this.props.onModalClick}/>
+                <SecretModal token={token}
+                             meeting_id={meeting.get('id')}
+                             fetchToken={this.props.fetchToken}
+                             open={this.props.secretModalToggled}
+                             close={this.props.onModalClick}
+                    />
                 <Tabs tabItemContainerStyle={{backgroundColor:'transparent'}}>
                     <Tab label="Detaljer" style={{color:'black'}}>
                         <div className={styles.wrapper}>
