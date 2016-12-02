@@ -36,7 +36,10 @@ export default class extends React.Component {
     }
 
     render () {
-        let actions = (<FlatButton onClick={this.props.close}>Luk</FlatButton>);
+        let actions = (
+            <FlatButton onClick={()=>this.props.toggleModal('secretModal')}>
+                Luk
+            </FlatButton>);
         let code, time = null;
         if(this.props.token){
             code = (<span>{this.props.token.get('code')}</span>);

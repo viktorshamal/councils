@@ -33,16 +33,21 @@ export function fetchTokenSuccess(token,extras={}) {
     }
 }
 
+export function attendMeeting(id,code) {
+    return (dispatch) => createResource('/meetings/' + id + '/attendances/', {code},
+        dispatch, fetchAttendanceSuccess, fetchError)
+}
+
+export function attendMeetingSuccess() {
+    return {
+        type: actionTypes.ATTEND_MEETING_SUCCESS
+    }
+}
+
 export function toggleModal(modal){
     return {
         type: actionTypes.TOGGLE_MODAL,
         modal
-    }
-}
-
-export function toggleSecretModal() {
-    return {
-        type: actionTypes.TOGGLE_SECRET_MODAL
     }
 }
 

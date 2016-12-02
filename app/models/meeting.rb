@@ -37,6 +37,10 @@ class Meeting < ActiveRecord::Base
     generate_token(2,self.secret)
   end
 
+  def current_code
+    self.current_token[:token][:code]
+  end
+
   private
   def generate_token(interval,secret)
     time = DateTime.now

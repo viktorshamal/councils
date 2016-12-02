@@ -1,22 +1,35 @@
 class V1::AttendancesController < V1::BaseController
+  before_action :authenticate_user, only: [:create, :token]
+
   def create
-      @meeting = Meeting.find_by_secret(params[:secret])
-      if @meeting
-        @attendance = Attendance.new(meeting_id: @meeting.id, user_id: current_user.id)
-        if @attendance.save
-          render json: @attendance, status: 200
+      meeting = Meeting.find(params[:meeting_id])
+      if params[:code] == meeting.current_code
+        attendance = Attendance.new(meeting_id: meeting.id, user_id: current_user.id)
+        if attendance.save
+          render json: formatted(attendance.meeting_id), status: 200
         else
-          render json: { errors: @attendance.errors.full_messages }, status: 422
+          render json: { errors: attendance.errors.full_messages }, status: 422
         end
       else
-        render json: {errors:['Secret not found.']}, status: 422
+        render json: {errors:['Forkert kode']}, status: 422
       end
+
   end
 
   def show
-    attendances = Attendance.where(meeting_id: params[:id])
-    user_ids = attendances.map(&:id)
-    hash = Hash[params[:id],user_ids]
-    render json: {attendance: hash}
+    render json: formatted(params[:id])
+  end
+
+  def token
+    meeting = Meeting.find(params[:id])
+    render json: meeting.current_token
+  end
+
+  private
+  def formatted(id)
+    attendances = Attendance.where(meeting_id: id)
+    user_ids = attendances.map(&:user_id)
+    hash = Hash[id,user_ids]
+    {attendance: hash}
   end
 end

@@ -8,7 +8,6 @@ export const $$initialState = Immutable.fromJS({
     $$users: {},
     $$roles: {},
     $$selectedMeeting: null,
-    $$secretModalToggled: false,
     $$attendance: {},
     $$tokens: {},
     $$isFetching: false
@@ -23,12 +22,6 @@ export default function ($$state = $$initialState, action=null){
         case actionTypes.SELECT_MEETING: {
             return $$state.merge({
                 $$selectedMeeting: action.id
-            });
-        }
-
-        case actionTypes.TOGGLE_SECRET_MODAL: {
-            return $$state.merge({
-                $$secretModalToggled: !$$state.get('$$secretModalToggled')
             });
         }
 

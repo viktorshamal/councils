@@ -1,7 +1,4 @@
 class AttendanceSerializer < ActiveModel::Serializer
-  attributes :meeting_id, :user_id, :hello
+  attributes :meeting_id, :user_id
 
-  def hello
-    'hello'
-  end
 end

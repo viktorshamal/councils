@@ -27,7 +27,8 @@ function mapStateToProps(state){
         user: state.auth.get('user'),
         users: store.get('$$users'),
         attendance: store.get('$$attendance'),
-        tokens: store.get('$$tokens')
+        tokens: store.get('$$tokens'),
+        modals: state.$$modalsStore
     }
 }
 
@@ -36,14 +37,17 @@ function mapDispatchToProps(dispatch){
         onMeetingClick: (id) => {
             dispatch(actionCreators.selectMeeting(id));
         },
-        onModalClick: () => {
-            dispatch(actionCreators.toggleSecretModal());
-        },
         fetchAttendance: (id) => {
             dispatch(actionCreators.fetchAttendance(id));
         },
         fetchToken: (id) => {
             dispatch(actionCreators.fetchToken(id));
+        },
+        toggleModal: (modal) => {
+            dispatch(actionCreators.toggleModal(modal));
+        },
+        attendMeeting: (id,code) => {
+            dispatch(actionCreators.attendMeeting(id,code));
         }
     };
 }
@@ -94,9 +98,5 @@ class Meetings extends React.Component {
   }
 }
 
-const Grid = makeResponsive(measureItems(CSSGrid), {
-    maxWidth: 1920,
-    minPadding: 100
-});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Meetings);

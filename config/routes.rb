@@ -10,13 +10,14 @@ Rails.application.routes.draw do
         resources :attendances, shallow: true
       end
 
+      get 'tokens/:id' => 'attendances#token'
+
       resources :users
 
       resources :documents do
         resources :paragraphs, shallow: true
       end
 
-      resources :tokens, only: [:show]
       resources :meeting_templates
       resources :paragraphs, only: [:create, :destroy]
       resources :councils, only: [:index]

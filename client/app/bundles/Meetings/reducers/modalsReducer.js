@@ -4,7 +4,9 @@ import * as actionTypes from '../actions/actionTypes.js';
 export const $$initialState = Immutable.fromJS({
     meetingModal: {open:false},
     typeModal: {open:false},
-    roleModal: {open:false}
+    roleModal: {open:false},
+    attendModal: {open:false},
+    secretModal: {open:false}
 });
 
 export default function ($$state = $$initialState, action=null) {
