@@ -1,5 +1,5 @@
 class V1::AttendancesController < V1::BaseController
-  before_action :authenticate_user, only: [:create, :token]
+  before_action :authenticate_user!, only: [:create, :token]
 
   def create
       meeting = Meeting.find(params[:meeting_id])
