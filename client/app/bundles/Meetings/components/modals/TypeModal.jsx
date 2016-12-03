@@ -30,15 +30,15 @@ export default class extends React.Component {
 
     render() {
         const actions = [
-            <FlatButton
-                label="Anuller"
-                primary={true}
-                onClick={()=>this.close()}
-                />,
-            <FlatButton
-                label="Gem"
+            <RaisedButton
+                label="Tilføj"
                 primary={true}
                 onClick={()=>this.handleSubmit()}
+                />,
+            <FlatButton
+                label="Luk"
+                primary={true}
+                onClick={()=>this.close()}
                 />
         ];
 
@@ -49,10 +49,11 @@ export default class extends React.Component {
                 open={this.props.open}
                 modal={false}
                 onRequestClose={()=>this.close()}
-                autoScrollBodyContent={true}
+                //autoScrollBodyContent={true}
 
                 >
                 <TextField hintText="Navn" onChange={this.handleChange}/>
+
             </Dialog>
         );
     }

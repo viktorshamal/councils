@@ -40,15 +40,15 @@ export default class extends React.Component {
 
     render() {
         const actions = [
-            <FlatButton
-                label="Cancel"
-                primary={true}
-                onClick={()=>this.close()}
-                />,
-            <FlatButton
-                label="Submit"
+            <RaisedButton
+                label="Tilføj"
                 primary={true}
                 onClick={()=>this.handleSubmit()}
+                />,
+            <FlatButton
+                label="Luk"
+                primary={true}
+                onClick={()=>this.close()}
                 />
         ];
 
@@ -57,9 +57,8 @@ export default class extends React.Component {
                 title="Tilføj et møde"
                 actions={actions}
                 open={this.props.open}
-                modal={true}
+                modal={false}
                 onRequestClose={()=>this.close()}
-                autoScrollBodyContent={true}
                 >
                 <TemplateSelector
                     onSelectChange={this.handleSelectChange}

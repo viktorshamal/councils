@@ -41,6 +41,12 @@ export default class extends React.Component {
 
     render() {
         const actions = [
+            <RaisedButton
+                label="Tilføj"
+                primary={true}
+                disabled={!this.state.user_id}
+                onClick={this.handleSubmit}
+                />,
             <FlatButton
                 label="Luk"
                 primary={true}
@@ -55,7 +61,7 @@ export default class extends React.Component {
                 open={this.props.open}
                 modal={false}
                 onRequestClose={()=>this.close()}
-                autoScrollBodyContent={true}
+                //autoScrollBodyContent={true}
 
                 >
                 <TemplateSelector
@@ -71,12 +77,6 @@ export default class extends React.Component {
                     users={this.props.users}
                     selected={this.state.user_id}
                     onChange={this.handleUserChange} />
-                <FlatButton
-                    label="Tilføj"
-                    primary={true}
-                    disabled={!this.state.user_id}
-                    onClick={this.handleSubmit}
-                    />,
             </Dialog>
         );
     }
@@ -92,6 +92,7 @@ const RoleAdder = ({users,selected,onChange}) => {
     return (
         <SelectField
             floatingLabelText='Person'
+            floatingLabelFixed={true}
             value={selected}
             onChange={onChange}
             >
