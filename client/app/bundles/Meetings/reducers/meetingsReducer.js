@@ -82,7 +82,7 @@ export default function ($$state = $$initialState, action=null){
 
         case actionTypes.FETCH_TOKEN_SUCCESS: {
             let tokens = $$state.get('$$tokens');
-            let newTokens = tokens.set(action.meeting_id,Immutable.fromJS(action.token));
+            let newTokens = tokens.set(action.meeting_id,Immutable.fromJS(action.data.token));
             return $$state.merge({ $$tokens: newTokens });
         }
 

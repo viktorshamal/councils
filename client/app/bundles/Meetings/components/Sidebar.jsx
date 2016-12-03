@@ -15,7 +15,7 @@ import styles from './Sidebar.scss';
 export default class Sidebar extends React.Component {
     render () {
         let meeting = this.props.meetings.get(this.props.selectedMeeting);
-        let token = this.props.tokens.get(meeting.get('id')).get('token');
+        let token = this.props.tokens.get(meeting.get('id'));
 
         return(
             <div className={styles.sidebar}>

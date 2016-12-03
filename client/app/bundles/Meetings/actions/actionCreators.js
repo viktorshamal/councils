@@ -28,7 +28,7 @@ export function fetchToken(meeting_id) {
 export function fetchTokenSuccess(token,extras={}) {
     return {
         type: actionTypes.FETCH_TOKEN_SUCCESS,
-        token,
+        data:token,
         ...extras
     }
 }
