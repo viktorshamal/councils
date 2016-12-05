@@ -8,9 +8,34 @@ export function selectMeeting(id) {
     }
 }
 
+export function toggleModal(modal){
+    return {
+        type: actionTypes.TOGGLE_MODAL,
+        modal
+    }
+}
+
 export function fetchAttendance(meeting_id) {
-    return (dispatch) => fetchResource('/attendances/' + meeting_id, {},
-        dispatch, fetchAttendanceSuccess, fetchError)
+    return (dispatch) => fetchResource('ATTENDANCE', '/attendances/' + meeting_id, {}, dispatch)
+}
+
+export function fetchToken(meeting_id) {
+    return (dispatch) => fetchResource('TOKEN', '/tokens/' + meeting_id, {},
+        dispatch, {meeting_id})
+}
+
+export function fetchRoles(meeting_template_id) {
+    return (dispatch) => fetchResource('ROLES', '/roles/' + meeting_template_id, {},
+        dispatch)
+}
+
+export function fetchUsers() {
+    return (dispatch) => fetchResource('USERS', '/users', {}, dispatch)
+}
+
+export function createAttendance(id,code) {
+    return (dispatch) => createResource('ATTENDANCE', '/meetings/' + id + '/attendances/', {code},
+        dispatch, fetchAttendanceSuccess)
 }
 
 export function fetchAttendanceSuccess(attendance) {
@@ -20,107 +45,18 @@ export function fetchAttendanceSuccess(attendance) {
     }
 }
 
-export function fetchToken(meeting_id) {
-    return (dispath) => fetchResource('/tokens/' + meeting_id, {},
-        dispath, fetchTokenSuccess, fetchError, {meeting_id} )
-}
-
-export function fetchTokenSuccess(token,extras={}) {
-    return {
-        type: actionTypes.FETCH_TOKEN_SUCCESS,
-        data:token,
-        ...extras
-    }
-}
-
-export function attendMeeting(id,code) {
-    return (dispatch) => createResource('/meetings/' + id + '/attendances/', {code},
-        dispatch, fetchAttendanceSuccess, fetchError)
-}
-
-export function attendMeetingSuccess() {
-    return {
-        type: actionTypes.ATTEND_MEETING_SUCCESS
-    }
-}
-
-export function toggleModal(modal){
-    return {
-        type: actionTypes.TOGGLE_MODAL,
-        modal
-    }
-}
-
-// Meetings
-export function createMeetingOptimistic(meeting) {
-    return {
-        type: actionTypes.CREATE_MEETING,
-        meeting
-    }
-}
-
 export function createMeeting(meeting) {
-    return (dispatch) => createResource('/meetings', meeting,
-        dispatch, createMeetingSuccess, fetchError)
+    return (dispatch) => createResource('MEETING','/meetings', meeting, dispatch)
 }
 
-export function createMeetingSuccess(meeting) {
-    return {
-        type: actionTypes.CREATE_MEETING_SUCCESS,
-        data: meeting
-    }
-}
-
-// Meeting Templates
 export function createMeetingTemplate(meetingTemplate) {
-    return (dispatch) => createResource('/meeting_templates', meetingTemplate,
-        dispatch, createMeetingTemplateSuccess, fetchError)
-}
-
-export function createMeetingTemplateSuccess(meetingTemplate) {
-    return {
-        type: actionTypes.CREATE_MEETING_TEMPLATE_SUCCESS,
-        data: meetingTemplate
-    }
-}
-
-// Roles
-
-export function fetchRoles(meeting_template_id) {
-    return (dispatch) => fetchResource('/roles/' + meeting_template_id, {},
-        dispatch, fetchRolesSuccess, fetchError)
-}
-
-export function fetchRolesSuccess(roles) {
-    return {
-        type: actionTypes.FETCH_ROLES_SUCCESS,
-        data: roles
-    }
+    return (dispatch) => createResource('MEETING_TEMPLATE', '/meeting_templates', meetingTemplate, dispatch)
 }
 
 export function createRole(role) {
-    return (dispatch) => createResource('/roles', role,
-        dispatch, fetchRolesSuccess, fetchError)
+    return (dispatch) => createResource('ROLE', '/roles', role, dispatch)
 }
 
-// Users
 
-export function fetchUsers() {
-    return (dispatch) => fetchResource('/users', {},
-        dispatch, fetchUsersSuccess, fetchError)
-}
 
-export function fetchUsersSuccess(users) {
-    return {
-        type: actionTypes.FETCH_USERS_SUCCESS,
-        data: users
-    }
-}
-
-export function fetchError(error) {
-    return {
-        type: actionTypes.FETCH_ERROR,
-        error
-    }
-}
 

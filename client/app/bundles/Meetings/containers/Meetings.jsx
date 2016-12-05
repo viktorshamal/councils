@@ -47,7 +47,7 @@ function mapDispatchToProps(dispatch){
             dispatch(actionCreators.toggleModal(modal));
         },
         attendMeeting: (id,code) => {
-            dispatch(actionCreators.attendMeeting(id,code));
+            dispatch(actionCreators.createAttendance(id,code));
         }
     };
 }

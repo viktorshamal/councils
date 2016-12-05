@@ -1,114 +1,72 @@
-import Immutable from 'immutable';
+import { fromJS } from 'immutable';
 import * as actionTypes from '../actions/actionTypes.js';
 
-export const $$initialState = Immutable.fromJS({
+export const $$initialState = fromJS({
+    $$selectedMeeting: null,
     $$meetings: [],
     $$meetingTemplates: [],
-    $$message: '',
     $$users: {},
     $$roles: {},
-    $$selectedMeeting: null,
     $$attendance: {},
-    $$tokens: {},
-    $$isFetching: false
+    $$tokens: {}
 });
 
 export default function ($$state = $$initialState, action=null){
     switch(action.type) {
-        case actionTypes.FETCH_ERROR: {
-            throw new Error(action.error);
-        }
-
         case actionTypes.SELECT_MEETING: {
             return $$state.merge({
                 $$selectedMeeting: action.id
             });
         }
 
-        case actionTypes.CREATE_MEETING: {
-            return $$state.merge({
-                $$isFetching: true
-            });
-        }
         case actionTypes.CREATE_MEETING_SUCCESS: {
-            const newMeetings = $$state.get('$$meetings').insert(0,Immutable.fromJS(action.data.meeting));
-            return $$state.merge({
-                $$meetings: Immutable.fromJS(newMeetings),
-                $$isFetching: false
-            })
-        }
-        case actionTypes.CREATE_ROLE: {
-            return $$state.merge({
-                $$isFetching: true
-            })
+            let oldMeetings = $$state.get('$$meetings');
+            let $$meetings = fromJS(oldMeetings.insert(0,fromJS(action.data.meeting)));
+
+            return $$state.merge({ $$meetings });
         }
 
-        case actionTypes.CREATE_MEETING_TEMPLATE: {
-            return $$state.merge({
-                $$isFetching: true
-            })
-        }
         case actionTypes.CREATE_MEETING_TEMPLATE_SUCCESS: {
-            const template = Immutable.fromJS(action.data.meeting_template);
-            const newTemplates = $$state.get('$$meetingTemplates').insert(0,template);
-            return $$state.merge({
-                $$meetingTemplates: Immutable.fromJS(newTemplates),
-                $$isFetching: false
-            })
+            const template = fromJS(action.data.meeting_template);
+            const $$meetingTemplates = fromJS($$state.get('$$meetingTemplates').insert(0,template));
+
+            return $$state.merge({ $$meetingTemplates });
         }
 
-        case actionTypes.FETCH_ROLES: {
-            return $$state.merge({
-                $$isFetching: true
-            });
+        case actionTypes.CREATE_ATTENDANCE_SUCCESS: {
+            const oldAttendance = $$state.get('$$attendance');
+            const $$attendance = fromJS(oldAttendance.merge(action.data.attendance));
+
+            return $$state.merge({ $$attendance });
         }
 
         case actionTypes.FETCH_ROLES_SUCCESS: {
-            let $$roles = $$state.get('$$roles');
+            let oldRoles = $$state.get('$$roles');
             let { resource_id, user_ids} = action.data.role;
-            let newRoles = $$roles.set(resource_id, user_ids);
+            let $$roles = oldRoles.set(resource_id, user_ids);
 
-            return $$state.merge({
-                $$roles: newRoles,
-                $$isFetching: false
-            });
-        }
-
-        case actionTypes.FETCH_TOKEN: {
-            return $$state.merge({
-                $$isFetching: true
-            });
+            return $$state.merge({ $$roles });
         }
 
         case actionTypes.FETCH_TOKEN_SUCCESS: {
-            let tokens = $$state.get('$$tokens');
-            let newTokens = tokens.set(action.meeting_id,Immutable.fromJS(action.data.token));
-            return $$state.merge({ $$tokens: newTokens });
-        }
+            let oldTokens = $$state.get('$$tokens');
+            let $$tokens = oldTokens.set(action.meeting_id,fromJS(action.data.token));
 
-        case actionTypes.FETCH_USERS: {
-            return $$state.merge({
-                $$isFetching: true
-            });
+            return $$state.merge({ $$tokens });
         }
 
         case actionTypes.FETCH_USERS_SUCCESS: {
             const $$users = {};
             action.data.users.map((user) => $$users[user.id] = user);
-            return $$state.merge({
-                $$users: Immutable.fromJS($$users),
-                $$isFetching: false
-            });
+
+            return $$state.merge({$$users: fromJS($$users)});
         }
 
         case actionTypes.FETCH_ATTENDANCE_SUCCESS: {
-            const $$attendance = $$state.get('$$attendance');
-            const newAttendance = $$attendance.merge(action.data.attendance);
+            const oldAttendance = $$state.get('$$attendance');
+            const $$attendance = fromJS(oldAttendance.merge(action.data.attendance));
 
-            return $$state.merge({
-                $$attendance: Immutable.fromJS(newAttendance),
-                $$isFetching: false
-            })
+            return $$state.merge({ $$attendance });
         }
 
         default:
