@@ -17,7 +17,7 @@ function mapStateToProps(state){
         roles: state.$$meetingsStore.get('$$roles'),
         modals: state.$$modalsStore,
         meetingTemplates: state.$$meetingsStore.get('$$meetingTemplates'),
-        message: state.$$meetingsStore.get('$$message')
+        messages: state.isFetching.get('messages')
     }
 }
 
@@ -89,7 +89,7 @@ class ActionButton extends React.Component {
                     users={this.props.users}
                     roles={this.props.roles}
                     />
-                <Snackbar open={false} message={this.props.message} autoHideDuration={4000}/>
+                <Snackbar open={true} message={this.props.messages.last()} autoHideDuration={3000} />
             </div>
         );
 

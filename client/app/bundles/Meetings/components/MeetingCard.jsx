@@ -13,7 +13,6 @@ moment.locale('da');
 // Simple example of a React "dumb" component
 export default class extends React.Component {
   static propTypes = {
-    secret: PropTypes.string.isRequired,
     agenda_drive_id: PropTypes.string.isRequired,
     summary_drive_id: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,

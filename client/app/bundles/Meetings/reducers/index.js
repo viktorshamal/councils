@@ -6,7 +6,7 @@ import fetchingReducer, { initialState as fetchingState } from './fetchingReduce
 export default {
     $$meetingsStore: meetingsReducer,
     $$modalsStore: modalsReducer,
-    fetchingStore: fetchingReducer,
+    isFetching: fetchingReducer,
     railsContext: railsContextReducer
 };
 

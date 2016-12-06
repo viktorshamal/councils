@@ -23,6 +23,10 @@
   flex: auto;
 }
 
+.progress {
+  max-width: $container-width;
+}
+
 .sidebarVisible {
   display: flex;
   flex: 0 0 20rem;

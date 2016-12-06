@@ -10,6 +10,8 @@ import MeetingCard from '../components/MeetingCard';
 import Header from './Header.jsx';
 import ActionButton from './ActionButton.jsx';
 import Sidebar from '../components/Sidebar';
+import LinearProgress from 'material-ui/LinearProgress';
+
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import styles from './Meetings.scss';
@@ -28,7 +30,8 @@ function mapStateToProps(state){
         users: store.get('$$users'),
         attendance: store.get('$$attendance'),
         tokens: store.get('$$tokens'),
-        modals: state.$$modalsStore
+        modals: state.$$modalsStore,
+        isFetching: state.isFetching
     }
 }
 
@@ -59,13 +62,23 @@ class Meetings extends React.Component {
   };
 
   render() {
-    var sidebar;
+    let sidebar;
 
     if (this.props.selectedMeeting !== null) {
       sidebar = (<Sidebar {...this.props}/>);
     } else {
       sidebar = null;
     }
+
+    let progress = null;
+    let calls = this.props.isFetching.getIn(['calls','meeting']);
+    if(calls && calls.count() > 0) progress = (
+        <LinearProgress
+            mode='indeterminate'
+            className={styles.progress}
+            style={{margin:'0 auto'}}
+        />
+    );
 
     var meetings = this.props.meetings.map((meeting, index) => {
       return (<MeetingCard
@@ -83,6 +96,7 @@ class Meetings extends React.Component {
         <MuiThemeProvider>
             <div>
                 <Header user={this.props.user} />
+                {progress}
                 <div className={styles.main}>
                     <div className={styles.meetings}>
                         {meetings}

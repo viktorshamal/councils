@@ -2,7 +2,8 @@ import { fromJS } from 'immutable';
 import * as actionTypes from '../actions/actionTypes.js';
 
 export const initialState = fromJS({
-    isFetching: {}
+    calls: {},
+    messages: []
 });
 
 export default function (state = initialState, action=null){
@@ -30,22 +31,25 @@ export default function (state = initialState, action=null){
 }
 
 function startFetchingState(state,name,id) {
-    let oldFetching = state.get('isFetching');
-    let oldIds = oldFetching.get(name);
+    let oldCalls = state.get('calls');
+    let oldIds = oldCalls.get(name);
     let newIds = [];
     if(oldIds) {
         newIds = oldIds.push(id);
     } else {
         newIds = [id];
     }
+    let calls = oldCalls.set(name, fromJS(newIds));
 
-    return state.merge({isFetching: oldFetching.set(name, fromJS(newIds))});
+    return state.merge({calls});
 }
 
 function endFetchingState(state,name,id) {
-    let oldFetching = state.get('isFetching');
-    let oldIds = oldFetching.get(name);
+    let oldCalls = state.get('calls');
+    let oldIds = oldCalls.get(name);
     let newIds = oldIds.filter(x => x != id);
+    let calls = oldCalls.set(name, fromJS(newIds));
+    let messages = state.get('messages').push(name + ' done');
 
-    return state.merge({isFetching: oldFetching.set(name, fromJS(newIds))});
+    return state.merge({calls, messages});
 }
