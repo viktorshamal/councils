@@ -51,6 +51,9 @@ function mapDispatchToProps(dispatch){
         },
         attendMeeting: (id,code) => {
             dispatch(actionCreators.createAttendance(id,code));
+        },
+        deleteMeeting: (id) => {
+            dispatch(actionCreators.deleteMeeting(id));
         }
     };
 }

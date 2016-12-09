@@ -2,15 +2,18 @@ import { fetch, getApiUrl } from 'redux-auth';
 import * as actionTypes from '../actions/actionTypes.js';
 
 export function createResource(name,path,payload,dispatch,extras={}) {
-    makeCall('POST', ...arguments);
+    makeCall('POST','CREATE', ...arguments);
 }
 
 export function fetchResource(name,path,params,dispatch,extras={}) {
-    makeCall('GET', ...arguments);
+    makeCall('GET', 'FETCH', ...arguments);
 }
 
-function makeCall(method, name, path, params, dispatch, extras){
-    let prefix = (method == 'POST' ? 'CREATE' : 'FETCH');
+export function deleteResource(name,path,dispatch) {
+    makeCall('DELETE','DELETE', name, path, null, dispatch, null);
+}
+
+function makeCall(method, prefix, name, path, params, dispatch, extras){
     let requestId = new Date().valueOf();
     dispatch(fetchStart(prefix, name, requestId));
 

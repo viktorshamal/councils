@@ -1,5 +1,5 @@
 import * as actionTypes from '../actions/actionTypes.js';
-import { fetchResource, createResource } from './apiUtils.js';
+import { fetchResource, createResource, deleteResource } from './apiUtils.js';
 
 export function selectMeeting(id) {
     return {
@@ -62,6 +62,10 @@ export function createMeetingTemplate(meetingTemplate) {
 
 export function createRole(role) {
     return (dispatch) => createResource('ROLE', '/roles', role, dispatch)
+}
+
+export function deleteMeeting(id) {
+    return (dispatch) => deleteResource('MEETING', '/meetings/' + id, dispatch)
 }
 
 
