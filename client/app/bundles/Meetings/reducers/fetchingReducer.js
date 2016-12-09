@@ -7,22 +7,23 @@ export const initialState = fromJS({
 });
 
 export default function (state = initialState, action=null){
-    if (!action.prefix || !action.name) return state;
-    let name = action.name.toLowerCase();
-
     switch(action.type) {
         case `FETCH_${action.name}_START` :
         case `CREATE_${action.name}_START`:
-            return startFetchingState(state, name, action.id);
+            return newState(state, action.name, action.id, newIdsStart);
 
         case `FETCH_${action.name}_SUCCESS` :
         case `CREATE_${action.name}_SUCCESS`:
-            return endFetchingState(state, name, action.id);
+            return newState(state, action.name, action.id, newIdsEnd, action.message);
 
         case `FETCH_${action.name}_ERROR` :
         case `CREATE_${action.name}_ERROR`:
-            return endFetchingState(state, name, action.id);
+            return newState(state, action.name, action.id, newIdsEnd, action.message);
 
+        case actionTypes.CLEAR_MESSAGE: {
+            let messages = state.get('messages').delete(action.i);
+            return state.merge({messages});
+        }
         default: {
             return state;
         }
@@ -30,26 +31,22 @@ export default function (state = initialState, action=null){
 
 }
 
-function startFetchingState(state,name,id) {
-    let oldCalls = state.get('calls');
-    let oldIds = oldCalls.get(name);
-    let newIds = [];
-    if(oldIds) {
-        newIds = oldIds.push(id);
-    } else {
-        newIds = [id];
-    }
-    let calls = oldCalls.set(name, fromJS(newIds));
-
-    return state.merge({calls});
+function newIdsStart(oldIds, id){
+    let newIds = oldIds ? oldIds.push(id) : [id];
+    return fromJS(newIds);
 }
 
-function endFetchingState(state,name,id) {
-    let oldCalls = state.get('calls');
-    let oldIds = oldCalls.get(name);
-    let newIds = oldIds.filter(x => x != id);
-    let calls = oldCalls.set(name, fromJS(newIds));
-    let messages = state.get('messages').push(name + ' done');
+function newIdsEnd(oldIds, id) {
+    return fromJS(oldIds.filter(x => x != id));
+}
 
-    return state.merge({calls, messages});
+function newState(state, name, id, newIds, message=null) {
+    let oldCalls = state.get('calls');
+    let oldIds = oldCalls.get(name.toLowerCase());
+
+    let calls = oldCalls.set(name.toLowerCase(), newIds(oldIds, id));
+
+    let newState = {calls};
+    if(message) newState.messages = state.get('messages').push(message);
+    return state.merge(newState);
 }

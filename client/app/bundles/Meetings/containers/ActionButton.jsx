@@ -40,6 +40,9 @@ function mapDispatchToProps(dispatch){
         },
         fetchUsers: () => {
             dispatch(actionCreators.fetchUsers());
+        },
+        clearMessage: (i) => {
+            dispatch(actionCreators.clearMessage(i));
         }
     };
 }
@@ -89,11 +92,29 @@ class ActionButton extends React.Component {
                     users={this.props.users}
                     roles={this.props.roles}
                     />
-                <Snackbar open={true} message={this.props.messages.last()} autoHideDuration={3000} />
+                <Notifications messages = {this.props.messages} clearMessage={this.props.clearMessage}/>
             </div>
         );
 
 
+    }
+}
+
+class Notifications extends React.Component {
+    static propTypes = {
+        messages: PropTypes.array.isRequired
+    };
+
+    onRequestClose = (i) => this.props.clearMessage(i);
+
+    render() {
+        let i = this.props.messages.count() - 1;
+        return (<Snackbar
+            open={this.props.messages.count() > 0}
+            message={this.props.messages.last()}
+            autoHideDuration={3000}
+            onRequestClose={()=>this.onRequestClose(i)}
+            />);
     }
 }
 

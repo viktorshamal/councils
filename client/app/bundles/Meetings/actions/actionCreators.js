@@ -15,6 +15,13 @@ export function toggleModal(modal){
     }
 }
 
+export function clearMessage(i) {
+    return {
+        type: actionTypes.CLEAR_MESSAGE,
+        i
+    }
+}
+
 export function fetchAttendance(meeting_id) {
     return (dispatch) => fetchResource('ATTENDANCE', '/attendances/' + meeting_id, {}, dispatch)
 }

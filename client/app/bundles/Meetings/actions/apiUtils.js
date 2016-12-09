@@ -54,9 +54,28 @@ function fetchStart(prefix, name, id) {
 }
 
 function fetchSuccess(prefix, name, id, data, extras={}) {
-    return action('SUCCESS', prefix, name, id, {...extras, data});
+    let message = null;
+    if(messages.hasOwnProperty(name)) message = messages[name].success;
+    return action('SUCCESS', prefix, name, id, {...extras, data, message});
 }
 
 function fetchError(prefix, name, id, error) {
-    return action('ERROR', prefix, name, id, {error});
+    let message = null;
+    if(messages.hasOwnProperty(name)) message = messages[name].error;
+    return action('ERROR', prefix, name, id, {error, message});
 }
+
+const messages = {
+    MEETING: {
+        success: 'Møde oprettet',
+        error: 'Mødet kunne ikke oprettes'
+    },
+    MEETING_TEMPLATE: {
+        success: 'Mødetype oprettet',
+        error: 'Mødetypen kunne ikke oprettes'
+    },
+    ROLE: {
+        success: 'Role oprettet',
+        error: 'Rollen kunne ikke oprettes'
+    }
+};
