@@ -7,16 +7,21 @@ import SecretModal from '../components/SecretModal';
 import AttendModal from '../components/modals/AttendModal';
 import TextField from 'material-ui/TextField';
 
+import AlarmIcon from 'react-icons/lib/md/alarm';
+import DateIcon from 'react-icons/lib/md/date-range';
 
+import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 
 import styles from './Sidebar.scss';
 
+import moment from 'moment';
 
 export default class Sidebar extends React.Component {
     render () {
         let meeting = this.props.meetings.get(this.props.selectedMeeting);
         let token = this.props.tokens.get(meeting.get('id'));
+        let date = meeting.get('date');
 
         return(
             <div className={styles.sidebar}>
@@ -38,13 +43,11 @@ export default class Sidebar extends React.Component {
                     <Tab label="Detaljer" style={{color:'black'}}>
                         <div className={styles.wrapper}>
                             <h2>{meeting.get('name')}</h2>
-                            <FlatButton
-                                label="Vis tilmeldingskode"
-                                onClick={()=>this.props.toggleModal('secretModal')} />
-                            <FlatButton
-                                label="Tilmeld"
-                                onClick={()=>this.props.toggleModal('attendModal')} />
-                            <DeleteForm deleteMeeting = {this.props.deleteMeeting} id = {meeting.get('id')}/>
+                            <AlarmIcon /> {moment(date).format('LT')}
+                            <br/>
+                            <DateIcon />{moment(date).format('LL')}
+                            <br/>
+                            <DeleteForm deleteMeeting={this.props.deleteMeeting} id={meeting.get('id')}/>
                         </div>
                     </Tab>
                     <Tab label="Fremmødte" style={{color:'black'}}>
@@ -57,12 +60,23 @@ export default class Sidebar extends React.Component {
                         </div>
                     </Tab>
                 </Tabs>
-                <FlatButton
-                    style={{position:'absolute', bottom:'0.5rem', right:'0.5rem'}}
-                    onClick={()=>this.props.onMeetingClick(null)}
-                >
-                    Luk
-                </FlatButton>
+                <div style={{position:'absolute', bottom:'0.5rem',width:'100%'}}>
+                    <RaisedButton
+                        style={{marginLeft:'1rem'}}
+                        primary={true}
+                        label="Tilmeld"
+                        onClick={()=>this.props.toggleModal('attendModal')} />
+                    <RaisedButton
+                        style={{marginLeft:'0.5rem'}}
+                        label="Kode"
+                        onClick={()=>this.props.toggleModal('secretModal')} />
+                    <FlatButton
+                        label="Luk"
+                        style={{position:'absolute', right:'0.5rem'}}
+                        onClick={()=>this.props.onMeetingClick(null)} />
+                </div>
+
+
             </div>
         );
     }
@@ -79,7 +93,7 @@ class DeleteForm extends React.Component {
     };
 
     handleChange = (event) => this.setState({input:event.target.value});
-    start = () => this.setState({deleting:true});
+    toggle = (deleting) => this.setState({deleting});
 
     deleteMeeting = (id) => {
         this.props.deleteMeeting(id);
@@ -90,27 +104,34 @@ class DeleteForm extends React.Component {
         let disabled = this.state.input !== 'SLET';
         if(this.state.deleting){
             return (
-                <div>
-                    <TextField hintText="SLET" onChange={this.handleChange} />
-                    <FlatButton
-                        label="Slet møde"
+                <div style={{marginTop:'1rem'}}>
+                    <TextField
+                        style={{width:'4rem',marginRight:'1rem'}}
+                        hintText="SLET"
+                        onChange={this.handleChange} />
+                    <RaisedButton
+                        label="Slet"
                         secondary={true}
                         onClick={()=>this.props.deleteMeeting(this.props.id)}
                         disabled={disabled} />
+                    <FlatButton
+                        label="Annuller"
+                        onClick={()=>this.toggle(false)}
+                        />
                 </div>);
         } else {
             return (
-                <FlatButton
-                    label="Slet møde"
+                <RaisedButton
+                    style={{marginTop:'1rem'}}
+                    label="Slet"
                     secondary={true}
-                    onClick={this.start}/>
+                    onClick={()=>this.toggle(true)}/>
             );
         }
 
 
     }
 }
-
 
 const AttendanceList = ({users,meeting_id,attendance}) => {
     var items = null;
@@ -119,10 +140,12 @@ const AttendanceList = ({users,meeting_id,attendance}) => {
         items = meetingAttendance.map((id)=>{
             let user = users.get(id.toString());
             if(!user) return null;
+            let name = user.get('name');
+            let avatar = (<Avatar >{name.charAt(0)}</Avatar>);
             return (
                 <ListItem
-                    primaryText={user.get('name')}
-                    leftAvatar={<Avatar >V</Avatar>}
+                    primaryText={name}
+                    leftAvatar={avatar}
                     key={id}
                     />
             );
