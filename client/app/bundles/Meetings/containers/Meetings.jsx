@@ -15,6 +15,7 @@ import Chip from 'material-ui/Chip';
 import Avatar from 'material-ui/Avatar';
 import {blue300, indigo900} from 'material-ui/styles/colors';
 
+import moment from 'moment';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import styles from './Meetings.scss';
@@ -93,11 +94,15 @@ class Meetings extends React.Component {
 
     var meetings = this.props.meetings.filter((meeting)=>{
         return (this.props.selectedTemplate === meeting.get('meeting_template_id') || this.props.selectedTemplate === null);
-    }).map((meeting, index) => {
+    })
+    .sort((meetingA,meetingB)=>{
+        return moment(meetingB.get('date')).diff(meetingA.get('date'));
+    })
+    .map((meeting, index) => {
       return (<MeetingCard
                 key={meeting.get('id')}
                 {...meeting.toObject()}
-                index={index}
+                index={this.props.meetings.indexOf(meeting)}
                 fullWidth={!sidebar}
                 onMeetingClick={this.props.onMeetingClick}
                 fetchAttendance={this.props.fetchAttendance}
