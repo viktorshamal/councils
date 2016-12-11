@@ -164,7 +164,7 @@ class Chips extends React.Component {
                    size={32}
                    color='white'
                    backgroundColor={avatarColor}>
-                   B
+                   {template.get('name').charAt(0).toUpperCase()}
                </Avatar>
                {template.get('name')}
            </Chip>);
