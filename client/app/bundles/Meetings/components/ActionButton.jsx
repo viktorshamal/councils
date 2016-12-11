@@ -10,15 +10,15 @@ export default ({toggleModal}) => {
                 iconResting="ion-plus-round"
                 iconActive="ion-close-round" />
             <ChildButton
-                icon="ion-social-github"
+                icon="ion-ios-people"
                 label='Nyt møde'
                 onClick={()=>toggleModal('meetingModal')}/>
             <ChildButton
-                icon="ion-social-github"
+                icon="ion-ios-browsers-outline"
                 label='Ny mødetype'
                 onClick={()=>toggleModal('typeModal')}/>
             <ChildButton
-                icon="ion-social-github"
+                icon="ion-person-add"
                 label='Ny rolle'
                 onClick={()=>toggleModal('roleModal')}/>
         </Menu>
