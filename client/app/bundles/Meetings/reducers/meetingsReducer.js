@@ -70,8 +70,8 @@ export default function (state = $$initialState, action=null){
         }
 
         case actionTypes.FETCH_ATTENDANCE_SUCCESS: {
-            const oldAttendance = state.get('$$attendance');
-            const $$attendance = fromJS(oldAttendance.merge(action.data.attendance));
+            let oldAttendance = state.get('$$attendance');
+            let $$attendance = fromJS(oldAttendance.merge(action.data.attendance));
 
             return state.merge({ $$attendance });
         }

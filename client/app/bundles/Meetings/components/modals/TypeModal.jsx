@@ -44,6 +44,7 @@ export default class extends React.Component {
 
         return (
             <Dialog
+                contentStyle={{overflowY:'auto'}}
                 title="Tilføj en mødetype"
                 actions={actions}
                 open={this.props.open}

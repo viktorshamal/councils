@@ -41,12 +41,6 @@ export default class extends React.Component {
 
     render() {
         const actions = [
-            <RaisedButton
-                label="Tilføj"
-                primary={true}
-                disabled={!this.state.user_id}
-                onClick={this.handleSubmit}
-                />,
             <FlatButton
                 label="Luk"
                 primary={true}
@@ -56,6 +50,7 @@ export default class extends React.Component {
 
         return (
             <Dialog
+                contentStyle={{overflowY:'auto'}}
                 title="Tilføj en rolle"
                 actions={actions}
                 open={this.props.open}
@@ -77,6 +72,13 @@ export default class extends React.Component {
                     users={this.props.users}
                     selected={this.state.user_id}
                     onChange={this.handleUserChange} />
+                <RaisedButton
+                    style={{marginLeft:'0.5rem'}}
+                    label="Tilføj"
+                    primary={true}
+                    disabled={!this.state.user_id}
+                    onClick={this.handleSubmit}
+                    />,
             </Dialog>
         );
     }
@@ -110,7 +112,7 @@ const RoleList = ({users,roles,meeting_template_id}) => {
             return (<ListItem
                 key={user_id}
                 primaryText={user.get('name')}
-                rightIcon={<RemoveIcon />}
+                //rightIcon={<RemoveIcon />}
             />);
         });
     }
