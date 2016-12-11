@@ -1,18 +1,18 @@
 class V1::RolesController < V1::BaseController
-  def index
-    roles = MeetingTemplate.find(params[:meeting_template_id]).roles.where(name: 'moderator')
-    #template = MeetingTemplate.find params[:meeting_template_id]
-    #users = User.with_role :moderator, template
+  def show
+    roles = MeetingTemplate.find(params[:id]).roles.where(name: 'moderator').first
+
     render json: roles
   end
 
   def create
     authorize :moderator, :create?
-    user = User.find(params[:user_id])
-    template = MeetingTemplate.find(params[:meeting_template_id])
+    user = User.find(role_params[:user_id])
+    template = MeetingTemplate.find(role_params[:meeting_template_id])
 
-    if user.add_role :moderator, template
-      render status: 200, json: {status:'ok'}
+    role = user.add_role :moderator, template
+    if role
+      render status: 200, json: role
     else
       render status: 403, json: {status:'not ok'}
     end
@@ -28,5 +28,10 @@ class V1::RolesController < V1::BaseController
     else
       render json: {status: 422}
     end
+  end
+
+  private
+  def role_params
+    params.require(:role).permit(:meeting_template_id,:user_id)
   end
 end

@@ -1,6 +1,6 @@
 class MeetingSerializer < ActiveModel::Serializer
   #serialization_scope :current_user
-  attributes :id, :secret, :name, :date, :agenda_drive_id, :summary_drive_id, :color
+  attributes :id, :name, :date, :agenda_drive_id, :summary_drive_id, :color, :user_ids
 
   # def attributes(x)
   #   data = super
@@ -10,5 +10,9 @@ class MeetingSerializer < ActiveModel::Serializer
   #   data
   # end
 
-  has_many :users
+  def user_ids
+    object.user_ids
+  end
+
+  #has_many :users
 end

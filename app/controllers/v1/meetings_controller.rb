@@ -2,9 +2,16 @@ class V1::MeetingsController < V1::BaseController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_meeting, only: [:show, :update, :destroy]
 
+  #before_action :initialize_shared_store, only: [:index]
+
   def index
-    @meetings = Council.find_by_identifier(params[:identifier]).meetings
-    render json: @meetings
+    @meetings = Council.find_by_identifier(identifier).meetings
+    redux_store('meetingsStore', props: @meetings)
+
+    respond_to do |format|
+      format.html
+      format.json {render json: @meetings}
+    end
   end
 
   def show
@@ -17,7 +24,10 @@ class V1::MeetingsController < V1::BaseController
     authorize @meeting
 
     if @meeting.save
-      render json: @meeting, status: :created
+      respond_to do |format|
+        format.html
+        format.json {render json: @meeting, status: :created}
+      end
     else
       render json: @meeting.errors, status: :unprocessable_entity
     end
@@ -49,5 +59,9 @@ class V1::MeetingsController < V1::BaseController
     # Never trust parameters from the scary internet, only allow the white list through.
     def meeting_params
       params.require(:meeting).permit(:date, :meeting_template_id)
+    end
+
+    def initialize_shared_store
+      redux_store('meetingsStore', props: @meetings)
     end
 end

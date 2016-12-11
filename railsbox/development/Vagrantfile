@@ -3,6 +3,8 @@
 
 Vagrant.require_version '>= 1.5'
 
+USERNAME = ENV['WIN_USERNAME']
+
 def require_plugins(plugins = {})
   needs_restart = false
   plugins.each do |plugin, version|
@@ -54,10 +56,11 @@ Vagrant.configure('2') do |config|
   config.vm.define 'councils' do |machine|
     machine.vm.hostname = 'localhost'
     machine.vm.network 'forwarded_port', :guest => 3000, :host => 3000, :auto_correct => true
+    machine.vm.network 'forwarded_port', :guest => 3500, :host => 3500, :auto_correct => true
 
     machine.vm.box = 'ubuntu/trusty64'
-    machine.vm.synced_folder '../../', '/councils', type: 'smb'
-    machine.vm.synced_folder '../ansible', '/ansible', type: 'smb'
+    machine.vm.synced_folder '../../', '/councils', type: 'smb', smb_username: USERNAME
+    machine.vm.synced_folder '../ansible', '/ansible', type: 'smb', smb_username: USERNAME
   end
 
 
