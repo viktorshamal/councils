@@ -58,6 +58,14 @@ export default class Sidebar extends React.Component {
                             <br/>
                             <DateIcon />{moment(date).format('LL')}
                             <br/>
+                            <div className={styles.driveButtons}>
+                                <a href={"https://docs.google.com/document/d/" + meeting.get('agenda_drive_id')} target='_blank'>
+                                    <FlatButton label='Dagsorden' />
+                                </a>
+                                <a href={"https://docs.google.com/document/d/" + meeting.get('summary_drive_id')} target='_blank'>
+                                    <FlatButton label='Referat' />
+                                </a>
+                            </div>
                             {deleteForm}
                         </div>
                     </Tab>
@@ -83,8 +91,6 @@ export default class Sidebar extends React.Component {
                         style={{position:'absolute', right:'0.5rem'}}
                         onClick={()=>this.props.onMeetingClick(null)} />
                 </div>
-
-
             </div>
         );
     }
@@ -110,32 +116,35 @@ class DeleteForm extends React.Component {
 
     render () {
         let disabled = this.state.input !== 'SLET';
+        let content = null;
         if(this.state.deleting){
-            return (
-                <div style={{marginTop:'1rem'}}>
+            content = [
                     <TextField
                         style={{width:'4rem',marginRight:'1rem'}}
                         hintText="SLET"
-                        onChange={this.handleChange} />
+                        onChange={this.handleChange} />,
                     <RaisedButton
                         label="Slet"
                         secondary={true}
                         onClick={()=>this.props.deleteMeeting(this.props.id)}
-                        disabled={disabled} />
+                        disabled={disabled} />,
                     <FlatButton
                         label="Annuller"
                         onClick={()=>this.toggle(false)}
-                        />
-                </div>);
+                        />]
         } else {
-            return (
-                <RaisedButton
-                    style={{marginTop:'1rem'}}
+            content = (<RaisedButton
                     label="Slet"
                     secondary={true}
                     onClick={()=>this.toggle(true)}/>
             );
         }
+
+        return (
+            <div className={styles.deleteForm}>
+                {content}
+            </div>
+        );
 
 
     }
