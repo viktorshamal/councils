@@ -15,6 +15,8 @@ import FlatButton from 'material-ui/FlatButton';
 
 import styles from './Sidebar.scss';
 
+import {authorized} from '../../../libs/utils.js';
+
 import moment from 'moment';
 
 export default class Sidebar extends React.Component {
@@ -22,6 +24,15 @@ export default class Sidebar extends React.Component {
         let meeting = this.props.meetings.get(this.props.selectedMeeting);
         let token = this.props.tokens.get(meeting.get('id'));
         let date = meeting.get('date');
+
+        let deleteForm, secretModal = null;
+        if(authorized(this.props.user)) {
+            deleteForm = (<DeleteForm deleteMeeting={this.props.deleteMeeting} id={meeting.get('id')}/>);
+            secretModal = (<RaisedButton
+                style={{marginLeft:'0.5rem'}}
+                label="Kode"
+                onClick={()=>this.props.toggleModal('secretModal')} />);
+        }
 
         return(
             <div className={styles.sidebar}>
@@ -47,7 +58,7 @@ export default class Sidebar extends React.Component {
                             <br/>
                             <DateIcon />{moment(date).format('LL')}
                             <br/>
-                            <DeleteForm deleteMeeting={this.props.deleteMeeting} id={meeting.get('id')}/>
+                            {deleteForm}
                         </div>
                     </Tab>
                     <Tab label="Fremmødte" style={{color:'black'}}>
@@ -66,10 +77,7 @@ export default class Sidebar extends React.Component {
                         primary={true}
                         label="Tilmeld"
                         onClick={()=>this.props.toggleModal('attendModal')} />
-                    <RaisedButton
-                        style={{marginLeft:'0.5rem'}}
-                        label="Kode"
-                        onClick={()=>this.props.toggleModal('secretModal')} />
+                    {secretModal}
                     <FlatButton
                         label="Luk"
                         style={{position:'absolute', right:'0.5rem'}}

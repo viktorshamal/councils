@@ -10,6 +10,8 @@ import Snackbar from 'material-ui/Snackbar';
 
 import * as actionCreators from '../actions/actionCreators.js';
 
+import {authorized} from '../../../libs/utils.js';
+
 function mapStateToProps(state){
     return {
         user: state.auth.get('user'),
@@ -57,17 +59,8 @@ class ActionButton extends React.Component {
     };
 
     render () {
-        const authorizedRoles = ['admin','moderator'];
-        const attributes = this.props.user.get('attributes');
-        var authorized = false;
-        var button = null;
-
-        if(attributes && attributes.has('role_names')) {
-            authorized = attributes.get('role_names').some(function (role, i) {
-                return authorizedRoles[i]==role;
-            });
-            if(authorized) button = (<FloatingButton toggleModal={this.props.toggleModal}/>);
-        }
+        let button = null;
+        if(authorized(this.props.user)) button = (<FloatingButton toggleModal={this.props.toggleModal}/>);
 
         return (
             <div>

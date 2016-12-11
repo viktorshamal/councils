@@ -24,6 +24,17 @@
   right: 0.5rem;
 }
 
+@media (max-width: 700px) {
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 1000;
+  }
+}
+
 /*.enter {
   opacity: 0.01;
 }
