@@ -22,6 +22,13 @@ export function clearMessage(i) {
     }
 }
 
+export function filterMeeting(id) {
+    return {
+        type: actionTypes.FILTER_MEETING,
+        id
+    }
+}
+
 export function fetchAttendance(meeting_id) {
     return (dispatch) => fetchResource('ATTENDANCE', '/attendances/' + meeting_id, {}, dispatch)
 }

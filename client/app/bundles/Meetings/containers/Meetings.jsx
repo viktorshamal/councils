@@ -11,6 +11,9 @@ import Header from './Header.jsx';
 import ActionButton from './ActionButton.jsx';
 import Sidebar from '../components/Sidebar';
 import LinearProgress from 'material-ui/LinearProgress';
+import Chip from 'material-ui/Chip';
+import Avatar from 'material-ui/Avatar';
+import {blue300, indigo900} from 'material-ui/styles/colors';
 
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -24,7 +27,9 @@ function mapStateToProps(state){
 
     return {
         meetings: store.get('$$meetings'),
+        meetingTemplates: store.get('$$meetingTemplates'),
         selectedMeeting: store.get('$$selectedMeeting'),
+        selectedTemplate: store.get('selectedTemplate'),
         secretModalToggled: store.get('$$secretModalToggled'),
         user: state.auth.get('user'),
         users: store.get('$$users'),
@@ -54,6 +59,9 @@ function mapDispatchToProps(dispatch){
         },
         deleteMeeting: (id) => {
             dispatch(actionCreators.deleteMeeting(id));
+        },
+        filterMeeting: (id) => {
+            dispatch(actionCreators.filterMeeting(id));
         }
     };
 }
@@ -83,7 +91,9 @@ class Meetings extends React.Component {
         />
     );
 
-    var meetings = this.props.meetings.map((meeting, index) => {
+    var meetings = this.props.meetings.filter((meeting)=>{
+        return (this.props.selectedTemplate === meeting.get('meeting_template_id') || this.props.selectedTemplate === null);
+    }).map((meeting, index) => {
       return (<MeetingCard
                 key={meeting.get('id')}
                 {...meeting.toObject()}
@@ -100,6 +110,12 @@ class Meetings extends React.Component {
             <div>
                 <Header user={this.props.user} />
                 {progress}
+                <div className={styles.actionBar}>
+                    <Chips
+                        templates={this.props.meetingTemplates}
+                        filterMeeting={this.props.filterMeeting}
+                        selectedTemplate={this.props.selectedTemplate} />
+                </div>
                 <div className={styles.main}>
                     <div className={styles.meetings}>
                         {meetings}
@@ -115,5 +131,56 @@ class Meetings extends React.Component {
   }
 }
 
+
+
+class Chips extends React.Component {
+    state = {
+        expanded: false
+    };
+
+    toggleExpanded = (expanded) => this.setState({expanded});
+    filterMeeting = (id) => this.props.filterMeeting(id);
+
+
+    render() {
+        let collapsedSize = 4;
+        let templates = this.state.expanded ? this.props.templates : this.props.templates.take(collapsedSize);
+        let chipStyle = {
+            margin:'0.5rem 0.5rem 0 0',
+            borderRadius:'0.1rem'
+        };
+
+        let chips = templates.map((template)=>{
+            let avatarColor =
+                (this.props.selectedTemplate === template.get('id') || this.props.selectedTemplate === null)
+                ?  template.get('color')
+                : 'grey';
+           return (
+           <Chip
+               style={chipStyle}
+               onTouchTap={()=>this.filterMeeting(template.get('id'))}>
+               <Avatar
+                   style={{borderRadius:'0.1rem 0.1rem 0.1rem 0.1rem'}}
+                   size={32}
+                   color='white'
+                   backgroundColor={avatarColor}>
+                   B
+               </Avatar>
+               {template.get('name')}
+           </Chip>);
+        });
+
+        let toggleChip = null;
+        if(this.state.expanded) {
+            toggleChip = (<Chip onTouchTap={()=>this.toggleExpanded(false)} style={chipStyle}>Vis færre</Chip>);
+        } else {
+            toggleChip = (<Chip onTouchTap={()=>this.toggleExpanded(true)} style={chipStyle}>Vis flere</Chip>);
+        }
+
+        let finalChips = templates.count() > (collapsedSize - 1) ? chips.push(toggleChip) : chips;
+
+        return (<div className={styles.chips}>{finalChips}</div>);
+    }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Meetings);

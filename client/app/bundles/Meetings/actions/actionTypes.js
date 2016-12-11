@@ -2,6 +2,8 @@ export const SELECT_MEETING = 'SELECT_MEETING';
 
 export const TOGGLE_MODAL = 'TOGGLE_MODAL';
 
+export const FILTER_MEETING = 'FILTER_MEETING';
+
 export const CLEAR_MESSAGE = 'CLEAR_MESSAGE';
 
 export const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS';
