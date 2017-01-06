@@ -15,6 +15,7 @@ export default class extends React.Component {
 
     handleSubmit() {
         this.props.handleSubmit(this.props.meeting_id, this.state.code);
+        this.close();
     }
 
     close() {
@@ -28,8 +29,7 @@ export default class extends React.Component {
     render() {
         const actions = [
             <FlatButton
-                label="Anuller"
-                primary={true}
+                label="Luk"
                 onClick={()=>this.close()}
                 />
         ];
@@ -42,12 +42,17 @@ export default class extends React.Component {
                 onRequestClose={()=>this.close()}
 
                 >
-                <TextField hintText="••••" onChange={this.handleChange}/>
-                <FlatButton
-                    label="Tilmeld"
-                    primary={true}
-                    onClick={()=>this.handleSubmit()}
-                    />
+                <div style={{display:'flex', flexDirection:'column',alignItems:'center'}}>
+                    <h2>Indtast tilmeldingskoden</h2>
+                    <TextField
+                        onChange={this.handleChange}
+                        inputStyle={{fontSize:'26px', textAlign:'center'}} />
+                    <RaisedButton
+                        style={{marginTop:'1rem'}}
+                        label="Tilmeld"
+                        primary={true}
+                        onClick={()=>this.handleSubmit()} />
+                </div>
             </Dialog>
         );
     }

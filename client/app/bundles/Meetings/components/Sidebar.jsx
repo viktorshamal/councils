@@ -70,7 +70,7 @@ export default class Sidebar extends React.Component {
                         </div>
                     </Tab>
                     <Tab label="Fremmødte" style={{color:'black'}}>
-                        <div className={styles.wrapper}>
+                        <div>
                             <AttendanceList
                                 users={this.props.users}
                                 meeting_id={meeting.get('id')}

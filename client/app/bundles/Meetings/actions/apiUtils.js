@@ -31,6 +31,7 @@ function makeCall(method, prefix, name, path, params, dispatch, extras){
     if (method === 'POST') options['body'] = JSON.stringify(params);
 
     return fetch(url, options)
+        .then(handleErrors)
         .then(response => response.json())
         .then(data => dispatch(fetchSuccess(prefix, name, requestId, data, extras)))
         .catch(error => dispatch(fetchError(prefix, name, requestId, error)));
@@ -40,6 +41,13 @@ function queryParams(params) {
     return Object.keys(params)
         .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
         .join('&');
+}
+
+function handleErrors(response) {
+    if (!response.ok) {
+        throw Error(response.statusText);
+    }
+    return response;
 }
 
 function action(type, prefix, name, id, extras={} ) {
@@ -58,15 +66,16 @@ function fetchStart(prefix, name, id) {
 
 function fetchSuccess(prefix, name, id, data, extras={}) {
     let message = null;
-    if(messages.hasOwnProperty(name)) message = messages[name].success;
+    if(messages.hasOwnProperty(name) && prefix==='CREATE') message = messages[name].success;
     return action('SUCCESS', prefix, name, id, {...extras, data, message});
 }
 
 function fetchError(prefix, name, id, error) {
     let message = null;
     if(messages.hasOwnProperty(name)) message = messages[name].error;
-    return action('ERROR', prefix, name, id, {error, message});
+    return action('ERROR', prefix, name, id, {error, errorMessage});
 }
+
 
 const messages = {
     MEETING: {
@@ -80,5 +89,9 @@ const messages = {
     ROLE: {
         success: 'Role oprettet',
         error: 'Rollen kunne ikke oprettes'
+    },
+    ATTENDANCE: {
+            success: 'Fremmøde gemt',
+            error: 'Fremmødet kunne ikke gemmes'
     }
 };
