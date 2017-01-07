@@ -47,7 +47,6 @@ export default class extends React.Component {
                 />,
             <FlatButton
                 label="Luk"
-                primary={true}
                 onClick={()=>this.close()}
                 />
         ];

@@ -1,27 +1,21 @@
 import React, { PropTypes } from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import * as actionCreators from '../actions/actionCreators.js';
 
 import MeetingCard from '../components/MeetingCard';
-import Header from './Header.jsx';
-import ActionButton from './ActionButton.jsx';
+import Header from '../components/Header.jsx';
 import Sidebar from '../components/Sidebar';
+import FilterBar from '../components/FilterBar.jsx';
+import ActionButton from './ActionButton.jsx';
 import LinearProgress from 'material-ui/LinearProgress';
-import Chip from 'material-ui/Chip';
-import Avatar from 'material-ui/Avatar';
-import {blue300, indigo900} from 'material-ui/styles/colors';
 
 import moment from 'moment';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import styles from './Meetings.scss';
-import sidebarStyles from '../components/Sidebar.scss';
 
-import { CSSGrid, measureItems, makeResponsive } from 'react-stonecutter';
 
 function mapStateToProps(state){
     var store = state.$$meetingsStore;
@@ -67,67 +61,24 @@ function mapDispatchToProps(dispatch){
     };
 }
 
-class Meetings extends React.Component {
+class Main extends React.Component {
   static propTypes = {
     meetings: ImmutablePropTypes.list.isRequired,
     selectedMeeting: PropTypes.number
   };
 
   render() {
-    let sidebar;
+      let sidebarEnabled = (this.props.selectedMeeting !== null);
 
-    if (this.props.selectedMeeting !== null) {
-      sidebar = (<Sidebar {...this.props}/>);
-    } else {
-      sidebar = null;
-    }
-
-    let progress = null;
-    let calls = this.props.isFetching.getIn(['calls','meeting']);
-    if(calls && calls.count() > 0) progress = (
-        <LinearProgress
-            mode='indeterminate'
-            className={styles.progress}
-            style={{margin:'0 auto'}}
-        />
-    );
-
-    var meetings = this.props.meetings.filter((meeting)=>{
-        return (this.props.selectedTemplate === meeting.get('meeting_template_id') || this.props.selectedTemplate === null);
-    })
-    .sort((meetingA,meetingB)=>{
-        return moment(meetingB.get('date')).diff(meetingA.get('date'));
-    })
-    .map((meeting, index) => {
-      return (<MeetingCard
-                key={meeting.get('id')}
-                {...meeting.toObject()}
-                index={this.props.meetings.indexOf(meeting)}
-                fullWidth={!sidebar}
-                onMeetingClick={this.props.onMeetingClick}
-                fetchAttendance={this.props.fetchAttendance}
-                fetchToken={this.props.fetchToken}
-          />);
-    });
-
-    return (
+      return (
         <MuiThemeProvider>
             <div>
                 <Header user={this.props.user} />
-                {progress}
-                <div className={styles.actionBar}>
-                    <Chips
-                        templates={this.props.meetingTemplates}
-                        filterMeeting={this.props.filterMeeting}
-                        selectedTemplate={this.props.selectedTemplate} />
-                </div>
+                <ProgressBar isFetching={this.props.isFetching}/>
+                <ActionBar {...this.props}/>
                 <div className={styles.main}>
-                    <div className={styles.meetings}>
-                        {meetings}
-                    </div>
-                    <div className={sidebar ? styles.sidebarVisible : styles.sidebarHidden}>
-                        {sidebar}
-                    </div>
+                    <Meetings {...this.props} fullWidth={!sidebarEnabled}/>
+                    <SidebarWrapper {...this.props} enabled={sidebarEnabled}/>
                 </div>
                 <ActionButton {...this.props}/>
             </div>
@@ -136,56 +87,63 @@ class Meetings extends React.Component {
   }
 }
 
+const ActionBar = (props) => {
+    return (
+        <div className={styles.actionBar}>
+            <FilterBar
+                templates={props.meetingTemplates}
+                filterMeeting={props.filterMeeting}
+                selectedTemplate={props.selectedTemplate} />
+        </div>
+    );
+};
 
+const SidebarWrapper = (props) => {
+    let sidebar = null;
+    let className = styles.sidebarHidden;
 
-class Chips extends React.Component {
-    state = {
-        expanded: false
-    };
-
-    toggleExpanded = (expanded) => this.setState({expanded});
-    filterMeeting = (id) => this.props.filterMeeting(id);
-
-
-    render() {
-        let collapsedSize = 4;
-        let templates = this.state.expanded ? this.props.templates : this.props.templates.take(collapsedSize);
-        let chipStyle = {
-            margin:'0.5rem 0.5rem 0 0',
-            borderRadius:'0.1rem'
-        };
-
-        let chips = templates.map((template)=>{
-            let avatarColor =
-                (this.props.selectedTemplate === template.get('id') || this.props.selectedTemplate === null)
-                ?  template.get('color')
-                : 'grey';
-           return (
-           <Chip
-               style={chipStyle}
-               onTouchTap={()=>this.filterMeeting(template.get('id'))}>
-               <Avatar
-                   style={{borderRadius:'0.1rem 0.1rem 0.1rem 0.1rem'}}
-                   size={32}
-                   color='white'
-                   backgroundColor={avatarColor}>
-                   {template.get('name').charAt(0).toUpperCase()}
-               </Avatar>
-               {template.get('name')}
-           </Chip>);
-        });
-
-        let toggleChip = null;
-        if(this.state.expanded) {
-            toggleChip = (<Chip onTouchTap={()=>this.toggleExpanded(false)} style={chipStyle}>Vis færre</Chip>);
-        } else {
-            toggleChip = (<Chip onTouchTap={()=>this.toggleExpanded(true)} style={chipStyle}>Vis flere</Chip>);
-        }
-
-        let finalChips = templates.count() > (collapsedSize - 1) ? chips.push(toggleChip) : chips;
-
-        return (<div className={styles.chips}>{finalChips}</div>);
+    if (props.enabled) {
+        sidebar = (<Sidebar {...props}/>);
+        className = styles.sidebarVisible;
     }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Meetings);
+    return (
+      <div className={className}>
+        {sidebar}
+      </div>
+    );
+};
+
+const ProgressBar = ({isFetching}) => {
+    let calls = isFetching.getIn(['calls','meeting']);
+    if(calls && calls.count() > 0) return (
+        <LinearProgress
+            mode='indeterminate'
+            className={styles.progress}
+            style={{margin:'0 auto'}}
+            />
+    );
+    return null;
+};
+
+const Meetings = ({meetings,selectedTemplate,onMeetingClick,fetchAttendance,fetchToken,fullWidth}) => {
+    let items = meetings.filter((meeting)=>{
+        return (selectedTemplate === meeting.get('meeting_template_id') || selectedTemplate === null);
+    }).sort((meetingA,meetingB)=>{
+        return moment(meetingB.get('date')).diff(meetingA.get('date'));
+    }).map((meeting) => {
+        return (<MeetingCard
+            key={meeting.get('id')}
+            {...meeting.toObject()}
+            index={meetings.indexOf(meeting)}
+            fullWidth={fullWidth}
+            onMeetingClick={onMeetingClick}
+            fetchAttendance={fetchAttendance}
+            fetchToken={fetchToken}
+            />);
+    });
+
+    return (<div className={styles.meetings}>{items}</div>);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

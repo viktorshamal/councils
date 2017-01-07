@@ -4,12 +4,9 @@ import ReactOnRails from 'react-on-rails';
 import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-
 import { configure } from 'redux-auth';
 
 import routes from '../routes/routes';
-
-import Meetings from '../containers/Meetings';
 
 var configurePromise;
 

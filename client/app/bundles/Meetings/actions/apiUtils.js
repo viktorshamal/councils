@@ -73,7 +73,7 @@ function fetchSuccess(prefix, name, id, data, extras={}) {
 function fetchError(prefix, name, id, error) {
     let message = null;
     if(messages.hasOwnProperty(name)) message = messages[name].error;
-    return action('ERROR', prefix, name, id, {error, errorMessage});
+    return action('ERROR', prefix, name, id, {error, message});
 }
 
 
