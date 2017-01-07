@@ -27,7 +27,7 @@ export default class Sidebar extends React.Component {
 
         let deleteForm, secretModal = null;
         if(authorized(this.props.user)) {
-            deleteForm = (<DeleteForm deleteMeeting={this.props.deleteMeeting} id={meeting.get('id')}/>);
+            //deleteForm = (<DeleteForm deleteMeeting={this.props.deleteMeeting} id={meeting.get('id')}/>);
             secretModal = (<RaisedButton
                 style={{marginLeft:'0.5rem'}}
                 label="Kode"
@@ -66,7 +66,6 @@ export default class Sidebar extends React.Component {
                                     <FlatButton label='Referat' />
                                 </a>
                             </div>
-                            {deleteForm}
                         </div>
                     </Tab>
                     <Tab label="Fremmødte" style={{color:'black'}}>
