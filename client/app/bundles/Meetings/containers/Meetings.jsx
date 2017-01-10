@@ -7,7 +7,7 @@ import * as actionCreators from '../actions/actionCreators.js';
 import MeetingCard from '../components/MeetingCard';
 import Header from '../components/Header.jsx';
 import Sidebar from '../components/Sidebar';
-import FilterBar from '../components/FilterBar.jsx';
+import ActionBar from '../components/ActionBar.jsx';
 import ActionButton from './ActionButton.jsx';
 import LinearProgress from 'material-ui/LinearProgress';
 
@@ -15,6 +15,8 @@ import moment from 'moment';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import styles from './Meetings.scss';
+
+import {authorized} from '../../../libs/utils.js';
 
 
 function mapStateToProps(state){
@@ -69,34 +71,24 @@ class Main extends React.Component {
 
   render() {
       let sidebarEnabled = (this.props.selectedMeeting !== null);
+      let isAuthorized = authorized(this.props.user);
 
       return (
         <MuiThemeProvider>
             <div>
                 <Header user={this.props.user} />
                 <ProgressBar isFetching={this.props.isFetching}/>
-                <ActionBar {...this.props}/>
+                <ActionBar {...this.props} optionsEnabled={isAuthorized}/>
                 <div className={styles.main}>
                     <Meetings {...this.props} fullWidth={!sidebarEnabled}/>
                     <SidebarWrapper {...this.props} enabled={sidebarEnabled}/>
                 </div>
-                <ActionButton {...this.props}/>
+                <ActionButton {...this.props} />
             </div>
         </MuiThemeProvider>
     );
   }
 }
-
-const ActionBar = (props) => {
-    return (
-        <div className={styles.actionBar}>
-            <FilterBar
-                templates={props.meetingTemplates}
-                filterMeeting={props.filterMeeting}
-                selectedTemplate={props.selectedTemplate} />
-        </div>
-    );
-};
 
 const SidebarWrapper = (props) => {
     let sidebar = null;

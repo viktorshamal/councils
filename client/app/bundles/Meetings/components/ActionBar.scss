@@ -1,0 +1,30 @@
+@import "../../../assets/styles/app-variables";
+
+.actionBar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  max-width: $container-width;
+  margin: 0 auto;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.options {
+  z-index: 1000;
+  display: inline-flex;
+}
+
+@media (min-width: $breakpoint-m) {
+  .actionBar {
+    flex-direction: row;
+  }
+
+  .options {
+    margin-left: auto;
+  }
+}

@@ -35,11 +35,11 @@ export default class extends React.Component {
 
   render() {
     var cardClass = this.props.fullWidth ? styles.fullWidth : styles.narrow;
-    const {agenda_drive_id, summary_drive_id } = this.props;
+    const {agenda_drive_id, summary_drive_id, color } = this.props;
     return (
-        <div className={"container " + cardClass} style={{borderColor:this.props.color}}>
+        <div className={"container " + cardClass} style={{borderColor:color}}>
             <Header {...this.props} selectMeeting={this.selectMeeting} />
-            <div className={styles.links}>
+            <div className={styles.links} >
                 <GoogleDriveLink id={agenda_drive_id}>
                     <List/> Dagsorden
                 </GoogleDriveLink>

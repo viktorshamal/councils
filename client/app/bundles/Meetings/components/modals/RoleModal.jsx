@@ -51,12 +51,11 @@ export default class extends React.Component {
         return (
             <Dialog
                 contentStyle={{overflowY:'auto'}}
-                title="Tilføj en rolle"
+                title="Roller"
                 actions={actions}
                 open={this.props.open}
                 modal={false}
                 onRequestClose={()=>this.close()}
-                //autoScrollBodyContent={true}
 
                 >
                 <TemplateSelector

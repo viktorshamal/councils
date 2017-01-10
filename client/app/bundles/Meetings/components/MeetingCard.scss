@@ -22,7 +22,7 @@ $margin-top:1.5rem;
   color: white;
   margin: 0 1rem 1rem 0;
   font-family: "Roboto", "Helvetica Neue", "Arial", sans-serif;
-  border-bottom: 0.15rem solid;
+  border-bottom: 0.2rem solid;
   border-radius: 0.1rem 0.1rem 0.2rem 0.2rem;
   z-index: 1;
 }
@@ -64,7 +64,7 @@ $timestamp-font-size: 0.8rem;
 .links {
   margin-top: $margin-top - 0.6rem;
   display: flex;
-  background-color: $color;
+  //background-color: $color;
   z-index: 10;
 }
 

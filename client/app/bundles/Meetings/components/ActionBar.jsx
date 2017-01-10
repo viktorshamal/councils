@@ -2,9 +2,13 @@ import React from 'react';
 import Chip from 'material-ui/Chip';
 import Avatar from 'material-ui/Avatar';
 
-import css from './FilterBar.scss';
+import IconButton from 'material-ui/IconButton';
+import Face from 'material-ui/svg-icons/action/face';
+import Group from 'material-ui/svg-icons/social/group-add';
 
-let styles = {
+import styles from './ActionBar.scss';
+
+let mdStyles = {
     chip: {
         margin:'0.5rem 0.5rem 0 0',
         borderRadius:'0.1rem'
@@ -14,7 +18,33 @@ let styles = {
     }
 };
 
-export default class extends React.Component {
+
+export default (props) => {
+    return (
+        <div className={styles.actionBar}>
+            <FilterBar
+                templates={props.meetingTemplates}
+                filterMeeting={props.filterMeeting}
+                selectedTemplate={props.selectedTemplate} />
+            <Options enabled = {props.optionsEnabled} toggleModal={props.toggleModal} />
+        </div>
+    );
+};
+
+const Options = ({toggleModal}) => {
+  return (
+      <div className={styles.options}>
+          <IconButton tooltip="Roller" touch={true} tooltipPosition="bottom-center" onClick={()=>toggleModal('roleModal')}>
+              <Face />
+          </IconButton>
+          <IconButton tooltip="Nyt udvalg" touch={true} tooltipPosition="bottom-center" onClick={()=>toggleModal('typeModal')}>
+              <Group />
+          </IconButton>
+      </div>
+  );
+};
+
+class FilterBar extends React.Component {
     state = {
         expanded: false
     };
@@ -34,10 +64,10 @@ export default class extends React.Component {
 
             return (
                 <Chip
-                    style={styles.chip}
+                    style={mdStyles.chip}
                     onTouchTap={()=>this.filterMeeting(template.get('id'))}>
                     <Avatar
-                        style={styles.avatar}
+                        style={mdStyles.avatar}
                         size={32}
                         color='white'
                         backgroundColor={avatarColor}>
@@ -49,7 +79,7 @@ export default class extends React.Component {
 
         let toggleEnabled = templates.count() > (collapsedSize - 1);
         return (
-            <div className={css.chips}>
+            <div className={styles.chips}>
                 {chips}
                 <ToggleChip enabled={toggleEnabled} expanded = {this.state.expanded} toggleExpanded={this.toggleExpanded} />
             </div>);
@@ -60,5 +90,5 @@ const ToggleChip = ({enabled, expanded, toggleExpanded}) => {
     if(!enabled) return null;
 
     let text = expanded ? 'Vis færre' : 'Vis flere';
-    return (<Chip onTouchTap={()=>toggleExpanded(!expanded)} style={styles.chip}>{text}</Chip>);
+    return (<Chip onTouchTap={()=>toggleExpanded(!expanded)} style={mdStyles.chip}>{text}</Chip>);
 };
