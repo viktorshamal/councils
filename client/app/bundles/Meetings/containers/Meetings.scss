@@ -3,14 +3,13 @@
 .main {
   display: flex;
   position: relative;
-  flex-direction: row;
   max-width: $container-width;
-  margin: 1rem auto;
+  flex-direction: column;
+  margin: 1rem 0.25rem;
 }
 
 .meetings {
-  margin-right: -3rem;
-  display: flex;
+  display: block;
   flex-flow: row wrap;
   flex: 1;
   justify-content: flex-start;
@@ -36,13 +35,18 @@
   display: none;
 }
 
-@media (max-width: $breakpoint-m) {
+@media (min-width: $breakpoint-s) {
     .main {
-        flex-direction: column;
+      flex-direction: row;
+      margin: 1rem auto;
     }
-
     .meetings {
-        display: block;
-        margin: 0;
+        display: flex;
     }
+}
+
+@media (min-width: $breakpoint-m) {
+  .meetings {
+    margin: 0 -0.5rem;
+  }
 }

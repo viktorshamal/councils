@@ -20,22 +20,12 @@ $margin-top:1.5rem;
 .card {
   background-color: $color;
   color: white;
-  margin: 0 1rem 1rem 0;
+  margin-bottom: 1rem;
   font-family: "Roboto", "Helvetica Neue", "Arial", sans-serif;
   border-bottom: 0.2rem solid;
   border-radius: 0.1rem 0.1rem 0.2rem 0.2rem;
+  width: 100%;
   z-index: 1;
-}
-
-.fullWidth {
-  composes: card;
-
-  width: 23%;
-}
-
-.narrow {
-  composes: card;
-  width: 29%;
 }
 
 .title {
@@ -99,17 +89,39 @@ $link-font-size: 1.4rem;
   }
 }
 
-@media (max-width: 700px) {
-  .card {
-    width: 50%;
-    margin: 0 0 1em 0;
+@media (min-width: $breakpoint-s) {
+  .fullWidth {
+    composes: card;
+    width: 46%;
+    margin: 0 0.5rem 1rem 0.5rem;
+  }
+
+  .narrow {
+    composes: card;
+    margin: 0 0.5rem 1rem 0.5rem;
   }
 }
 
-@media (max-width: 400px) {
-  .card {
-    width: 100%;
-    margin: 0 0 1em 0;
+@media (min-width: $breakpoint-m) {
+  .fullWidth {
+    composes: card;
+    width: 31%;
+  }
+
+  .narrow {
+    composes: card;
+    width: 46%;
+  }
+}
+@media (min-width: $breakpoint-l) {
+  .fullWidth {
+    composes: card;
+    width: 23%;
+  }
+
+  .narrow {
+    composes: card;
+    width: 31%;
   }
 }
 

@@ -1,24 +1,45 @@
 @import "../../../assets/styles/app-variables";
-
 .main {
   height: $header-height;
   display: flex;
   align-items: center;
   max-width: $container-width;
   margin: 0 auto;
-  padding: 0.75rem 0 0.75rem 0;
+  padding: 0.75rem 0.75rem;
+  background-color: #8C4A8A;
+
+  font-weight: 300;
+  color: white;
 }
 
 .logo {
   font-size: 1.5rem;
 }
 
+.rightMobile {
+  margin-left: auto;
+}
+
 .right {
-  display: flex;
+  display: none;
   align-items: center;
   margin-left: auto;
 
   p {
     margin-right: 0.75rem;
+  }
+}
+
+@media (min-width: $breakpoint-m) {
+  .main {
+    background-color: transparent;
+    color: black;
+    padding: 0.75rem 0 0.75rem 0;
+  }
+  .right {
+    display: flex;
+  }
+  .rightMobile {
+    display: none;
   }
 }

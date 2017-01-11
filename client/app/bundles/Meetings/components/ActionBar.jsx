@@ -14,7 +14,8 @@ let mdStyles = {
         borderRadius:'0.1rem'
     },
     avatar:  {
-        borderRadius:'0.1rem 0.1rem 0.1rem 0.1rem'
+        borderRadius:'0.1rem 0.1rem 0.1rem 0.1rem',
+        minWidth: '32px'
     }
 };
 
