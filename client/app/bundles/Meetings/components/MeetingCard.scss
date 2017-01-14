@@ -18,6 +18,7 @@ $margin-top:1.5rem;
 }
 
 .card {
+  height: 10rem;
   background-color: $color;
   color: white;
   margin-bottom: 1rem;
@@ -116,7 +117,7 @@ $link-font-size: 1.4rem;
 @media (min-width: $breakpoint-l) {
   .fullWidth {
     composes: card;
-    width: 23%;
+    width: 23.2%;
   }
 
   .narrow {

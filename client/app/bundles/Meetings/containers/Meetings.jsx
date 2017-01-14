@@ -118,7 +118,7 @@ const ProgressBar = ({isFetching}) => {
     return null;
 };
 
-const Meetings = ({meetings,selectedTemplate,onMeetingClick,fetchAttendance,fetchToken,fullWidth}) => {
+const Meetings = ({meetings,selectedTemplate,onMeetingClick,fetchAttendance,fetchToken,fullWidth,selectedMeeting}) => {
     let items = meetings.filter((meeting)=>{
         return (selectedTemplate === meeting.get('meeting_template_id') || selectedTemplate === null);
     }).sort((meetingA,meetingB)=>{
@@ -132,6 +132,7 @@ const Meetings = ({meetings,selectedTemplate,onMeetingClick,fetchAttendance,fetc
             onMeetingClick={onMeetingClick}
             fetchAttendance={fetchAttendance}
             fetchToken={fetchToken}
+            selectedMeeting={selectedMeeting}
             />);
     });
 

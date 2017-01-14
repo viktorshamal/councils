@@ -36,8 +36,12 @@ export default class extends React.Component {
   render() {
     var cardClass = this.props.fullWidth ? styles.fullWidth : styles.narrow;
     const {agenda_drive_id, summary_drive_id, color } = this.props;
+
+    let cardStyle = {borderColor:color};
+    if (this.props.index === this.props.selectedMeeting) cardStyle.backgroundColor = color;
+
     return (
-        <div className={"container " + cardClass} style={{borderColor:color}}>
+        <div className={"container " + cardClass} style={cardStyle}>
             <Header {...this.props} selectMeeting={this.selectMeeting} />
             <div className={styles.links} >
                 <GoogleDriveLink id={agenda_drive_id}>

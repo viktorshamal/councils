@@ -1,15 +1,16 @@
 @import "../../../assets/styles/app-variables";
 .main {
+  font-family: 'Roboto', sans-serif;
   height: $header-height;
   display: flex;
   align-items: center;
   max-width: $container-width;
   margin: 0 auto;
-  padding: 0.75rem 0.75rem;
-  background-color: #8C4A8A;
+  padding: 0.5rem 0 0.2rem 0;
+  background-color: #FAFAFA;
 
-  font-weight: 300;
-  color: white;
+  font-weight: 500;
+  color: black;
 }
 
 .logo {

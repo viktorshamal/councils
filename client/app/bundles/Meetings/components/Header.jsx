@@ -64,7 +64,7 @@ class PopoverExampleSimple extends React.Component {
         return (
             <span className={styles.rightMobile}>
                 <IconButton onTouchTap={this.handleTouchTap}>
-                    <More color={'white'}/>
+                    <More color={'black'}/>
                 </IconButton>
                 <Popover
                     open={this.state.open}

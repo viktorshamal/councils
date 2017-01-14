@@ -45,7 +45,7 @@ export default class extends React.Component {
                 />
         ];
 
-        let colors = ['#43B5AD','#48ACF0','#B74F6F','#1C77C3','#F39237','#FFEAEE','#F9C80E'];
+        let colors = ['#43B5AD','#48ACF0','#B74F6F','#1C77C3','#F39237','#F9C80E'];
         let contentStyle= {
             display:'flex',
             flexDirection:'column',
