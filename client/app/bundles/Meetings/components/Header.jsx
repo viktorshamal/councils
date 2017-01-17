@@ -28,11 +28,11 @@ export default ({user}) => {
                     <p>{name}</p>
                     {button}
                 </span>
-                <PopoverExampleSimple name={name} />
             </div>
         </div>
     );
 }
+//                <PopoverExampleSimple name={name} />
 
 class PopoverExampleSimple extends React.Component {
 
