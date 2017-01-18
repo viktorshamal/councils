@@ -3,7 +3,7 @@ class V1::MeetingTemplatesController < V1::BaseController
   before_action :authenticate_user!
 
   def index
-    @meeting_templates = Council.find_by_identifier(params[:identifier]).meeting_templates
+    @meeting_templates = Council.find_by_identifier(params[:identifier]).meeting_templates.order(:name)
     render json: @meeting_templates
   end
 
