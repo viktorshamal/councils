@@ -16,7 +16,7 @@ import moment from 'moment';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import styles from './Meetings.scss';
 
-import {authorized} from '../../../libs/utils.js';
+import { hasRole } from '../../../libs/utils.js';
 
 
 function mapStateToProps(state){
@@ -71,7 +71,7 @@ class Main extends React.Component {
 
   render() {
       let sidebarEnabled = (this.props.selectedMeeting !== null);
-      let isAuthorized = authorized(this.props.user);
+      let isAuthorized = hasRole(this.props.user,'admin');
 
       return (
         <MuiThemeProvider>

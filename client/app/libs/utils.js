@@ -7,4 +7,12 @@ export function authorized(user) {
             return authorizedRoles[i]==role;
         });
     }
+    return false;
+}
+
+export function hasRole(user,role) {
+    let attributes = user.get('attributes');
+
+    if (attributes) return attributes.get('role_names').includes(role);
+    return false;
 }

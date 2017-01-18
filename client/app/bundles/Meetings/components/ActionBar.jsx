@@ -21,21 +21,23 @@ let mdStyles = {
 
 
 export default (props) => {
+    let actions = (props.optionsEnabled) ? (<Actions toggleModal={props.toggleModal} />) : null;
+
     return (
         <div className={styles.actionBar}>
             <FilterBar
                 templates={props.meetingTemplates}
                 filterMeeting={props.filterMeeting}
                 selectedTemplate={props.selectedTemplate} />
-            <Options enabled = {props.optionsEnabled} toggleModal={props.toggleModal} />
+            {actions}
         </div>
     );
 };
 
-const Options = ({toggleModal}) => {
+const Actions = ({toggleModal}) => {
   return (
       <div className={styles.options}>
-          <IconButton tooltip="Roller" touch={true} tooltipPosition="bottom-center" onClick={()=>toggleModal('roleModal')}>
+          <IconButton tooltip="Vis torvholdere" touch={true} tooltipPosition="bottom-center" onClick={()=>toggleModal('roleModal')}>
               <Face />
           </IconButton>
           <IconButton tooltip="Nyt udvalg" touch={true} tooltipPosition="bottom-center" onClick={()=>toggleModal('typeModal')}>

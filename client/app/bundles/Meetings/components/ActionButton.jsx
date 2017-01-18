@@ -5,7 +5,8 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 let style = {
     position: 'fixed',
     bottom: '1.5rem',
-    right: '1.5rem'
+    right: '1.5rem',
+    zIndex: '50'
 };
 
 export default ({toggleModal}) => {

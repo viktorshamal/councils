@@ -3,7 +3,7 @@ class V1::UsersController < V1::BaseController
     @users = if params[:meeting_id]
       Meeting.find(params[:meeting_id]).user_ids
     else
-      Council.find_by_identifier(identifier).users
+      Council.find_by_identifier(identifier).users.order(:name)
     end
 
     render json: @users
