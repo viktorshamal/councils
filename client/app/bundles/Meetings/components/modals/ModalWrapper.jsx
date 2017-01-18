@@ -1,7 +1,7 @@
 import React from 'react';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-
+import RaisedButton from 'material-ui/RaisedButton';
 
 let styles = {
     dialog: {
@@ -11,16 +11,33 @@ let styles = {
 };
 
 export default (props) => {
-    close = () => {
+    let close = () => {
         props.toggleModal(props.modalName);
     };
 
+    let submit = () => {
+        props.submitAction();
+        close();
+    };
+
+    let submitButton = null;
+
+    if(props.submitAction && props.submitLabel) {
+        submitButton = (
+            <RaisedButton
+                label={props.submitLabel}
+                primary={true}
+                onClick={submit}
+            />
+        );
+    }
+
     const actions = ([
-        props.submitButton,
         <FlatButton
             label="Luk"
             onClick={close}
-        />]
+        />,
+        submitButton]
     );
 
     return(

@@ -35,17 +35,17 @@ export default class extends React.Component {
 
     render() {
         const actions = [
-            <RaisedButton
-                label="Tilføj"
-                primary={true}
-                onClick={()=>this.handleSubmit()} />,
             <FlatButton
                 label="Luk"
                 onClick={()=>this.close()}
-                />
+                />,
+            <RaisedButton
+                label="Opret udvalg"
+                primary={true}
+                onClick={()=>this.handleSubmit()} />
         ];
 
-        let colors = ['#43B5AD','#48ACF0','#B74F6F','#1C77C3','#F39237','#F9C80E'];
+        let colors = ['#48ACF0','#B74F6F','#1C77C3','#F39237','#F9C80E'];
         let contentStyle= {
             display:'flex',
             flexDirection:'column',
@@ -54,7 +54,7 @@ export default class extends React.Component {
         return (
             <Dialog
                 contentStyle={{overflowY:'auto'}}
-                title="Udvalg"
+                title="Nyt udvalg"
                 actions={actions}
                 open={this.props.open}
                 modal={false}

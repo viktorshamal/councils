@@ -57,10 +57,12 @@ class FilterBar extends React.Component {
 
 
     render() {
-        let collapsedSize = 4;
+        let collapsedSize = 6;
         let templates = this.state.expanded ? this.props.templates : this.props.templates.take(collapsedSize);
 
-        let chips = templates.map((template) => {
+        let chips = templates.sort((a,b)=>{
+            return a.get('name') > b.get('name');
+        }).map((template) => {
             let avatarColor = (this.props.selectedTemplate === template.get('id') || this.props.selectedTemplate === null)
                 ?  template.get('color')
                 : 'grey';
@@ -80,7 +82,7 @@ class FilterBar extends React.Component {
                 </Chip>);
         });
 
-        let toggleEnabled = templates.count() > (collapsedSize - 1);
+        let toggleEnabled = templates.count() > (collapsedSize-1);
         return (
             <div className={styles.chips}>
                 {chips}
