@@ -35,7 +35,7 @@ export default class Sidebar extends React.Component {
         }
 
         return(
-            <div className={styles.sidebar}>
+            <div className={styles.sidebar} >
                 <SecretModal
                     token={token}
                     meeting_id={meeting.get('id')}
