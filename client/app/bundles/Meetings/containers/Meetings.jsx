@@ -11,6 +11,8 @@ import ActionBar from '../components/ActionBar.jsx';
 import ActionButton from './ActionButton.jsx';
 import LinearProgress from 'material-ui/LinearProgress';
 
+import Helmet from 'react-helmet';
+
 import moment from 'moment';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -76,6 +78,7 @@ class Main extends React.Component {
       return (
         <MuiThemeProvider>
             <div>
+                <HelmetWrapper selectedMeeting={this.props.selectedMeeting} meetings={this.props.meetings}/>
                 <Header user={this.props.user} />
                 <ProgressBar isFetching={this.props.isFetching}/>
                 <ActionBar {...this.props} optionsEnabled={isAuthorized}/>
@@ -89,6 +92,17 @@ class Main extends React.Component {
     );
   }
 }
+
+const HelmetWrapper = ({meetings,selectedMeeting}) => {
+    let meeting = meetings.get(selectedMeeting);
+    let color = (meeting) ? meeting.get('color') : '#8C4A8A';
+    return (
+        <Helmet 
+            meta={[
+                {name:"theme-color", content: color}
+            ]} />
+        );
+};
 
 const SidebarWrapper = (props) => {
     let sidebar = null;

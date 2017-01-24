@@ -23,7 +23,6 @@ export default class Sidebar extends React.Component {
     render () {
         let meeting = this.props.meetings.get(this.props.selectedMeeting);
         let token = this.props.tokens.get(meeting.get('id'));
-        let date = meeting.get('date');
 
         let deleteForm, secretModal = null;
         if(authorized(this.props.user)) {
@@ -35,7 +34,31 @@ export default class Sidebar extends React.Component {
         }
 
         return(
-            <div className={styles.sidebar} >
+            <div className={styles.sidebar} style={{backgroundColor:meeting.get('color')}} >
+                <Tabs tabItemContainerStyle={{backgroundColor:'transparent'}}>
+                    <Tab label="Detaljer" style={{color:'white'}}>
+                        <DetailsTab meeting={meeting}/>
+                    </Tab>
+                    <Tab label="Fremmødte" style={{color:'white'}}>
+                        <AttendanceTab
+                            users={this.props.users}
+                            meeting_id={meeting.get('id')}
+                            attendance={this.props.attendance}
+                        />
+                    </Tab>
+                </Tabs>
+                <div style={{position:'absolute', bottom:'0.5rem',width:'100%'}}>
+                    <RaisedButton
+                        style={{marginLeft:'1rem'}}
+                        primary={true}
+                        label="Tilmeld"
+                        onClick={()=>this.props.toggleModal('attendModal')} />
+                    {secretModal}
+                    <FlatButton
+                        label="Luk"
+                        style={{position:'absolute', right:'0.5rem',color:'white'}}
+                        onClick={()=>this.props.onMeetingClick(null)} />
+                </div>
                 <SecretModal
                     token={token}
                     meeting_id={meeting.get('id')}
@@ -48,48 +71,7 @@ export default class Sidebar extends React.Component {
                     toggleModal={this.props.toggleModal}
                     handleSubmit={this.props.attendMeeting}
                     meeting_id={meeting.get('id')}
-
                     />
-                <Tabs tabItemContainerStyle={{backgroundColor:'transparent'}}>
-                    <Tab label="Detaljer" style={{color:'black'}}>
-                        <div className={styles.wrapper}>
-                            <h2>{meeting.get('name')}</h2>
-                            <AlarmIcon /> {moment(date).format('LT')}
-                            <br/>
-                            <DateIcon />{moment(date).format('LL')}
-                            <br/>
-                            <div className={styles.driveButtons}>
-                                <a href={"https://docs.google.com/document/d/" + meeting.get('agenda_drive_id')} target='_blank'>
-                                    <FlatButton label='Dagsorden' />
-                                </a>
-                                <a href={"https://docs.google.com/document/d/" + meeting.get('summary_drive_id')} target='_blank'>
-                                    <FlatButton label='Referat' />
-                                </a>
-                            </div>
-                        </div>
-                    </Tab>
-                    <Tab label="Fremmødte" style={{color:'black'}}>
-                        <div>
-                            <AttendanceList
-                                users={this.props.users}
-                                meeting_id={meeting.get('id')}
-                                attendance={this.props.attendance}
-                                />
-                        </div>
-                    </Tab>
-                </Tabs>
-                <div style={{position:'absolute', bottom:'0.5rem',width:'100%'}}>
-                    <RaisedButton
-                        style={{marginLeft:'1rem'}}
-                        primary={true}
-                        label="Tilmeld"
-                        onClick={()=>this.props.toggleModal('attendModal')} />
-                    {secretModal}
-                    <FlatButton
-                        label="Luk"
-                        style={{position:'absolute', right:'0.5rem'}}
-                        onClick={()=>this.props.onMeetingClick(null)} />
-                </div>
             </div>
         );
     }
@@ -97,6 +79,28 @@ export default class Sidebar extends React.Component {
 
 Sidebar.propTypes = {
     selectedMeeting: PropTypes.number
+};
+
+const DetailsTab = ({meeting}) => {
+    let date = moment(meeting.get('date'));
+
+    return (
+            <div className={styles.wrapper}>
+                <h2>{meeting.get('name')}</h2>
+                <AlarmIcon /> {date.format('LT')}
+                <br/>
+                <DateIcon />{date.format('LL')}
+                <br/>
+                <div className={styles.driveButtons}>
+                    <a href={"https://docs.google.com/document/d/" + meeting.get('agenda_drive_id')} target='_blank'>
+                        <FlatButton label='Dagsorden' style={{color:'white'}}/>
+                    </a>
+                    <a href={"https://docs.google.com/document/d/" + meeting.get('summary_drive_id')} target='_blank'>
+                        <FlatButton label='Referat' style={{color:'white'}}/>
+                    </a>
+                </div>
+            </div>
+    );
 };
 
 class DeleteForm extends React.Component {
@@ -149,7 +153,7 @@ class DeleteForm extends React.Component {
     }
 }
 
-const AttendanceList = ({users,meeting_id,attendance}) => {
+const AttendanceTab = ({users,meeting_id,attendance}) => {
     var items = null;
     var meetingAttendance = attendance.get(meeting_id.toString());
     if(meetingAttendance){
@@ -160,6 +164,7 @@ const AttendanceList = ({users,meeting_id,attendance}) => {
             let avatar = (<Avatar >{name.charAt(0)}</Avatar>);
             return (
                 <ListItem
+                    style={{color:'white'}}
                     primaryText={name}
                     leftAvatar={avatar}
                     key={id}

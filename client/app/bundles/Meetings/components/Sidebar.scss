@@ -8,11 +8,13 @@
   border-radius: 0.1rem 0.1rem 0.2rem 0.2rem;
   position: relative;
   z-index: 100;
+  font-weight: 300;
+  color:white;
 }
 
 .tabs {
   background-color: #FAFAFA;
-  color: black;
+  color: white;
 }
 
 .wrapper {
@@ -30,6 +32,7 @@
   display: flex;
   width: 100%;
   justify-content: center;
+  color: white;
 }
 
 .deleteForm {
@@ -49,21 +52,3 @@
     z-index: 1000;
   }
 }
-
-/*.enter {
-  opacity: 0.01;
-}
-
-.enter.enterActive {
-  opacity: 1;
-  transition: opacity 250ms ease-in;
-}
-
-.leave {
-  opacity: 1;
-}
-
-.leave.leaveActive {
-  opacity: 0.01;
-  transition: opacity 250ms ease-in;
-}*/
