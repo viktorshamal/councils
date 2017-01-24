@@ -10,6 +10,7 @@ gem 'active_model_serializers', '~> 0.10.0'
 gem 'paper_trail', '~> 4.0.0'
 gem 'sprockets'
 gem 'execjs'
+gem 'actionpack-page_caching', git: 'https://github.com/rails/actionpack-page_caching.git'
 
 #pre-processing
 gem 'haml'

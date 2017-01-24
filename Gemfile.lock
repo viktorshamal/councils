@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/rails/actionpack-page_caching.git
+  revision: 6138221b8e5f522f9b901f2c19f3b1719742d2bf
+  specs:
+    actionpack-page_caching (1.0.2)
+      actionpack (>= 4.0.0, < 6)
+
 GEM
   remote: https://rubygems.org/
   remote: https://rails-assets.org/
@@ -288,6 +295,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  actionpack-page_caching!
   active_model_serializers (~> 0.10.0)
   byebug
   database_cleaner

@@ -1,2 +1,2 @@
-web: rails s -p 3000
-client: sh -c 'rm app/assets/webpack/* || true && cd client && npm run build:development'
+web: bin/start-nginx bundle exec puma config/puma.rb
+client: sh -c 'rm /app/assets/webpack/* || true && cd client && npm run build:development'

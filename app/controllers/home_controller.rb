@@ -1,6 +1,8 @@
 class HomeController < ApplicationController
   include ReactOnRails::Controller
 
+  caches_page :index
+
   def index
     council = Council.find_by_identifier(identifier)
     @meetings = council.meetings
