@@ -172,6 +172,9 @@ GEM
       activerecord (>= 3.0, < 6.0)
       activesupport (>= 3.0, < 6.0)
       request_store (~> 1.1)
+    passenger (5.1.2)
+      rack
+      rake (>= 0.8.1)
     pg (0.18.4)
     pkg-config (1.1.7)
     puma (3.6.0)
@@ -315,8 +318,8 @@ DEPENDENCIES
   omniauth-facebook
   omniauth-google-oauth2
   paper_trail (~> 4.0.0)
+  passenger (>= 5.0.25)
   pg
-  puma
   puma-heroku
   pundit
   rack-cors
