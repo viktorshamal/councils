@@ -20,10 +20,9 @@ class V1::RolesController < V1::BaseController
 
   def destroy
     authorize :moderator, :destroy?
-    template = MeetingTemplate.find params[:meeting_template_id]
-    user = User.find params[:user_id]
+    role = Role.find(params[:id])
 
-    if user.remove_role :moderator, template
+    if role.destroy
       render json: {status:200}
     else
       render json: {status: 422}

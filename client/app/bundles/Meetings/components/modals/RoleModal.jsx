@@ -5,9 +5,13 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { List, ListItem } from 'material-ui/List';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
-import TemplateSelector from './TemplateSelector.jsx';
-import RemoveIcon from 'react-icons/lib/md/remove-circle-outline.js';
+import IconButton from 'material-ui/IconButton';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import IconMenu from 'material-ui/IconMenu';
+import { grey400 } from 'material-ui/styles/colors';
 
+
+import TemplateSelector from './TemplateSelector.jsx';
 
 import style from './RoleModal.scss';
 
@@ -62,7 +66,8 @@ export default class extends React.Component {
                 <RoleList
                     users={this.props.users}
                     roles={this.props.roles}
-                    meeting_template_id={this.state.meeting_template_id} />
+                    meeting_template_id={this.state.meeting_template_id}
+                    deleteRole={this.props.deleteRole} />
                 <RoleAdder
                     users={this.props.users}
                     selected={this.state.user_id}
@@ -101,15 +106,21 @@ const RoleAdder = ({users,selected,onChange,handleSubmit}) => {
     );
 };
 
-const RoleList = ({users,roles,meeting_template_id}) => {
+const RoleList = ({users,roles,meeting_template_id,deleteRole}) => {
     let items;
     if(roles.has(meeting_template_id)){
         items = roles.get(meeting_template_id).map((role)=>{
-            const user_id = role.user_id;
-            const user = users.get(user_id.toString());
+            let user_id = role.user_id;
+            let user = users.get(user_id.toString());
+            let rightIcon = (
+                <IconMenu iconButtonElement={iconButtonElement}>
+                    <MenuItem onTouchTap={()=>deleteRole(role.id)}>Fjern</MenuItem>
+                </IconMenu>
+            );
             return (<ListItem
                 key={user_id}
                 primaryText={user.get('name')}
+                rightIconButton={rightIcon}
             />);
         });
     }
@@ -120,3 +131,9 @@ const RoleList = ({users,roles,meeting_template_id}) => {
         </List>
     );
 };
+
+const iconButtonElement = (
+    <IconButton touch={true}>
+        <MoreVertIcon color={grey400} />
+    </IconButton>
+);

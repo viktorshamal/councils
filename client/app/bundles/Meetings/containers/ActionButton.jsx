@@ -45,6 +45,9 @@ function mapDispatchToProps(dispatch){
         },
         clearMessage: (i) => {
             dispatch(actionCreators.clearMessage(i));
+        },
+        deleteRole: (id) => {
+            dispatch(actionCreators.deleteRole(id));
         }
     };
 }
@@ -82,6 +85,7 @@ class ActionButton extends React.Component {
                     meetingTemplates={this.props.meetingTemplates}
                     onChange={this.props.fetchRoles}
                     createRole={this.props.createRole}
+                    deleteRole={this.props.deleteRole}
                     users={this.props.users}
                     roles={this.props.roles}
                     />

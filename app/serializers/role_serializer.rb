@@ -3,7 +3,7 @@ class RoleSerializer < ActiveModel::Serializer
 
   def user_ids
     object.users.map do |user|
-      {type: object.name, user_id: user.id}
+      {id: object.id, type: object.name, user_id: user.id}
     end
   end
 end

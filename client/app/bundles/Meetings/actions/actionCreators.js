@@ -76,7 +76,7 @@ export function deleteMeeting(id) {
 }
 
 export function deleteRole(id) {
-    return (dispatch) => deleteResource('ROLE', '/roles/', dispatch)
+    return (dispatch) => deleteResource('ROLE', '/roles/' + id, dispatch)
 }
 
 
