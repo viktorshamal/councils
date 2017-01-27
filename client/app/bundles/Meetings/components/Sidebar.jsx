@@ -24,7 +24,7 @@ export default class Sidebar extends React.Component {
         let meeting = this.props.meetings.get(this.props.selectedMeeting);
         let token = this.props.tokens.get(meeting.get('id'));
 
-        let deleteForm, secretModal = null;
+        let secretModal = null;
         if(authorized(this.props.user)) {
             //deleteForm = (<DeleteForm deleteMeeting={this.props.deleteMeeting} id={meeting.get('id')}/>);
             secretModal = (<RaisedButton
@@ -34,12 +34,12 @@ export default class Sidebar extends React.Component {
         }
 
         return(
-            <div className={styles.sidebar} style={{backgroundColor:meeting.get('color')}} >
+            <div className={styles.sidebar} >
                 <Tabs tabItemContainerStyle={{backgroundColor:'transparent'}}>
-                    <Tab label="Detaljer" style={{color:'white'}}>
+                    <Tab label="Detaljer" style={{color:'black'}}>
                         <DetailsTab meeting={meeting}/>
                     </Tab>
-                    <Tab label="Fremmødte" style={{color:'white'}}>
+                    <Tab label="Fremmødte" style={{color:'black'}}>
                         <AttendanceTab
                             users={this.props.users}
                             meeting_id={meeting.get('id')}
@@ -56,7 +56,7 @@ export default class Sidebar extends React.Component {
                     {secretModal}
                     <FlatButton
                         label="Luk"
-                        style={{position:'absolute', right:'0.5rem',color:'white'}}
+                        style={{position:'absolute', right:'0.5rem',color:'black'}}
                         onClick={()=>this.props.onMeetingClick(null)} />
                 </div>
                 <SecretModal
@@ -93,10 +93,10 @@ const DetailsTab = ({meeting}) => {
                 <br/>
                 <div className={styles.driveButtons}>
                     <a href={"https://docs.google.com/document/d/" + meeting.get('agenda_drive_id')} target='_blank'>
-                        <FlatButton label='Dagsorden' style={{color:'white'}}/>
+                        <FlatButton label='Dagsorden'/>
                     </a>
                     <a href={"https://docs.google.com/document/d/" + meeting.get('summary_drive_id')} target='_blank'>
-                        <FlatButton label='Referat' style={{color:'white'}}/>
+                        <FlatButton label='Referat'/>
                     </a>
                 </div>
             </div>
@@ -164,7 +164,7 @@ const AttendanceTab = ({users,meeting_id,attendance}) => {
             let avatar = (<Avatar >{name.charAt(0)}</Avatar>);
             return (
                 <ListItem
-                    style={{color:'white'}}
+                    style={{color:'black'}}
                     primaryText={name}
                     leftAvatar={avatar}
                     key={id}

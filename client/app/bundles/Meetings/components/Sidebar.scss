@@ -3,18 +3,19 @@
 .sidebar {
   background-color: #FAFAFA;
   width: 100%;
-  height: 25rem;
   border: 0.0625rem solid #e5e5e5;
   border-radius: 0.1rem 0.1rem 0.2rem 0.2rem;
-  position: relative;
-  z-index: 100;
   font-weight: 300;
-  color:white;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 1000;
 }
 
 .tabs {
   background-color: #FAFAFA;
-  color: white;
 }
 
 .wrapper {
@@ -32,7 +33,6 @@
   display: flex;
   width: 100%;
   justify-content: center;
-  color: white;
 }
 
 .deleteForm {
@@ -42,13 +42,18 @@
   width: 100%;
 }
 
-@media (max-width: 700px) {
+::-webkit-scrollbar {
+  width: 0.4rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(116, 116, 116, 0.2);
+}
+
+@media (min-width: 700px) {
   .sidebar {
-    position: fixed;
-    left: 0;
-    top: 0;
-    height: 100vh;
-    overflow-y: auto;
-    z-index: 1000;
+    height: 25rem;
+    position: relative;
+    margin-left: 1rem;
   }
 }
