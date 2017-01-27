@@ -13,11 +13,11 @@ export default function (state = initialState, action=null){
             return newState(state, action.name, action.id, newIdsStart);
 
         case `FETCH_${action.name}_SUCCESS` :
-        case `CREATE_${action.name}_SUCCESS`:
-            return newState(state, action.name, action.id, newIdsEnd, action.message);
-
         case `FETCH_${action.name}_ERROR` :
+        case `CREATE_${action.name}_SUCCESS`:
         case `CREATE_${action.name}_ERROR`:
+        case `DELETE_${action.name}_SUCCESS`:
+        case `DELETE_${action.name}_ERROR`:
             return newState(state, action.name, action.id, newIdsEnd, action.message);
 
         case actionTypes.CLEAR_MESSAGE: {

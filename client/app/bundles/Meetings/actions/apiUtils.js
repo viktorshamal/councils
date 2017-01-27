@@ -65,33 +65,55 @@ function fetchStart(prefix, name, id) {
 }
 
 function fetchSuccess(prefix, name, id, data, extras={}) {
-    let message = null;
-    if(messages.hasOwnProperty(name) && prefix==='CREATE') message = messages[name].success;
+    let message = getMessage(prefix,name,'success');
     return action('SUCCESS', prefix, name, id, {...extras, data, message});
 }
 
 function fetchError(prefix, name, id, error) {
-    let message = null;
-    if(messages.hasOwnProperty(name)) message = messages[name].error;
+    let message = getMessage(prefix,name,'error');
     return action('ERROR', prefix, name, id, {error, message});
 }
 
 
+function getMessage(prefix,name,outcome) {
+    if(messages.hasOwnProperty(name)){
+        if(messages[name].hasOwnProperty(prefix)) {
+            if(messages[name][prefix].hasOwnProperty(outcome)) {
+                return messages[name][prefix][outcome];
+            }
+        }
+    }
+
+    return null;
+}
+
 const messages = {
     MEETING: {
-        success: 'Møde oprettet',
-        error: 'Mødet kunne ikke oprettes'
+        CREATE: {
+            success: 'Møde oprettet',
+            error: 'Mødet kunne ikke oprettes'
+        }
     },
     MEETING_TEMPLATE: {
-        success: 'Mødetype oprettet',
-        error: 'Mødetypen kunne ikke oprettes'
+        CREATE: {
+            success: 'Mødetype oprettet',
+            error: 'Mødetypen kunne ikke oprettes'
+        }
     },
     ROLE: {
-        success: 'Role oprettet',
-        error: 'Rollen kunne ikke oprettes'
+        CREATE: {
+            success: 'Rolle oprettet',
+            error: 'Rollen kunne ikke oprettes'
+        },
+        DELETE: {
+            success: 'Rolle fjernet',
+            error: 'Rolle kunne ikke fjernes'
+        }
     },
     ATTENDANCE: {
+        CREATE: {
             success: 'Fremmøde gemt',
             error: 'Fremmødet kunne ikke gemmes'
+        }
     }
 };
