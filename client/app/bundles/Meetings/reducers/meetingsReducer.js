@@ -9,7 +9,8 @@ export const $$initialState = fromJS({
     $$users: {},
     $$roles: {},
     $$attendance: {},
-    $$tokens: {}
+    $$tokens: {},
+    $$council: null
 });
 
 export default function (state = $$initialState, action=null){

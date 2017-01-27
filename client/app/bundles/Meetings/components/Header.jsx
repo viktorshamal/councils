@@ -9,7 +9,7 @@ import MenuItem from 'material-ui/MenuItem';
 
 import { OAuthSignInButton, SignOutButton } from 'redux-auth/material-ui-theme';
 
-export default ({user}) => {
+export default ({user,council}) => {
     var button;
 
     if (user.get('isSignedIn')) {
@@ -19,11 +19,11 @@ export default ({user}) => {
     }
 
     let name = user.getIn(['attributes', 'name']);
-
+    console.log(council.get('name'));
     return (
         <div className={styles.wrapper}>
             <div className={styles.main}>
-                <span className={styles.logo}>Gefions Elevråd</span>
+                <span className={styles.logo}>{council.get('name')}</span>
                 <span className={styles.right}>
                     <p>{name}</p>
                     {button}

@@ -25,6 +25,7 @@ function mapStateToProps(state){
     var store = state.$$meetingsStore;
 
     return {
+        council: store.get('$$council'),
         meetings: store.get('$$meetings'),
         meetingTemplates: store.get('$$meetingTemplates'),
         selectedMeeting: store.get('$$selectedMeeting'),
@@ -78,8 +79,11 @@ class Main extends React.Component {
       return (
         <MuiThemeProvider>
             <div>
-                <HelmetWrapper selectedMeeting={this.props.selectedMeeting} meetings={this.props.meetings}/>
-                <Header user={this.props.user} />
+                <HelmetWrapper
+                    council={this.props.council}
+                    selectedMeeting={this.props.selectedMeeting}
+                    meetings={this.props.meetings}/>
+                <Header user={this.props.user} council={this.props.council}/>
                 <ProgressBar isFetching={this.props.isFetching}/>
                 <ActionBar {...this.props} optionsEnabled={isAuthorized}/>
                 <div className={styles.main}>
@@ -93,11 +97,12 @@ class Main extends React.Component {
   }
 }
 
-const HelmetWrapper = ({meetings,selectedMeeting}) => {
+const HelmetWrapper = ({council,meetings,selectedMeeting}) => {
     let meeting = meetings.get(selectedMeeting);
     let color = (meeting) ? meeting.get('color') : '#8C4A8A';
     return (
-        <Helmet 
+        <Helmet
+            title={council.get('name')}
             meta={[
                 {name:"theme-color", content: color}
             ]} />
