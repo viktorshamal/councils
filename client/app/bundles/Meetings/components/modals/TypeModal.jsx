@@ -45,7 +45,7 @@ export default class extends React.Component {
                 onClick={()=>this.handleSubmit()} />
         ];
 
-        let colors = ['#48ACF0','#B74F6F','#1C77C3','#F39237','#F9C80E'];
+        let colors = ['#48ACF0','#B74F6F','#1C77C3','#F39237','#F9C80E','#694D75','#587B7F','#B9A394','#7C77B9'];
         let contentStyle= {
             display:'flex',
             flexDirection:'column',
