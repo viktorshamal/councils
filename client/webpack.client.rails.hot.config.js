@@ -45,15 +45,6 @@ config.module.loaders.push(
   },
   {
     test: /\.css$/,
-    include: /node_modules/,
-    loaders: [
-        'style',
-        'css'
-
-    ]
-  },
-  {
-    test: /\.css$/,
     exclude: /node_modules/,
     loaders: [
       'style',

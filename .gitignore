@@ -26,5 +26,7 @@ node_modules
 # Generated js bundles
 /app/assets/webpack/*
 
-# Let's ignore cached files 
+# Let's ignore cached files
 /public/deploy
+
+/.idea

@@ -15,4 +15,11 @@ class ApplicationController < ActionController::Base
   def identifier
     @identifier ||= ((params[:identifier].present? && params[:identifier]) || ENV['DEFAULT_COUNCIL'])
   end
+
+  def council
+    matches = /(?:http[s]*\:\/\/)*(.*?)\.(?=[^\/]*\..{2,5})/.match(request.original_url)
+    subdomain = matches ? matches[1] : nil
+    council = subdomain ? Council.find_by_identifier(subdomain) : nil
+    council ? council : Council.find_by_identifier(identifier)
+  end
 end

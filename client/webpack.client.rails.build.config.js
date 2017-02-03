@@ -25,15 +25,6 @@ config.module.loaders.push(
   {
     test: /\.css$/,
     loader: ExtractTextPlugin.extract(
-        'style',
-        'css?minimize&importLoaders=1&' +
-        '!postcss'
-    ),
-    include: /node_modules/
-  },
-  {
-    test: /\.css$/,
-    loader: ExtractTextPlugin.extract(
       'style',
       'css?minimize&modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]' +
       '!postcss'

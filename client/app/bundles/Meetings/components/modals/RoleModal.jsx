@@ -23,10 +23,15 @@ let styles = {
 };
 
 export default class extends React.Component {
-    state = {
-        meeting_template_id: this.props.meetingTemplates.get(0).get('id'),
-        user_id: null
-    };
+    constructor(props) {
+        super(props);
+        let id = null;
+        if (this.props.meetingTemplates.has(0)) id = this.props.meetingTemplates.get(0).get('id');
+        this.state = {
+            meeting_template_id: id,
+            user_id: null
+        }
+    }
 
     componentWillMount() {
         this.props.onChange(this.state.meeting_template_id);

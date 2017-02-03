@@ -7,14 +7,16 @@ import TemplateSelector from './TemplateSelector.jsx';
 import moment from 'moment';
 
 export default class extends React.Component {
-    state = {
-        meeting_template_id: this.props.meetingTemplates.get(0).get('id'),
-        date: Date.now(),
-        time: Date.now()
-    };
-
+    constructor(props) {
+        super(props);
+        let id = null;
+        if(this.props.meetingTemplates.has(0)) id = this.props.meetingTemplates.get(0).get('id');
+        this.state = {
+            meeting_template_id: id,
+            date: Date.now(),
+            time: Date.now()};
+    }
     handleSubmit(){
-        console.log(this.state);
         const { meeting_template_id, date, time } = this.state;
         this.props.handleSubmit({
             meeting:{
